@@ -10,41 +10,41 @@ function sum(a: number, b: number): number {
 }
 
 // 4. Создать переменную status, которая может быть только: "loading", "success", "error".
-let status1: "loading" | "success" | "error"
+let status1: "loading" | "success" | "error";
 
 // 5. Создать переменную textFormat, которая может быть только: 'uppercase', 'lowercase', 'capitalize'".
-let textFormat: 'uppercase' | 'lowercase' | 'capitalize'
+let textFormat: 'uppercase' | 'lowercase' | 'capitalize';
 
 // 6. Создать интерфейс, который описывает юзера. Поля на ваш выбор. Одно поле должно быть опциональным.
 interface IUser {
-  id: number,
-  name: string,
-  surname: string,
-  age?: number
+  id: number;
+  name: string;
+  surname: string;
+  age?: number;
 }
 
 // 7. Создать интерфейс для админа, который расширяется интерфейсом User с задания №5 и имеет свои дополнительные поля, присущие администратору
 interface IAdmin extends IUser {
-  role: string,
-  isAdmin: boolean,
+  role: string;
+  isAdmin: boolean;
 }
 
 // 8. Создать функцию, которая принимает строку и вариант, как именно форматировать строку (задание №5) и на основе этого возвращает форматированную строку.
-function formatString(str: string, format: 'uppercase' | 'lowercase' | 'capitalize'): string {
+function formatText(str: string, format: 'uppercase' | 'lowercase' | 'capitalize'): string {
   if (format === 'uppercase') {
-    return str.toUpperCase()
+    return str.toUpperCase();
   } else if (format === 'lowercase') {
-    return str.toLowerCase()
+    return str.toLowerCase();
   } else if (format === 'capitalize') {
-    return str.charAt(0).toUpperCase() + str.slice(1).toLocaleLowerCase()
+    return str.charAt(0).toUpperCase() + str.slice(1).toLocaleLowerCase();
   } else {
-    return str
+    return str;
   }
 }
 
 // 9. Создать функцию, которая принимает строку и символ, возвращает строку без переданного символа. 
 function removeChar(str: string, char: string): string {
-  return str.replaceAll(char, '')
+  return str.replaceAll(char, '');
 }
 
 // 10. Создать массив объектов на основе интерфейса с задания №6. Отфильтровать его по одному из параметров
@@ -55,5 +55,5 @@ const users: IUser[] = [
 ];
 
 const filtredUsers = users.filter((user: IUser) => {
-  return user.age !== undefined
+  return user.age !== undefined;
 })
