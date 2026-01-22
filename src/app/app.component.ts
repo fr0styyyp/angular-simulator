@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import './training';
-import { Color } from '../enums/color';
+import { Color } from '../enums/Color';
 import { Collection } from '../collection';
 
 @Component({
@@ -10,36 +10,32 @@ import { Collection } from '../collection';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  
+  public tours: Collection<string> = new Collection<string>();
+  public prices: Collection<number> = new Collection<number>();
+  public companyName: string = 'РУМТИБЕТ';
+  
   constructor() {
     this.setLastVisit();
-    this.setVisitCount();
+    this.visitCount();
+    
+    this.tours.replace(0, 'Поход в горы');
+    this.prices.replace(0, 1000);
   }
-  
-  companyName: string = 'РУМТИБЕТ'
   
   isPrimaryColor(color: Color): boolean {
-    if (color === Color.Red || color === Color.Blue || color === Color.Green) {
-      return true
-    } else {
-      return false
-    }
+    return color === Color.RED || color === Color.BLUE || color === Color.GREEN;
   }
   
-  setLastVisit() {
-    const currentDate = new Date().toLocaleString()
-    localStorage.setItem('lastVisit', currentDate)
+  setLastVisit(): void {
+    const currentDate: string = new Date().toLocaleString();
+    localStorage.setItem('lastVisit', currentDate);
   }
   
-  setVisitCount() {
-    const visitCountString = localStorage.getItem('visitCount');
-    const currentCount = visitCountString ? parseInt(visitCountString) : 0;
-    const newCount = currentCount + 1;
-    localStorage.setItem('visitCount', newCount.toString())
+  visitCount(): void {
+    const visitCountString: string | null = localStorage.getItem('visitCount');
+    const currentCount: number = visitCountString ? parseInt(visitCountString) : 0;
+    const newCount: number = currentCount + 1;
+    localStorage.setItem('visitCount', newCount.toString());
   }
 }
-
-const tours = new Collection<String>();
-const prices = new Collection<Number>();
-
-tours.replace(0, 'Поход в горы');
-prices.replace(0, 1000);
