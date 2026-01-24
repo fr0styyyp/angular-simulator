@@ -21,4 +21,5 @@ export class Collection<T> {
   replace(index: number, newItem: T): T {
     return this.items[index] = newItem;
   }
+  
 }

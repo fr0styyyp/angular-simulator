@@ -13,7 +13,7 @@ export class AppComponent {
   
   public tours: Collection<string> = new Collection<string>();
   public prices: Collection<number> = new Collection<number>();
-  public companyName: string = 'РУМТИБЕТ';
+  public companyName: string = 'Румтибет';
   
   constructor() {
     this.setLastVisit();
@@ -24,18 +24,20 @@ export class AppComponent {
   }
   
   isPrimaryColor(color: Color): boolean {
-    return color === Color.RED || color === Color.BLUE || color === Color.GREEN;
+    const primaryColors: Color[] = [Color.RED, Color.BLUE, Color.GREEN];
+    return primaryColors.includes(color);
   }
   
   setLastVisit(): void {
     const currentDate: string = new Date().toLocaleString();
-    localStorage.setItem('lastVisit', currentDate);
+    localStorage.setItem('last-visit', currentDate);
   }
   
   visitCount(): void {
-    const visitCountString: string | null = localStorage.getItem('visitCount');
-    const currentCount: number = visitCountString ? parseInt(visitCountString) : 0;
+    const storageVisitCount: string | null = localStorage.getItem('visit-count');
+    const currentCount: number = storageVisitCount ? parseInt(storageVisitCount) : 0;
     const newCount: number = currentCount + 1;
-    localStorage.setItem('visitCount', newCount.toString());
+    localStorage.setItem('visit-count', newCount.toString());
   }
+  
 }
