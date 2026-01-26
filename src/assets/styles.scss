@@ -1,0 +1,20 @@
+@use './fonts';
+@use './normalize';
+
+* {
+  font-family: 'Nunito sans';
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 100%;
+  color: white;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  display: block;
+  width: 1180px;
+  margin: 0 auto;
+}
