@@ -1,5 +1,28 @@
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  
+  .spinner {
+    animation: rotate-spinner 1s linear infinite;
+    transform-origin: center center; 
+    backface-visibility: hidden;
+  }
+  
+  @keyframes rotate-spinner {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+}
+
 .hero {
-  min-height: 100vh;
+  min-height: 985px;
   background: url('/images/bg-mountains.jpg') no-repeat center center;
   background-size: cover;
   display: flex;
@@ -16,6 +39,54 @@
       justify-content: space-between;
       align-items: center;
       width: 1180px;
+      position: relative;
+      
+      .header-actions {
+        position: absolute;
+        right: 0;
+        top: 100%;
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        
+        .change-action {
+        margin-left: 50px;
+        padding: 12px 24px;
+        font-weight: 600;
+        font-style: 'SemiBold';
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: 1.2%;
+        background-color: #1A3E3E;
+        border: 0px;
+        border-radius: 8px;
+        cursor: pointer;
+        }
+        
+        .clicker {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+        
+        .counter-value {
+          text-align: center;
+        }
+        
+        .counter-btn {
+          width: 30px;
+          height: 30px;
+          background: transparent;
+          border: 0px;
+          cursor: pointer;
+          color: #FDFDFD;
+          
+          &:disabled {
+            opacity: 0.4;
+            cursor: auto;
+          }
+        }
+      }
       
       .logo-block {
         display: flex;
@@ -25,7 +96,7 @@
         span {
           font-family: 'NEXT ART';
           font-size: 12px;
-          font-weight: 400;
+          font-weight: 700;
           letter-spacing: 3px;
           margin-top: 6px;
           text-transform: uppercase;
@@ -47,6 +118,7 @@
         background-color: #1A3E3E;
         border: 0px;
         border-radius: 8px;
+        cursor: pointer;
       }
     }
   }
@@ -82,7 +154,7 @@
     margin-top: 41px;
     box-sizing: border-box;
     
-    button {
+    .submit-btn {
       height: 52px;
       width: 213px;
       background-color: #FDFDFD;
@@ -91,6 +163,42 @@
       border-radius: 8px;
       padding: 0px;
       margin-bottom: 31px;
+      cursor: pointer;
+      
+      &:disabled {
+        background-color: #cccccc;
+        color: #666666;
+        opacity: 0.6;
+        cursor: auto;
+      }
+    }
+  }
+  
+    .live-input-wrapper {
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+      gap: 50px;
+      
+      .input-field {
+      border-radius: 10px;
+      border: 1px solid rgba(225, 227, 228, 1);
+      width: 270px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      padding: 0px 12px;
+      }
+      
+      input {
+        background: transparent;
+        border: none;
+        width: 270px;
+        height: 52px;
+        background-image: url('/images/arrow-right-icon.svg');
+        background-repeat: no-repeat;
+        background-position: right 15px center;
+      }
     }
     
     .form-item-container {
@@ -117,18 +225,243 @@
       justify-content: space-between;
       align-self: center;
       
-      img {
-         margin-right: 16px;
+      input, select {
+        appearance: none;
+        border: none;
+        outline: none;
+        background: transparent;
+        font-family: inherit;
       }
       
-      span {
-          font-weight: 600;
-          font-style: Bold;
-          font-size: 16px;
-          line-height: 150%;
-          letter-spacing: 0px;
-          margin-left: 16px;
+      select {
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        font-style: Bold;
+        font-size: 16px;
+        line-height: 150%;
+        letter-spacing: 0px;
+        margin-left: 16px;
+        background-image: url('/images/arrow-down-icon.svg');
+        background-repeat: no-repeat;
+        background-position: right 15px center;
+        padding-right: 40px;
+        cursor: pointer;
+        width: 270px;
+        height: 52px;
+      }
+      
+      input {
+        font-weight: 600;
+        font-style: Bold;
+        font-size: 16px;
+        line-height: 150%;
+        letter-spacing: 0px;
+        margin-left: 16px;
+        width: 245px;
+        height: 52px;
+        cursor: pointer;
       }
     }
+  }
+
+
+.tour-description {
+  height: 726px;
+  display: flex;
+  align-items: center;
+  
+  .description-img-wrapper {
+    width: 480px;
+    height: 526px;
+    display: flex;
+    position: relative;
+    
+    .mountain-img {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      z-index: 1;
+    }
+    
+    .nature-block {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      z-index: 2;
+      
+      .nature-img {
+        display: block;
+        position: static;
+      }
+      
+      .play-btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50px;
+        height: 50px;
+        background: rgba(253, 253, 253, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 3;
+        border-radius: 100%;
+      }
+    }
+  }
+  
+  .description {
+    top: 64px;
+    width: 580px;
+    height: 398px;
+    margin-left: 120px;
+    
+    span {
+      color: #F2BE22;
+      font-weight: 400;
+      font-style: Regular;
+      font-size: 24px;
+      line-height: 20px;
+      letter-spacing: 0%;
+    }
+    
+    h2 {
+      color: #18121E;
+      font-weight: 800;
+      font-style: ExtraBold;
+      font-size: 32px;
+      line-height: 120%;
+      letter-spacing: 0%;
+      margin-top: 8px;
+    }
+    
+     p {
+      color: #18121E;
+      font-weight: 400;
+      font-style: Regular;
+      font-size: 18px;
+      line-height: 150%;
+      letter-spacing: 0%;
+      margin: 40px 0px;
+     }
+     
+     button {
+      background-color: #1A3E3E;
+      width: 200px;
+      height: 52px;
+      cursor: pointer;
+      border-radius: 4px;
+     }
+  }
+}
+
+.offers {
+  height: 771px;
+  background-color: #F3F5F4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  button {
+    width: 236px;
+    height: 52px;
+    border-radius: 4px;
+    background-color: #1A3E3E;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 1.2%;
+    cursor: pointer;
+  }
+  
+  .offers-description {
+    height: 187px;
+    width: 580px;
+    
+    span {
+      color: #F2BE22;
+      font-weight: 400;
+      font-style: Regular;
+      font-size: 24px;
+      line-height: 20px;
+      letter-spacing: 0%;
+    }
+    
+    h2 {
+      font-weight: 800;
+      font-style: ExtraBold;
+      font-size: 32px;
+      line-height: 120%;
+      letter-spacing: 0%;
+      color: #18121E;
+      margin-top: 8px;
+      margin-bottom: 40px;
+    }
+    
+    p {
+      color: #18121E;
+      font-weight: 400;
+      font-style: Regular;
+      font-size: 18px;
+      line-height: 150%;
+      letter-spacing: 0%;
+      margin: 0px;
+    }
+  }
+  
+  .services-card {
+    display: flex;
+    width: 580px;
+    transition: all 0.3s ease;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    cursor: pointer;
+    
+    .card-content {
+      display: flex;
+      flex-direction: column;
+      margin-left: 16px;
+    }
+    
+    &:hover {
+        background-color: #ffffff;
+        transform: scale(1.02);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    h3 {
+      font-weight: 700;
+      font-style: Bold;
+      font-size: 18px;
+      line-height: 20px;
+      letter-spacing: 1.2%;
+      color: #18121E;
+      margin: 0px;
+    }
+    
+    p {
+      font-weight: 400;
+      font-style: Regular;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0%;
+      color: #18121E;
+      margin-top: 4px;
+      margin-bottom: 0px;
+    }
+  }
+  
+  .offers-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+    width: 510px;
+    height: 510px;
   }
 }
