@@ -5,6 +5,12 @@ import { Collection } from '../collection';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
+interface ICard {
+  title: string;
+  text: string;
+  icon: string;
+}
+
 @Component({
   selector: 'app-root',
   imports: [FormsModule, CommonModule],
@@ -13,39 +19,39 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   
-  public readonly companyName: string = 'Румтибет';
-  public selectedDirection: string = '';
-  public selectedDate: string = '';
-  public participantsCount: number | null = null;
-  public tours: Collection<string> = new Collection<string>();
-  public prices: Collection<number> = new Collection<number>();
-  public dataTime: Date = new Date();
-  public counter: number = 0;
-  public isTimerVisible: boolean = true;
-  public liveText: string = '';
-  public isLoading: boolean = true;
+  readonly companyName: string = 'Румтибет';
+  selectedDirection: string = '';
+  selectedDate: string = '';
+  participantsCount: number | null = null;
+  tours: Collection<string> = new Collection<string>();
+  prices: Collection<number> = new Collection<number>();
+  currentDate: Date = new Date();
+  counter: number = 0;
+  isTimerVisible: boolean = true;
+  liveText: string = '';
+  isLoading: boolean = true;
   
-  public readonly cards = [
+  cards: ICard[] = [
     {
       title: 'Опытный гид',
       text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      icon: '/images/experienced-guide-icon.svg'
+      icon: 'experienced-guide-icon'
     },
     {
       title: 'Безопасный поход',
       text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      icon: '/images/armour-icon.svg'
+      icon: 'armour-icon'
     },
     {
       title: 'Лояльные цены',
       text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      icon: '/images/price-icon.svg'
+      icon: 'price-icon'
     }
-  ]
+  ];
   
   constructor() {
     setInterval(() => {
-      this.dataTime = new Date();
+      this.currentDate = new Date();
     }, 1000);
     
     setTimeout(() => {
@@ -59,7 +65,7 @@ export class AppComponent {
     this.prices.replace(0, 1000);
   }
   
-  public isFormInvalid(): boolean {
+  validateBookingForm(): boolean {
     return (
     !this.selectedDate ||
     !this.selectedDirection ||
@@ -68,17 +74,17 @@ export class AppComponent {
     );
   }
   
-  public increment(): void {
+  counterIncrement(): void {
     this.counter++;
   }
   
-  public decrement(): void {
+  counterDecrement(): void {
     if (this.counter > 0) {
       this.counter--;
     }
   }
   
-  public toggleDisplay(): void {
+  toggleHeaderFeature(): void {
     this.isTimerVisible = !this.isTimerVisible;
   }
   

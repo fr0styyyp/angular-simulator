@@ -30,18 +30,18 @@
       <div class="header-actions">
         @if (isTimerVisible) {
         <div class="data-time">
-          {{ dataTime | date : 'dd.MM.yyyy HH:mm:ss' }}
+          {{ currentDate | date : 'dd.MM.yyyy HH:mm:ss' }}
         </div>
       } @else {
         <div class="clicker">
-          <button class="counter-btn" (click)="increment()">+</button>
+          <button class="counter-btn" (click)="counterIncrement()">+</button>
           
           <span class="counter-value">{{ counter }}</span>
           
-          <button class="counter-btn" (click)="decrement()" [disabled]="counter === 0">-</button>
+          <button class="counter-btn" (click)="counterDecrement()" [disabled]="counter === 0">-</button>
         </div>
       }
-        <button class="change-action" (click)="toggleDisplay()">{{ isTimerVisible ? 'Показать кликер' : 'Показать дату' }}</button>
+        <button class="change-action" (click)="toggleHeaderFeature()">{{ isTimerVisible ? 'Показать кликер' : 'Показать дату' }}</button>
       </div>
     </div>
   </header>
@@ -73,7 +73,7 @@
       </div>
       <span class="subtitle">минимум 4 человека</span>
     </div>
-    <button [disabled]="isFormInvalid()" class="submit-btn">
+    <button [disabled]="validateBookingForm()" class="submit-btn">
       Найти программу
     </button>
   </div>
@@ -91,10 +91,10 @@
 
 <section class="tour-description container">
   <div class="description-img-wrapper">
-    <img class="mountain-img" src="/images/mountain-img.png" alt="mountain" width="350" height="400">
+    <img class="mountain-img" src="/images/mountain.png" alt="mountain" width="350" height="400">
     
     <div class="nature-block">
-      <img class="nature-img" src="/images/nature-img.png" alt="nature" width="350" height="400">
+      <img class="nature-img" src="/images/nature.png" alt="nature" width="350" height="400">
       
       <div class="play-btn">
         <img src="/images/play-icon.svg" alt="play">
@@ -120,7 +120,7 @@
     
       @for (card of cards; track card.title) {
           <div class="services-card">
-            <img [src]="card.icon" alt="icon" height="50px" width="50px">
+            <img [src]="'/images/' + card.icon + '.svg'" alt="icon" height="50px" width="50px">
             <div class="card-content">
               <h3>{{ card.title }}</h3>
               <p>{{ card.text }}</p>
@@ -134,10 +134,10 @@
   </div>
   
   <div class="offers-grid">
-    <img src="/images/grid-img-1.png" alt="grid-img-1" class="grid-img-1">
-    <img src="/images/grid-img-2.png" alt="grid-img-2" class="grid-img-2">
-    <img src="/images/grid-img-3.png" alt="grid-img-3" class="grid-img-3">
-    <img src="/images/grid-img-4.png" alt="grid-img-4" class="grid-img-4">
+    <img src="/images/mountain-lake.png" alt="mountain-lake" class="grid-img-1">
+    <img src="/images/canyon-view.png" alt="canyon-view" class="grid-img-2">
+    <img src="/images/snowy-peak-biker.png" alt="snowy-peak-biker" class="grid-img-3">
+    <img src="/images/mountain-river-autumn.png" alt="mountain-river-autumn" class="grid-img-4">
   </div>
 </section>
 }
