@@ -4,12 +4,7 @@ import { Color } from '../enums/Color';
 import { Collection } from '../collection';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
-interface ICard {
-  title: string;
-  text: string;
-  icon: string;
-}
+import { ICard } from './interfaces/card.interface';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +23,7 @@ export class AppComponent {
   currentDate: Date = new Date();
   counter: number = 0;
   isTimerVisible: boolean = true;
-  liveText: string = '';
+  liveTextInput: string = '';
   isLoading: boolean = true;
   
   cards: ICard[] = [
@@ -58,33 +53,31 @@ export class AppComponent {
       this.isLoading = false;
     }, 2000);
     
-    this.setLastVisit();
-    this.visitCount();
+    this.setLastVisitDate();
+    this.updateVisitCount();
     
     this.tours.replace(0, 'Поход в горы');
     this.prices.replace(0, 1000);
   }
   
-  validateBookingForm(): boolean {
-    return (
-    !this.selectedDate ||
-    !this.selectedDirection ||
-    !this.participantsCount ||
-    this.participantsCount < 4
-    );
+  isFormValid(): boolean {
+    return this.selectedDate !== '' && 
+    this.selectedDirection !== '' && 
+    this.participantsCount !== null && 
+    this.participantsCount >= 4;
   }
   
-  counterIncrement(): void {
+  onIncrementCounter(): void {
     this.counter++;
   }
   
-  counterDecrement(): void {
+  onDecrementCounter(): void {
     if (this.counter > 0) {
       this.counter--;
     }
   }
   
-  toggleHeaderFeature(): void {
+  onToggleTimerVisibility(): void {
     this.isTimerVisible = !this.isTimerVisible;
   }
   
@@ -93,12 +86,12 @@ export class AppComponent {
     return primaryColors.includes(color);
   }
   
-  private setLastVisit(): void {
+  private setLastVisitDate(): void {
     const currentDate: string = new Date().toLocaleString();
     localStorage.setItem('last-visit', currentDate);
   }
   
-  private visitCount(): void {
+  private updateVisitCount(): void {
     const storageVisitCount: string | null = localStorage.getItem('visit-count');
     const currentCount: number = storageVisitCount ? parseInt(storageVisitCount) : 0;
     const newCount: number = currentCount + 1;

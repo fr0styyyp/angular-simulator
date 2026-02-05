@@ -1,11 +1,11 @@
-@if (isLoading){
+@if (isLoading) {
   <div class="loader-overlay">
     <img 
-    src="/images/refresh-icon.svg"
-    alt="refresh-icon"
-    class="spinner"
-    width="51"
-    height="51"
+      src="/images/loading-icon.svg"
+      alt="refresh-icon"
+      class="spinner"
+      width="51"
+      height="51"
     >
   </div>
 } @else {
@@ -18,30 +18,30 @@
       </div>
   
       <nav class="navigation">
-        <a href="#">Главная</a>
-        <a href="#">Про гида</a>
-        <a href="#">Программа тура</a>
-        <a href="#">Стоимость</a>
-        <a href="#">Блог</a>
-        <a href="#">Контакты</a>
-        <button class="consult-btn">Консультация</button>
+        <a id="nav-link-home" href="#">Главная</a>
+        <a id="nav-link-about-guide" href="#">Про гида</a>
+        <a id="nav-link-tour-program" href="#">Программа тура</a>
+        <a id="nav-link-price" href="#">Стоимость</a>
+        <a id="nav-link-blog" href="#">Блог</a>
+        <a id="nav-link-contacts" href="#">Контакты</a>
+        <button id="consult-btn" class="consult-btn">Консультация</button>
       </nav>
       
       <div class="header-actions">
         @if (isTimerVisible) {
-        <div class="data-time">
-          {{ currentDate | date : 'dd.MM.yyyy HH:mm:ss' }}
-        </div>
-      } @else {
-        <div class="clicker">
-          <button class="counter-btn" (click)="counterIncrement()">+</button>
-          
-          <span class="counter-value">{{ counter }}</span>
-          
-          <button class="counter-btn" (click)="counterDecrement()" [disabled]="counter === 0">-</button>
-        </div>
-      }
-        <button class="change-action" (click)="toggleHeaderFeature()">{{ isTimerVisible ? 'Показать кликер' : 'Показать дату' }}</button>
+          <div class="data-time">
+            {{ currentDate | date : 'dd.MM.yyyy HH:mm:ss' }}
+          </div>
+        } @else {
+          <div class="clicker">
+            <button id="counter-btn" class="counter-btn" (click)="onIncrementCounter()">+</button>
+            
+            <span class="counter-value">{{ counter }}</span>
+            
+            <button id="counter-btn" class="counter-btn" (click)="onDecrementCounter()" [disabled]="counter === 0">-</button>
+          </div>
+        }
+        <button id="change-action" class="change-action" (click)="onToggleTimerVisibility()">{{ isTimerVisible ? 'Показать кликер' : 'Показать дату' }}</button>
       </div>
     </div>
   </header>
@@ -53,7 +53,7 @@
   <div class="form-data-container container">
     <div class="form-item-container">
       <div class="form-item">
-        <select [(ngModel)]="selectedDirection">
+        <select id="select-direction" [(ngModel)]="selectedDirection">
           <option value="" disabled>Локация для тура</option>
           <option value="mountains">Горы</option>
           <option value="forest">Лес</option>
@@ -63,28 +63,35 @@
     </div>
     <div class="form-item-container">
       <div class="form-item">
-      <input type="date" [(ngModel)]="selectedDate" placeholder="Дата похода">
+      <input id="input-tour-date" type="date" [(ngModel)]="selectedDate" placeholder="Дата похода">
       </div>
       <span class="subtitle">укажите диапазон</span>
     </div>
     <div class="form-item-container">
       <div class="form-item">
-      <input type="number" [(ngModel)]="participantsCount" placeholder="Участники">
+        <select id="select-participants-count" [(ngModel)]="participantsCount" class="form-select">
+            <option value="" disabled selected>Количество человек</option>
+            <option value="4">4 человека</option>
+            <option value="5">5 человек</option>
+            <option value="6">6 человек</option>
+            <option value="7">7 человек</option>
+            <option value="8+">8+ человек</option>
+          </select>
       </div>
       <span class="subtitle">минимум 4 человека</span>
     </div>
-    <button [disabled]="validateBookingForm()" class="submit-btn">
+    <button id="submit-btn" [disabled]="!isFormValid()" class="submit-btn">
       Найти программу
     </button>
   </div>
   
   <div class="live-input-wrapper container">
     <div class="input-field">
-      <input type="text" [(ngModel)]="liveText" placeholder="Живой текст">
+      <input id="live-text-input" type="text" [(ngModel)]="liveTextInput" placeholder="Живой текст">
     </div>
     
     <div class="output-field">
-      <span>{{ liveText }}</span>
+      <span>{{ liveTextInput }}</span>
     </div>
   </div>
 </main>
@@ -106,7 +113,7 @@
     <span>о нашем походе</span>
     <h2>Исследуйте все горные массивы мира вместе с нами</h2>
     <p>Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.</p>
-    <button>Программа тура</button>
+    <button id="tour-description-btn">Программа тура</button>
   </div>
 </section>
 
@@ -130,7 +137,7 @@
         <p>Карточек пока нету</p>
       }
     
-    <button>Стоимость программ</button>
+    <button id="price-btn">Стоимость программ</button>
   </div>
   
   <div class="offers-grid">
