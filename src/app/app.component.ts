@@ -4,7 +4,7 @@ import { Color } from '../enums/Color';
 import { Collection } from '../collection';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ICard } from './interfaces/card.interface';
+import { ICard } from './interfaces/ICard';
 
 @Component({
   selector: 'app-root',
@@ -60,11 +60,19 @@ export class AppComponent {
     this.prices.replace(0, 1000);
   }
   
-  isFormValid(): boolean {
-    return this.selectedDate !== '' && 
-    this.selectedDirection !== '' && 
-    this.participantsCount !== null && 
-    this.participantsCount >= 4;
+  get isFormValid(): boolean {
+    return !!(this.selectedDate && this.selectedDirection && this.participantsCount && this.participantsCount >= 4);
+  }
+  
+  get formattedDate(): string {
+    return this.currentDate.toLocaleString('ru-RU', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }).replace(',', '');
   }
   
   onIncrementCounter(): void {
