@@ -30,7 +30,7 @@
       <div class="header-actions">
         @if (isTimerVisible) {
           <div class="data-time">
-            {{ formattedDate }}
+            {{ currentDate.toLocaleString('ru-RU') }}
           </div>
         } @else {
           <div class="clicker">
@@ -80,7 +80,7 @@
       </div>
       <span class="subtitle">минимум 4 человека</span>
     </div>
-    <button id="submit-btn" [disabled]="!isFormValid" class="submit-btn">
+    <button id="submit-btn" [disabled]="!isFormValid()" class="submit-btn">
       Найти программу
     </button>
   </div>

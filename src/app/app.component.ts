@@ -60,19 +60,8 @@ export class AppComponent {
     this.prices.replace(0, 1000);
   }
   
-  get isFormValid(): boolean {
+  isFormValid(): boolean {
     return !!(this.selectedDate && this.selectedDirection && this.participantsCount && this.participantsCount >= 4);
-  }
-  
-  get formattedDate(): string {
-    return this.currentDate.toLocaleString('ru-RU', {
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    }).replace(',', '');
   }
   
   onIncrementCounter(): void {
