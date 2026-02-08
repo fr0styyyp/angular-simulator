@@ -1,4 +1,15 @@
-<main class="hero">
+@if (isLoading) {
+  <div class="loader-overlay">
+    <img 
+      src="/images/loading-icon.svg"
+      alt="refresh-icon"
+      class="spinner"
+      width="51"
+      height="51"
+    >
+  </div>
+} @else {
+  <main class="hero">
   <header class="header">
     <div class="header-container container">
       <div class="logo-block">
@@ -7,14 +18,31 @@
       </div>
   
       <nav class="navigation">
-        <a href="#">Главная</a>
-        <a href="#">Про гида</a>
-        <a href="#">Программа тура</a>
-        <a href="#">Стоимость</a>
-        <a href="#">Блог</a>
-        <a href="#">Контакты</a>
-        <button class="consult-btn">Консультация</button>
+        <a id="nav-link-home" href="#">Главная</a>
+        <a id="nav-link-about-guide" href="#">Про гида</a>
+        <a id="nav-link-tour-program" href="#">Программа тура</a>
+        <a id="nav-link-price" href="#">Стоимость</a>
+        <a id="nav-link-blog" href="#">Блог</a>
+        <a id="nav-link-contacts" href="#">Контакты</a>
+        <button id="consult-btn" class="consult-btn">Консультация</button>
       </nav>
+      
+      <div class="header-actions">
+        @if (isTimerVisible) {
+          <div class="data-time">
+            {{ currentDate.toLocaleString('ru-RU') }}
+          </div>
+        } @else {
+          <div class="clicker">
+            <button id="counter-btn" class="counter-btn" (click)="onIncrementCounter()">+</button>
+            
+            <span class="counter-value">{{ counter }}</span>
+            
+            <button id="counter-btn" class="counter-btn" (click)="onDecrementCounter()" [disabled]="counter === 0">-</button>
+          </div>
+        }
+        <button id="change-action" class="change-action" (click)="onToggleTimerVisibility()">{{ isTimerVisible ? 'Показать кликер' : 'Показать дату' }}</button>
+      </div>
     </div>
   </header>
   
@@ -25,25 +53,98 @@
   <div class="form-data-container container">
     <div class="form-item-container">
       <div class="form-item">
-        <span>Локация для тура</span>
-        <img src="/images/arrow-down-icon.svg" alt="arrow down">
+        <select id="select-direction" [(ngModel)]="selectedDirection">
+          <option value="" disabled>Локация для тура</option>
+          <option value="mountains">Горы</option>
+          <option value="forest">Лес</option>
+        </select>
       </div>
       <span class="subtitle">выберите из списка</span>
     </div>
     <div class="form-item-container">
       <div class="form-item">
-        <span>Дата похода</span>
-        <img src="/images/date-icon.svg" alt="formkit date">
+      <input id="input-tour-date" type="date" [(ngModel)]="selectedDate" placeholder="Дата похода">
       </div>
       <span class="subtitle">укажите диапазон</span>
     </div>
     <div class="form-item-container">
       <div class="form-item">
-        <span>Участники</span>
-        <img src="/images/arrow-down-icon.svg" alt="arrow-down">
+        <select id="select-participants-count" [(ngModel)]="participantsCount" class="form-select">
+            <option value="" disabled selected>Количество человек</option>
+            <option value="4">4 человека</option>
+            <option value="5">5 человек</option>
+            <option value="6">6 человек</option>
+            <option value="7">7 человек</option>
+            <option value="8+">8+ человек</option>
+          </select>
       </div>
       <span class="subtitle">минимум 4 человека</span>
     </div>
-    <button>Найти программу</button>
+    <button id="submit-btn" [disabled]="!isFormValid()" class="submit-btn">
+      Найти программу
+    </button>
+  </div>
+  
+  <div class="live-input-wrapper container">
+    <div class="input-field">
+      <input id="live-text-input" type="text" [(ngModel)]="liveTextInput" placeholder="Живой текст">
+    </div>
+    
+    <div class="output-field">
+      <span>{{ liveTextInput }}</span>
+    </div>
   </div>
 </main>
+
+<section class="tour-description container">
+  <div class="description-img-wrapper">
+    <img class="mountain-img" src="/images/mountain.png" alt="mountain" width="350" height="400">
+    
+    <div class="nature-block">
+      <img class="nature-img" src="/images/nature.png" alt="nature" width="350" height="400">
+      
+      <div class="play-btn">
+        <img src="/images/play-icon.svg" alt="play">
+      </div>
+    </div>
+  </div>
+  
+  <div class="description">
+    <span>о нашем походе</span>
+    <h2>Исследуйте все горные массивы мира вместе с нами</h2>
+    <p>Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.</p>
+    <button id="tour-description-btn">Программа тура</button>
+  </div>
+</section>
+
+<section class="offers container">
+  <div class="offers-left">
+    <div class="offers-description">
+      <span>наше предложение</span>
+      <h2>Лучшие программы для тебя</h2>
+      <p>Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.</p>
+    </div>
+    
+      @for (card of cards; track card.title) {
+          <div class="services-card">
+            <img [src]="'/images/' + card.icon + '.svg'" alt="icon" height="50px" width="50px">
+            <div class="card-content">
+              <h3>{{ card.title }}</h3>
+              <p>{{ card.text }}</p>
+            </div>
+          </div>
+      } @empty {
+        <p>Карточек пока нету</p>
+      }
+    
+    <button id="price-btn">Стоимость программ</button>
+  </div>
+  
+  <div class="offers-grid">
+    <img src="/images/mountain-lake.png" alt="mountain-lake" class="grid-img-1">
+    <img src="/images/canyon-view.png" alt="canyon-view" class="grid-img-2">
+    <img src="/images/snowy-peak-biker.png" alt="snowy-peak-biker" class="grid-img-3">
+    <img src="/images/mountain-river-autumn.png" alt="mountain-river-autumn" class="grid-img-4">
+  </div>
+</section>
+}
