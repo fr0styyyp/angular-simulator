@@ -9,6 +9,15 @@
     >
   </div>
 } @else {
+  <div class="toast-container">
+    @for (item of messageService.allMessages; track item; let i = $index) {
+      <ng-container
+      [ngTemplateOutlet]="msgTemp"
+      [ngTemplateOutletContext]="{ message: item, index: i }">
+      </ng-container>
+    }
+  </div>
+  
   <main class="hero">
   <header class="header">
     <div class="header-container container">
@@ -113,7 +122,7 @@
     <span>о нашем походе</span>
     <h2>Исследуйте все горные массивы мира вместе с нами</h2>
     <p>Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.</p>
-    <button id="tour-description-btn">Программа тура</button>
+    <button (click)="messageService.addMessage('Программа недоступна', messageType.WARN)" id="tour-description-btn">Программа тура</button>
   </div>
 </section>
 
@@ -137,7 +146,7 @@
         <p>Карточек пока нету</p>
       }
     
-    <button id="price-btn">Стоимость программ</button>
+    <button (click)="messageService.addMessage('Стоимость отправлена на почту', messageType.INFO)" id="price-btn">Стоимость программ</button>
   </div>
   
   <div class="offers-grid">
@@ -147,4 +156,80 @@
     <img src="/images/mountain-river-autumn.png" alt="mountain-river-autumn" class="grid-img-4">
   </div>
 </section>
+
+<section class="popular-destinations-container container">
+  <div class="popular-destinations-title">
+    <span>по версии отдыхающих</span>
+    <h2>Популярные направления</h2>
+  </div>
+  
+  <div class="popular-destination-cards">
+    @for (card of destinations; track card.title) {
+      <div class="destinate-card" [style.backgroundImage]="'url(/images/' + card.imageUrl + '.png)'">
+        
+        <div class="rating-wrapper">
+          <img [src]="'/images/' + card.starIcon + '.svg'" alt="star">
+          <span>{{ card.rating }}</span>
+        </div>
+        
+        <div class="destination-card-description-wrapper">
+          <div class="destinate-description">
+            <h3>{{ card.title }}</h3>
+            <p>{{ card.description }}</p>
+          </div>
+          
+          <div class="destinate-price">
+            <span>{{ card.price }}</span>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+  
+  <button (click)="messageService.addMessage('направление получено', messageType.SUCCESS)" id="-destinations-rating" class="main-btn">Рейтинг направлений</button>
+</section>
+
+<section class="trip-blog container">
+  <div class="trip-blog-title">
+    <span>делимся впечатлениями</span>
+    <h2>Блог о путешествиях</h2>
+</div>
+
+<div class="cards-of-blog">
+  @for (card of blogs; track card.title) {
+    <div class="blog-card">
+      <img [src]="'/images/' + card.imageUrl + '.png'" alt="image of blog" width="230" height="280">
+      
+      <div class="description-wrapper">
+        <div class="blog-description">
+          <h3>{{ card.title }}</h3>
+          <p>{{ card.description }}</p>
+        </div>
+        
+        <div class="description-footer">
+          <span>{{ card.date }}</span>
+          <a>{{ card.link }}</a>
+        </div>
+      </div>
+    </div>
+  }
+</div>
+
+<button (click)="messageService.addMessage('Материалы недоступы', messageType.ERROR)" id="other-materials" class="main-btn">Другие материалы</button>
+</section>
 }
+
+<ng-template #msgTemp let-msg="message" let-idx="index">
+  <div class="toast-card" [ngClass]="msg.type">
+    <div class="toast-icon">
+      <img src="/images/toast-icon.svg" alt="toast icon" width="40px" height="40px">
+    </div>
+    <div class="toast-content">
+      <div class="title">{{ msg.type }}</div>
+      <div class="text">{{ msg.text }}</div>
+    </div>
+    <button (click)="messageService.closeMessage(idx)" id="close-btn">
+      <img src="/images/close-btn.svg" alt="close" width="20" height="20">
+    </button>
+  </div>
+</ng-template>
