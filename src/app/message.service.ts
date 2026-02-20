@@ -11,15 +11,15 @@ export class MessageService {
   addMessage(text: string, type: Message) {
     const newMessage: IMessage = { text, type };
     
-    this.messages.unshift(newMessage);
+    this.messages = [newMessage, ...this.messages];
     
     setTimeout(() => {
-      this.closeMessage(this.messages.indexOf(newMessage));
+      this.closeMessage(newMessage);
     }, 5000);
   }
   
-  closeMessage(index: number) {
-    this.messages.splice(index, 1);
+  closeMessage(message: IMessage) {
+    this.messages = this.messages.filter((m) => m !== message);
   }
   
   get allMessages(): IMessage[] {
