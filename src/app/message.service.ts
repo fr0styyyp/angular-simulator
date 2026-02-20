@@ -9,7 +9,7 @@ export class MessageService {
   
   private messages: IMessage[] = [];
   
-  addMessage(text: string, type: Message) {
+  addMessage(text: string, type: Message): void {
     const newMessage: IMessage = { text, type };
     
     this.messages = [newMessage, ...this.messages];
@@ -19,7 +19,7 @@ export class MessageService {
     }, 5000);
   }
   
-  closeMessage(message: IMessage) {
+  closeMessage(message: IMessage): void {
     this.messages = this.messages.filter((m) => m !== message);
   }
   

@@ -38,18 +38,18 @@ export class AppComponent {
     {
       title: 'Опытный гид',
       text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      icon: 'experienced-guide-icon'
+      icon: 'experienced-guide-icon',
     },
     {
       title: 'Безопасный поход',
       text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      icon: 'armour-icon'
+      icon: 'armour-icon',
     },
     {
       title: 'Лояльные цены',
       text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      icon: 'price-icon'
-    }
+      icon: 'price-icon',
+    },
   ];
   
   destinations: IDestination[] = [
@@ -59,7 +59,7 @@ export class AppComponent {
       price: '480 $',
       starIcon: 'star',
       rating: 4.9,
-      imageUrl: 'lake'
+      imageUrl: 'lake',
     },
     {
       title: 'Ночь в горах',
@@ -67,7 +67,7 @@ export class AppComponent {
       price: '500 $',
       starIcon: 'star',
       rating: 4.5,
-      imageUrl: 'winter-mountain'
+      imageUrl: 'winter-mountain',
     },
     {
       title: 'Йога в горах',
@@ -75,8 +75,8 @@ export class AppComponent {
       price: '230 $',
       starIcon: 'star',
       rating: 5.0,
-      imageUrl: 'mountain-yoga'
-    }
+      imageUrl: 'mountain-yoga',
+    },
   ];
   
   blogs: IBlog[] = [
@@ -85,29 +85,29 @@ export class AppComponent {
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
       date: '01/04/2023',
       link: 'читать статью',
-      imageUrl: 'italy-mountain'
+      imageUrl: 'italy-mountain',
     },
     {
       title: 'Долой сомнения! Весь мир открыт для вас!',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих...',
       date: '01/04/2023',
       link: 'читать статью',
-      imageUrl: 'plane-view'
+      imageUrl: 'plane-view',
     },
     {
       title: 'Как подготовиться к путешествию в одиночку? ',
       description: 'Для современного мира базовый вектор развития предполагает.',
       date: '01/04/2023',
       link: 'читать статью',
-      imageUrl: 'human-between-buildings'
+      imageUrl: 'human-between-buildings',
     },
     {
       title: 'Индия ... летим?',
       description: 'Для современного мира базовый.',
       date: '01/04/2023',
       link: 'читать статью',
-      imageUrl: 'mosque'
-    }
+      imageUrl: 'mosque',
+    },
   ];
   
   constructor() {
@@ -127,7 +127,12 @@ export class AppComponent {
   }
   
   isFormValid(): boolean {
-    return !!(this.selectedDate && this.selectedDirection && this.participantsCount && this.participantsCount >= 4);
+    return !!(
+      this.selectedDate &&
+      this.selectedDirection &&
+      this.participantsCount &&
+      this.participantsCount >= 4
+    );
   }
   
   onIncrementCounter(): void {
