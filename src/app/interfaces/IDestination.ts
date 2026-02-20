@@ -3,6 +3,6 @@ export interface IDestination {
   description: string;
   price: string;
   starIcon: string;
-  rating: number | string;
+  rating: number;
   imageUrl: string;
 }

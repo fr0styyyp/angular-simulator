@@ -19,11 +19,9 @@ import { LocalStorageService } from './local-storage.service';
 })
 export class AppComponent {
   
+  readonly companyName: string = 'Румтибет';
   messageType = Message;
   messageService: MessageService = inject(MessageService);
-  private localStorageService: LocalStorageService = inject(LocalStorageService);
-  
-  readonly companyName: string = 'Румтибет';
   selectedDirection!: string;
   selectedDate!: string;
   participantsCount: number | null = null;
@@ -34,6 +32,7 @@ export class AppComponent {
   isTimerVisible: boolean = true;
   liveTextInput: string = '';
   isLoading: boolean = true;
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
   
   cards: ICard[] = [
     {
@@ -75,7 +74,7 @@ export class AppComponent {
       description: 'для тех, кто забоится о себе',
       price: '230 $',
       starIcon: 'star',
-      rating: '5.0',
+      rating: 5.0,
       imageUrl: 'mountain-yoga'
     }
   ];

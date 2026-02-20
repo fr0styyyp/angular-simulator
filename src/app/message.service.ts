@@ -6,6 +6,7 @@ import { Message } from '../enums/Message';
   providedIn: 'root',
 })
 export class MessageService {
+  
   private messages: IMessage[] = [];
   
   addMessage(text: string, type: Message) {
@@ -25,4 +26,5 @@ export class MessageService {
   get allMessages(): IMessage[] {
     return this.messages;
   }
+  
 }

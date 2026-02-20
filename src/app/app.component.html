@@ -43,11 +43,11 @@
           </div>
         } @else {
           <div class="clicker">
-            <button id="counter-btn" class="counter-btn" (click)="onIncrementCounter()">+</button>
+            <button id="counter-inc-btn" class="counter-btn" (click)="onIncrementCounter()">+</button>
             
             <span class="counter-value">{{ counter }}</span>
             
-            <button id="counter-btn" class="counter-btn" (click)="onDecrementCounter()" [disabled]="counter === 0">-</button>
+            <button id="counter-dec-btn" class="counter-btn" (click)="onDecrementCounter()" [disabled]="counter === 0">-</button>
           </div>
         }
         <button id="change-action" class="change-action" (click)="onToggleTimerVisibility()">{{ isTimerVisible ? 'Показать кликер' : 'Показать дату' }}</button>
@@ -193,7 +193,7 @@
   <div class="trip-blog-title">
     <span>делимся впечатлениями</span>
     <h2>Блог о путешествиях</h2>
-</div>
+  </div>
 
 <div class="cards-of-blog">
   @for (card of blogs; track card.title) {
