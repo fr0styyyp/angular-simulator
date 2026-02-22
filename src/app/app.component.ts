@@ -20,7 +20,7 @@ import { LocalStorageService } from './local-storage.service';
 export class AppComponent {
   
   readonly companyName: string = 'Румтибет';
-  messageType = Message;
+  messageType: typeof Message = Message;
   messageService: MessageService = inject(MessageService);
   selectedDirection!: string;
   selectedDate!: string;
@@ -160,9 +160,8 @@ export class AppComponent {
   }
   
   private updateVisitCount(): void {
-    const count = this.localStorageService.getItem<number>('visit count') || 0;
-    const newCount: number = count + 1;
-    this.localStorageService.setItem('visit count', newCount);
+    const count: number = this.localStorageService.getItem<number>('visit count') || 0;
+    this.localStorageService.setItem('visit count', count + 1);
   }
   
 }

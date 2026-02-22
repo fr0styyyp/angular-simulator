@@ -9,15 +9,6 @@
     >
   </div>
 } @else {
-  <div class="toast-container">
-    @for (item of messageService.allMessages; track item; let i = $index) {
-      <ng-container
-      [ngTemplateOutlet]="msgTemp"
-      [ngTemplateOutletContext]="{ message: item, index: i }">
-      </ng-container>
-    }
-  </div>
-  
   <main class="hero">
   <header class="header">
     <div class="header-container container">
@@ -218,6 +209,15 @@
 <button (click)="messageService.addMessage('Материалы недоступы', messageType.ERROR)" id="other-materials" class="main-btn">Другие материалы</button>
 </section>
 }
+
+<div class="toast-container">
+  @for (item of messageService.allMessages; track item; let i = $index) {
+    <ng-container
+    [ngTemplateOutlet]="msgTemp"
+    [ngTemplateOutletContext]="{ message: item, index: i }">
+    </ng-container>
+  }
+</div>
 
 <ng-template #msgTemp let-msg="message" let-idx="index">
   <div class="toast-card" [ngClass]="msg.type">
