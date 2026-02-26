@@ -1,0 +1,23 @@
+<div class="toast-container">
+  @for (item of messageService.allMessages; track item; let i = $index) {
+    <ng-container
+      [ngTemplateOutlet]="msgTemp"
+      [ngTemplateOutletContext]="{ message: item, index: i }">
+    </ng-container>
+  }
+</div>
+
+<ng-template #msgTemp let-msg="message" let-idx="index">
+  <div class="toast-card" [ngClass]="msg.type">
+    <div class="toast-icon">
+      <img src="/images/toast-icon.svg" alt="toast icon" width="40px" height="40px">
+    </div>
+    <div class="toast-content">
+      <div class="title">{{ msg.type }}</div>
+      <div class="text">{{ msg.text }}</div>
+    </div>
+    <button (click)="messageService.closeMessage(msg)" id="close-btn">
+      <img src="/images/close-icon.svg" alt="close" width="20" height="20">
+    </button>
+  </div>
+</ng-template>

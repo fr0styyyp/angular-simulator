@@ -10,18 +10,24 @@ import { IBlog } from './interfaces/IBlog';
 import { MessageService } from './message.service';
 import { Message } from '../enums/Message';
 import { LocalStorageService } from './local-storage.service';
+import { IImpressionImage } from './interfaces/IImpression-image';
+import { RouterOutlet } from '@angular/router';
+import { FooterComponent } from '../footer/footer.component';
+import { HeaderComponent } from '../header/header.component';
+import { MessageComponent } from '../message/message.component';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterOutlet, HeaderComponent, FooterComponent, MessageComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
   
-  readonly companyName: string = 'Румтибет';
-  messageType: typeof Message = Message;
   messageService: MessageService = inject(MessageService);
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
+  
+  messageType: typeof Message = Message;
   selectedDirection!: string;
   selectedDate!: string;
   participantsCount: number | null = null;
@@ -32,7 +38,6 @@ export class AppComponent {
   isTimerVisible: boolean = true;
   liveTextInput: string = '';
   isLoading: boolean = true;
-  private localStorageService: LocalStorageService = inject(LocalStorageService);
   
   cards: ICard[] = [
     {
@@ -110,6 +115,33 @@ export class AppComponent {
     },
   ];
   
+  impressionImages: IImpressionImage[] = [
+    {
+      id: 1,
+      imageUrl: 'view-air-ballons',
+    },
+    {
+      id: 2,
+      imageUrl: 'country-map',
+    },
+    {
+      id: 3,
+      imageUrl: 'building-on-water',
+    },
+    {
+      id: 4,
+      imageUrl: 'ocean-beach',
+    },
+    {
+      id: 5,
+      imageUrl: 'canyon',
+    },
+    {
+      id: 6,
+      imageUrl: 'detective-stuff',
+    },
+  ];
+  
   constructor() {
     setInterval(() => {
       this.currentDate = new Date();
@@ -133,20 +165,6 @@ export class AppComponent {
       this.participantsCount &&
       this.participantsCount >= 4
     );
-  }
-  
-  onIncrementCounter(): void {
-    this.counter++;
-  }
-  
-  onDecrementCounter(): void {
-    if (this.counter > 0) {
-      this.counter--;
-    }
-  }
-  
-  onToggleTimerVisibility(): void {
-    this.isTimerVisible = !this.isTimerVisible;
   }
   
   private isPrimaryColor(color: Color): boolean {

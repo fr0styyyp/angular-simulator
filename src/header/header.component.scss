@@ -1,0 +1,99 @@
+.header {
+  background-color: transparent;
+  width: 100%;
+  justify-content: center;
+  margin-top: 16px;
+  
+  .active-link {
+    color: blue;
+    text-decoration: underline;
+  }
+  
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1180px;
+    position: relative;
+    
+    .header-actions {
+      position: absolute;
+      right: 0;
+      top: 100%;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      
+      .change-action {
+        margin-left: 50px;
+        padding: 12px 24px;
+        font-weight: 600;
+        font-style: 'SemiBold';
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: 1.2%;
+        background-color: #1A3E3E;
+        border: 0px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      
+      .clicker {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      
+      .counter-value {
+        text-align: center;
+      }
+      
+      .counter-btn {
+        width: 30px;
+        height: 30px;
+        background: transparent;
+        border: 0px;
+        cursor: pointer;
+        color: #FDFDFD;
+        
+        &:disabled {
+          opacity: 0.4;
+          cursor: auto;
+        }
+      }
+    }
+    
+    .logo-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
+      span {
+        font-family: 'NEXT ART';
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        margin-top: 6px;
+        text-transform: uppercase;
+      }
+    }
+    
+    .navigation a {
+      margin-left: 24px;
+    }
+    
+    .navigation button {
+      margin-left: 49px;
+      padding: 12px 24px;
+      font-weight: 600;
+      font-style: 'SemiBold';
+      font-size: 16px;
+      line-height: 20px;
+      letter-spacing: 1.2%;
+      background-color: #1A3E3E;
+      border: 0px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  }
+}
