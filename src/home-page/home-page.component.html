@@ -1,1 +1,52 @@
-<p>home-page works!</p>
+<div class="hero">
+  <div class="home-page-container">
+    <div class="title-container">
+      <h1 class="title">Насладись прогулкой в горах <br> с командой единомышленников</h1>
+    </div>
+  
+    <div class="form-data-container container">
+      <div class="form-item-container">
+        <div class="form-item">
+          <select id="select-direction" [(ngModel)]="selectedDirection">
+            <option value="" disabled>Локация для тура</option>
+            <option value="mountains">Горы</option>
+            <option value="forest">Лес</option>
+          </select>
+        </div>
+        <span class="subtitle">выберите из списка</span>
+      </div>
+      <div class="form-item-container">
+        <div class="form-item">
+        <input id="input-tour-date" type="date" [(ngModel)]="selectedDate" placeholder="Дата похода">
+        </div>
+        <span class="subtitle">укажите диапазон</span>
+      </div>
+      <div class="form-item-container">
+        <div class="form-item">
+          <select id="select-participants-count" [(ngModel)]="participantsCount" class="form-select">
+              <option value="" disabled selected>Количество человек</option>
+              <option value="4">4 человека</option>
+              <option value="5">5 человек</option>
+              <option value="6">6 человек</option>
+              <option value="7">7 человек</option>
+              <option value="8+">8+ человек</option>
+            </select>
+        </div>
+        <span class="subtitle">минимум 4 человека</span>
+      </div>
+      <button id="submit-btn" [disabled]="!isFormValid()" class="submit-btn">
+        Найти программу
+      </button>
+    </div>
+  
+    <div class="live-input-wrapper container">
+      <div class="input-field">
+        <input id="live-text-input" type="text" [(ngModel)]="liveTextInput" placeholder="Живой текст">
+      </div>
+  
+      <div class="output-field">
+        <span>{{ liveTextInput }}</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -23,6 +23,12 @@ export class HeaderComponent {
     { label: 'Пользователи', path: '/users' }
   ];
   
+  constructor() {
+    setInterval(() => {
+      this.currentDate = new Date();
+    }, 1000);
+  }
+  
   isFormValid(): boolean {
     return !!(
       this.selectedDate &&
