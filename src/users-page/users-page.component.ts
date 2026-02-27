@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ICard } from '../app/interfaces/ICard';
 import { IDestination } from '../app/interfaces/IDestination';
 import { IBlog } from '../app/interfaces/IBlog';
-import { IImpressionImage } from '../app/interfaces/IImpression-image';
+import { IImpressionImage } from '../app/interfaces/IImpressionImage';
 
 @Component({
   selector: 'app-users-page',

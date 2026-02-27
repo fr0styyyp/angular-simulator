@@ -20,7 +20,7 @@ export class HeaderComponent {
   
   navItems = [
     { label: 'Главная', path: '/' },
-    { label: 'Пользователи', path: '/users' }
+    { label: 'Пользователи', path: '/users' },
   ];
   
   constructor() {

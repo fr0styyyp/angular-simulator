@@ -10,7 +10,7 @@ import { IBlog } from './interfaces/IBlog';
 import { MessageService } from './message.service';
 import { Message } from '../enums/Message';
 import { LocalStorageService } from './local-storage.service';
-import { IImpressionImage } from './interfaces/IImpression-image';
+import { IImpressionImage } from './interfaces/IImpressionImage';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
