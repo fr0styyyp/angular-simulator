@@ -52,7 +52,7 @@
     width: 1180px;
     height: auto;
     margin: 0 auto;
-    margin-top: 430px;
+    margin-top: 395px;
     
     .title {
       font-family: 'Nunito Sans';
@@ -79,19 +79,11 @@
     margin-top: 41px;
     box-sizing: border-box;
     
-    .submit-btn {
-      height: 52px;
-      width: 213px;
-      background-color: #FDFDFD;
-      border: 0px;
-      color: #1A3E3E;
-      border-radius: 8px;
-      padding: 0px;
-      margin-bottom: 31px;
-      cursor: pointer;
+    .main-btn {
+      margin-bottom: 29px;
       
       &:disabled {
-        background-color: #cccccc;
+        background-color: #1A3E3E;
         color: #666666;
         opacity: 0.6;
         cursor: auto;

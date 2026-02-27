@@ -37,7 +37,7 @@
           <div class="form-item">
           <input id="input-tour-date" type="date" [(ngModel)]="selectedDate" placeholder="Дата похода">
           </div>
-          <span class="subtitle">укажите диапазон</span>
+          <span class="subtitle">укажите дату</span>
         </div>
         <div class="form-item-container">
           <div class="form-item">
@@ -50,9 +50,9 @@
                 <option value="8+">8+ человек</option>
               </select>
           </div>
-          <span class="subtitle">минимум 4 человека</span>
+          <span class="subtitle">выберите из списка</span>
         </div>
-        <button id="submit-btn" [disabled]="!isFormValid()" class="submit-btn">
+        <button id="submit-btn" [disabled]="!isFormValid()" class="main-btn">
           Найти программу
         </button>
       </div>
