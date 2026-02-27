@@ -10,19 +10,4 @@ import { FormsModule } from '@angular/forms';
 })
 export class HomePageComponent {
   
-  selectedDirection!: string;
-  selectedDate!: string;
-  participantsCount: number | null = null;
-  liveTextInput: string = '';
-
-  
-  isFormValid(): boolean {
-    return !!(
-      this.selectedDate &&
-      this.selectedDirection &&
-      this.participantsCount &&
-      this.participantsCount >= 4
-    );
-  }
-  
 }
