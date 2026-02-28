@@ -6,13 +6,13 @@
     </div>
 
     <nav class="navigation">
-      @for (item of navItems; track item.path) {
+      @for (navItem of navItems; track navItem.path) {
         <a
-          [routerLink]="item.path"
+          [routerLink]="navItem.path"
           routerLinkActive="active-link"
-          [routerLinkActiveOptions]="{ exact: item.path === '/' }"
+          [routerLinkActiveOptions]="{ exact: navItem.path === '/' }"
           >
-          {{ item.label }}
+          {{ navItem.label }}
         </a>
       }
       <button id="consult-btn" class="consult-btn">Консультация</button>

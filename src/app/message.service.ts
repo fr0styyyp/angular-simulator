@@ -10,7 +10,7 @@ export class MessageService {
   private messages: IMessage[] = [];
   
   closeMessage(message: IMessage): void {
-    this.messages = this.messages.filter(m => m !== message);
+    this.messages = this.messages.filter((m: IMessage) => m !== message);
   }
   
   showWarn(text: string): void {

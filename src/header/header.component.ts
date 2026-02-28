@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { INavItem } from '../app/interfaces/INavItem';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +19,7 @@ export class HeaderComponent {
   selectedDate!: string;
   participantsCount: number | null = null;
   
-  navItems = [
+  navItems: INavItem[] = [
     { label: 'Главная', path: '/' },
     { label: 'Пользователи', path: '/users' },
   ];

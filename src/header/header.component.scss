@@ -6,6 +6,8 @@
   height: 156px;
   box-sizing: border-box;
   padding: 18px 0px;
+  position: absolute;
+  z-index: 10;
   
   .active-link {
     color: blue;
