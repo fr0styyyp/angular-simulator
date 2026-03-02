@@ -1,0 +1,106 @@
+.header {
+  background: rgba(24, 18, 30, 0.5);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  justify-content: center;
+  height: 156px;
+  box-sizing: border-box;
+  padding: 18px 0px;
+  position: absolute;
+  z-index: 10;
+  
+  .active-link {
+    color: blue;
+    text-decoration: underline;
+  }
+  
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1180px;
+    position: relative;
+    height: 72px;
+    
+    .header-actions {
+      position: absolute;
+      right: 0;
+      top: 100%;
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      
+      .change-action {
+        margin-left: 50px;
+        padding: 12px 24px;
+        font-weight: 600;
+        font-style: 'SemiBold';
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: 1.2%;
+        color: rgba(26, 62, 62, 1);
+        background: rgba(253, 253, 253, 1);
+        border: 0px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      
+      .clicker {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      
+      .counter-value {
+        text-align: center;
+      }
+      
+      .counter-btn {
+        width: 30px;
+        height: 30px;
+        background: transparent;
+        border: 0px;
+        cursor: pointer;
+        color: #FDFDFD;
+        
+        &:disabled {
+          opacity: 0.4;
+          cursor: auto;
+        }
+      }
+    }
+    
+    .logo-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
+      span {
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: 8px;
+        margin-top: 6px;
+        text-transform: uppercase;
+      }
+    }
+    
+    .navigation a {
+      margin-left: 24px;
+    }
+    
+    .navigation button {
+      margin-left: 49px;
+      padding: 12px 24px;
+      font-weight: 600;
+      font-style: 'SemiBold';
+      font-size: 16px;
+      line-height: 20px;
+      letter-spacing: 1.2%;
+      color: rgba(26, 62, 62, 1);
+      background: rgba(253, 253, 253, 1);
+      border: 0px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
+}

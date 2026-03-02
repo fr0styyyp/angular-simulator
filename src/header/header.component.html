@@ -1,0 +1,38 @@
+<header class="header">
+  <div class="header-container container">
+    <div class="logo-block">
+      <img src="/images/company-logo-icon.svg" alt="icon" width="137" height="48">
+      <span>{{ companyName }}</span>
+    </div>
+
+    <nav class="navigation">
+      @for (navItem of navItems; track navItem.path) {
+        <a
+          [routerLink]="navItem.path"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: navItem.path === '/' }"
+          >
+          {{ navItem.label }}
+        </a>
+      }
+      <button id="consult-btn" class="consult-btn">Консультация</button>
+    </nav>
+    
+    <div class="header-actions">
+      @if (isTimerVisible) {
+        <div class="data-time">
+          {{ currentDate.toLocaleString('ru-RU') }}
+        </div>
+      } @else {
+        <div class="clicker">
+          <button id="counter-inc-btn" class="counter-btn" (click)="onIncrementCounter()">+</button>
+          
+          <span class="counter-value">{{ counter }}</span>
+          
+          <button id="counter-dec-btn" class="counter-btn" (click)="onDecrementCounter()" [disabled]="counter === 0">-</button>
+        </div>
+      }
+      <button id="change-action" class="change-action" (click)="onToggleTimerVisibility()">{{ isTimerVisible ? 'Показать кликер' : 'Показать дату' }}</button>
+    </div>
+  </div>
+</header>
