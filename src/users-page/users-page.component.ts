@@ -1,17 +1,23 @@
 import { Component, inject } from '@angular/core';
-import { MessageService } from '../app/message.service';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ICard } from '../app/interfaces/ICard';
-import { IDestination } from '../app/interfaces/IDestination';
-import { IBlog } from '../app/interfaces/IBlog';
-import { IImpressionImage } from '../app/interfaces/IImpressionImage';
+import { UserService } from '../app/user.service';
+import { Observable } from 'rxjs';
+import { IUser } from '../app/interfaces/IUser';
 
 @Component({
   selector: 'app-users-page',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, AsyncPipe],
   templateUrl: './users-page.component.html',
   styleUrl: './users-page.component.scss',
 })
 export class UsersPageComponent {
+  
+  userService: UserService = inject(UserService);
+  users$: Observable<IUser[]> = this.userService.getUsers();
+  
+  constructor() {
+    this.userService.loadUsers();
+  }
+  
 }

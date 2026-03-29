@@ -1,5 +1,5 @@
 <div class="toast-container">
-  @for (item of messageService.allMessages; track item; let i = $index) {
+  @for (item of (messages$ | async); track item; let i = $index) {
     <ng-container
       [ngTemplateOutlet]="msgTemp"
       [ngTemplateOutletContext]="{ message: item, index: i }">

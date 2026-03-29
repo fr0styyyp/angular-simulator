@@ -1,20 +1,9 @@
-@if (isLoading) {
-  <div class="loader-overlay">
-    <img 
-      src="/images/loading-icon.svg"
-      alt="refresh-icon"
-      class="spinner"
-      width="51"
-      height="51"
-    >
-  </div>
-} @else {
-  <app-header></app-header>
+<app-header></app-header>
+
+<main>
+  <app-message></app-message>
+  <router-outlet></router-outlet>
+</main>
   
-  <main>
-    <app-message></app-message>
-    <router-outlet></router-outlet>
-  </main>
-    
-  <app-footer></app-footer>
-}
+<app-footer></app-footer>
+<app-loader></app-loader>
