@@ -1,0 +1,85 @@
+<section class="users">
+  <div class="users-container">
+    @for (user of (users$ | async); track user.id) {
+      <div class="user">
+        <div class="user-name-container">
+          <span class="name green">{{ user.name }}</span>
+          <span class="username orange">@{{ user.username }}</span>
+        </div>
+        
+        <div class="user-contact-container">
+          <span class="green contact">Контакты</span>
+          <div class="contacts">
+            <div>
+              <span class="gray thin">Эл. почта:</span>
+              <span class="orange bold">{{ user.email }}</span>
+            </div>
+            <div>
+              <span class="gray thin">Телефон:</span>
+              <span  class="green bold">{{ user.phone }}</span>
+            </div>
+            <div>
+              <span class="gray thin">Веб-сайт:</span>
+              <span class="orange bold">{{ user.website }}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="user-address-container">
+          <span class="green address title">адрес проживания</span>
+          <div class="addresses">
+            <div>
+              <span class="gray thin">Город:</span>
+              <span class="green bold">{{ user.address.city }}</span>
+            </div>
+            <div>
+              <span class="gray thin">Улица:</span>
+              <span class="green bold">{{ user.address.street }}</span>
+            </div>
+            <div>
+              <span class="gray thin">Офис:</span>
+              <span  class="green bold">{{ user.address.suite }}</span>
+            </div>
+            <div>
+              <span class="gray thin">Индекс:</span>
+              <span class="green bold">{{ user.address.zipcode }}</span>
+            </div>
+            <div class="coordinates">
+              <span class="gray thin">Координаты:</span>
+              <div class="coordinate">
+                <div class="coordinate-first">
+                  <span class="green bold">{{ user.address.geo.lat }}</span>
+                </div>
+                <div class="coordinate-second">
+                  <span class="green bold">{{ user.address.geo.lng }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="user-job-container">
+          <span class="green job title">Место работы</span>
+          <div class="jobs">
+            <div>
+              <span class="gray thin">Компания:</span>
+              <span class="green bold">{{ user.company.name }}</span>
+            </div>
+            <div>
+              <span class="gray thin">Миссия:</span>
+              <span  class="gray-italic">{{ user.company.catchPhrase }}</span>
+            </div>
+            <div>
+              <span class="gray thin">Специализация:</span>
+              <span class="green bold">{{ user.company.bs }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    } @empty {
+      <div class="empty-blank">
+        <span>Нет пользователей для отображения</span>
+      </div>
+    }
+  </div>
+</section>

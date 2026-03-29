@@ -11,5 +11,6 @@ import { CommonModule } from '@angular/common';
 export class MessageComponent {
   
   messageService: MessageService = inject(MessageService);
+  messages$ = this.messageService.messages$;
   
 }
