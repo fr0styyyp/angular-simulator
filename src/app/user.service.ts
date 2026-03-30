@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, finalize, Observable, of } from 'rxjs';
+import { BehaviorSubject, catchError, finalize, Observable, of, tap } from 'rxjs';
 import { LoaderService } from './loader.service';
 import { UserApiService } from './user-api.service';
 import { MessageService } from './message.service';
@@ -11,32 +11,35 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class UserService {
   
-  private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
-  users$: Observable<IUser[]> = this.usersSubject.asObservable();
   loaderService: LoaderService = inject(LoaderService);
   userApiService: UserApiService = inject(UserApiService);
   messageService: MessageService = inject(MessageService);
+  
+  private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
+  users$: Observable<IUser[]> = this.usersSubject.asObservable();
   
   setUsers(users: IUser[]): void {
     this.usersSubject.next(users);
   }
   
-  getUsers(): Observable<IUser[]> {
-    return this.users$;
+  getUsers(): IUser[] {
+    return this.usersSubject.getValue();
   }
   
-  loadUsers(): void {
+  loadUsers(): Observable<IUser[]> {
     this.loaderService.show();
-    
-    this.userApiService.getUsers()
+    return this.userApiService.getUsers()
       .pipe(
-        catchError((error: HttpErrorResponse) => {
-          const errorMessage = `Ошибка ${error.status}: ${'Не удалось загрузить данные'}`;
+        tap((data: IUser[]): void => {
+          this.setUsers(data);
+        }),
+        catchError((error: HttpErrorResponse): Observable<IUser[]> => {
+          const errorMessage = `Ошибка ${error.status}: Не удалось загрузить данные`;
           this.messageService.showError(errorMessage);
           return of([]);
         }),
-        finalize(() => this.loaderService.hide())
-      ).subscribe(data => this.setUsers(data));
+        finalize((): void => this.loaderService.hide())
+      );
   }
   
 }

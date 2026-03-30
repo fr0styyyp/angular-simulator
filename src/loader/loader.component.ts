@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { LoaderService } from '../app/loader.service';
 import { AsyncPipe } from '@angular/common';
-import { tap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-loader',
@@ -12,14 +12,6 @@ import { tap } from 'rxjs';
 export class LoaderComponent {
   
   loaderService: LoaderService = inject(LoaderService);
-  isLoading$ = this.loaderService.isLoading$.pipe(
-    tap(loading => {
-      if (loading) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = 'auto';
-      }
-    })
-  );
+  isLoading$: Observable<boolean> = this.loaderService.isLoading$;
   
 }

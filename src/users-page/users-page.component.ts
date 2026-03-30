@@ -14,10 +14,10 @@ import { IUser } from '../app/interfaces/IUser';
 export class UsersPageComponent {
   
   userService: UserService = inject(UserService);
-  users$: Observable<IUser[]> = this.userService.getUsers();
+  users$: Observable<IUser[]> = this.userService.users$;
   
   constructor() {
-    this.userService.loadUsers();
+    this.userService.loadUsers().subscribe();
   }
   
 }

@@ -1,16 +1,18 @@
 import { Component, inject } from '@angular/core';
 import { MessageService } from '../app/message.service';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
+import { IMessage } from '../app/interfaces/IMessage';
 
 @Component({
   selector: 'app-message',
-  imports: [CommonModule],
+  imports: [CommonModule, AsyncPipe],
   templateUrl: './message.component.html',
   styleUrl: './message.component.scss',
 })
 export class MessageComponent {
   
   messageService: MessageService = inject(MessageService);
-  messages$ = this.messageService.messages$;
+  messages$: Observable<IMessage[]> = this.messageService.messages$;
   
 }

@@ -86,3 +86,7 @@ a {
   vertical-align: middle;
   color: rgba(102, 124, 124, 1);
 }
+
+body:has(app-loader .loader-overlay) {
+  overflow: hidden !important;
+}
