@@ -36,11 +36,6 @@ export class AppComponent {
   counter: number = 0;
   
   constructor() {
-    this.loaderService.show();
-    setTimeout(() => {
-      this.loaderService.hide()
-    }, 2000);
-    
     this.setLastVisitDate();
     this.updateVisitCount();
     

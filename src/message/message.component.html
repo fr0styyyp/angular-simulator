@@ -1,8 +1,8 @@
 <div class="toast-container">
-  @for (item of (messages$ | async); track item; let i = $index) {
+  @for (message of messages$ | async; track message; let i = $index) {
     <ng-container
       [ngTemplateOutlet]="msgTemp"
-      [ngTemplateOutletContext]="{ message: item, index: i }">
+      [ngTemplateOutletContext]="{ message: message, index: i }">
     </ng-container>
   }
 </div>

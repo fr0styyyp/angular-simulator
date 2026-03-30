@@ -12,7 +12,7 @@ export class MessageService {
   messages$: Observable<IMessage[]> = this.messagesSubject.asObservable();
   
   closeMessage(message: IMessage): void {
-    const updatedMessages = this.messagesSubject.getValue().filter((m: IMessage) => m !== message);
+    const updatedMessages: IMessage[] = this.messagesSubject.getValue().filter((m: IMessage) => m !== message);
     this.messagesSubject.next(updatedMessages);
   }
   

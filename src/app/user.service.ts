@@ -30,15 +30,12 @@ export class UserService {
     this.loaderService.show();
     return this.userApiService.getUsers()
       .pipe(
-        tap((data: IUser[]): void => {
-          this.setUsers(data);
-        }),
-        catchError((error: HttpErrorResponse): Observable<IUser[]> => {
-          const errorMessage = `Ошибка ${error.status}: Не удалось загрузить данные`;
+        catchError((error: HttpErrorResponse) => {
+          const errorMessage: string = `Ошибка ${error.status}: Не удалось загрузить данные`;
           this.messageService.showError(errorMessage);
           return of([]);
         }),
-        finalize((): void => this.loaderService.hide())
+        finalize(() => this.loaderService.hide())
       );
   }
   
