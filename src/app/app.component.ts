@@ -15,29 +15,27 @@ import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 import { MessageComponent } from '../message/message.component';
+import { LoaderService } from './loader.service';
+import { LoaderComponent } from "../loader/loader.component";
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule, CommonModule, RouterOutlet, HeaderComponent, FooterComponent, MessageComponent],
+  imports: [FormsModule, CommonModule, RouterOutlet, HeaderComponent, FooterComponent, MessageComponent, LoaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
   
   private localStorageService: LocalStorageService = inject(LocalStorageService);
+  loaderService: LoaderService = inject(LoaderService);
   
   messageType: typeof Message = Message;
   tours: Collection<string> = new Collection<string>();
   prices: Collection<number> = new Collection<number>();
   currentDate: Date = new Date();
   counter: number = 0;
-  isLoading: boolean = true;
   
   constructor() {
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 2000);
-    
     this.setLastVisitDate();
     this.updateVisitCount();
     

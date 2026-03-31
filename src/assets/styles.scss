@@ -31,3 +31,62 @@ a {
   cursor: pointer;
   border: 0px;
 }
+
+.green {
+  color: rgba(29, 57, 57, 1);
+}
+
+.gray {
+  color: rgba(102, 124, 124, 1);
+}
+
+.orange {
+  color: rgba(212, 163, 115, 1);
+}
+
+.thin {
+  font-family: Nunito Sans;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 14px;
+  line-height: 19.6px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+.title {
+  font-family: Nunito Sans;
+  font-weight: 800;
+  font-style: ExtraBold;
+  font-size: 12px;
+  line-height: 13.8px;
+  letter-spacing: 1.2px;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
+.bold {
+  font-family: Nunito Sans;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 14px;
+  line-height: 19.6px;
+  letter-spacing: 0%;
+  text-align: right;
+  vertical-align: middle;
+}
+
+.gray-italic {
+  font-weight: 700;
+  font-style: Italic;
+  font-size: 13px;
+  line-height: 18.2px;
+  letter-spacing: 0%;
+  text-align: right;
+  vertical-align: middle;
+  color: rgba(102, 124, 124, 1);
+}
+
+body:has(app-loader .loader-overlay) {
+  overflow: hidden !important;
+}
