@@ -28,11 +28,13 @@ export class UserService {
   
   loadUsers(): Observable<IUser[]> {
     this.loaderService.show();
+    
     return this.userApiService.getUsers()
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          const errorMessage: string = `Ошибка ${error.status}: Не удалось загрузить данные`;
+          const errorMessage: string = `Ошибка ${ error.status }: Не удалось загрузить данные`;
           this.messageService.showError(errorMessage);
+          
           return of([]);
         }),
         finalize(() => this.loaderService.hide())
