@@ -1,4 +1,5 @@
 <section class="users">
+  <span class="users-title green">Список Пользователей</span>
   <div class="users-container">
     @for (user of users$ | async; track user.id) {
       <div class="user">
@@ -77,8 +78,10 @@
         </div>
       </div>
     } @empty {
-      <div class="empty-blank">
-        <span>Нет пользователей для отображения</span>
+      <div class="empty-blank-container">
+        <div class="empty-blank">
+          <span>Нет пользователей для отображения</span>
+        </div>
       </div>
     }
   </div>
