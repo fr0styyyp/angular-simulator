@@ -19,7 +19,12 @@ export class UsersPageComponent implements OnInit {
   users$: Observable<IUser[]> = this.userService.users$;
   
   ngOnInit() {
-    this.userService.loadUsers().subscribe();
+    this.userService.loadUsers()
+      .pipe(
+        tap((data: IUser[]) => {
+          this.userService.setUsers(data)
+        })
+      ).subscribe();
   }
   
   onUserAdd(user: IUser): void {
@@ -31,7 +36,12 @@ export class UsersPageComponent implements OnInit {
   }
   
   onRefresh(): void {
-    this.userService.loadUsers(true).subscribe();
+    this.userService.userApiService.getUsers()
+      .pipe(
+        tap((data: IUser[]) => {
+          this.userService.setUsers(data);
+        })
+      ).subscribe();
   }
   
 }
