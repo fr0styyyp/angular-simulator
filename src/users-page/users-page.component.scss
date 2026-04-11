@@ -16,6 +16,18 @@
     vertical-align: middle;
   }
   
+  .search-container {
+    margin-top: 30px;
+    
+    input {
+      height: 35px;
+      width: 396px;
+      border-radius: 8px;
+      border: 1px solid rgba(208, 213, 221, 1);
+      color: rgba(52, 64, 84, 1);
+    }
+  }
+  
   &-container {
     width: 1460px;
     display: flex;
