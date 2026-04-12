@@ -33,7 +33,7 @@ export class UserService {
   
   loadUsers(): Observable<IUser[]> {
     const cachedUsers: string | null = localStorage.getItem(this.USERS_KEY);
-    if(cachedUsers) {
+    if (cachedUsers) {
       const users: IUser[] = JSON.parse(cachedUsers);
       if (users.length > 0) {
         return of(users);
@@ -55,15 +55,13 @@ export class UserService {
   addUser(user: IUser): void {
     const currentUsers: IUser[] = this.getUsers();
     const updatedUsers: IUser[] = [...currentUsers, user];
-    this.usersSubject.next(updatedUsers);
-    this.syncToStorage(updatedUsers);
+    this.setUsers(updatedUsers);
   }
   
   deleteUser(userId: number): void {
     const currentUsers: IUser[] = this.getUsers();
-    const updatedUsers: IUser[] = currentUsers.filter(user => user.id !== userId);
-    this.usersSubject.next(updatedUsers);
-    this.syncToStorage(updatedUsers);
+    const updatedUsers: IUser[] = currentUsers.filter((user: IUser) => user.id !== userId);
+    this.setUsers(updatedUsers);
   }
   
 }

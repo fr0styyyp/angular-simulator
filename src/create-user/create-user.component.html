@@ -1,5 +1,5 @@
 <div class="form-container">
-  <form [formGroup]="createUserForm">
+  <form [formGroup]="userForm">
     <div>
       <label for="name">Name</label>
       <input type="text" id="name" formControlName="name" />
@@ -79,5 +79,5 @@
       </div>
     </ng-container>
   </form>
-  <button type="button" (click)="onSubmit()" [disabled]="createUserForm.invalid">Создать пользователя</button>
+  <button type="button" (click)="onSubmit()" [disabled]="userForm.invalid">Создать пользователя</button>
 </div>

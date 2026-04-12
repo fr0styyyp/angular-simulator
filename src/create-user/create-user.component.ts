@@ -10,11 +10,11 @@ import { IUser } from '../app/interfaces/IUser';
 })
 export class CreateUserComponent {
   
-  @Output() userCreated: EventEmitter<IUser> = new EventEmitter<IUser>();
+  @Output() onUserCreate: EventEmitter<IUser> = new EventEmitter<IUser>();
   
   private fb: FormBuilder = inject(FormBuilder);
   
-  createUserForm: FormGroup = this.fb.group({
+  userForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
     username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
     email: ['', [Validators.required, Validators.email, Validators.maxLength(100)]],
@@ -37,6 +37,22 @@ export class CreateUserComponent {
     })
   });
   
+  private cleanEmptyStrings<T extends object>(obj: T): T {
+    const cleaned = { ...obj } as any;
+    
+    for (const key in cleaned) {
+      const value = cleaned[key];
+      
+      if (value !== null && typeof value === 'object' && !Array.isArray(value)) {
+        cleaned[key] = this.cleanEmptyStrings(value);
+      } else if (typeof value === 'string') {
+        cleaned[key] = this.checkEmpty(value);
+      }
+    }
+    
+    return cleaned as T;
+  }
+  
   checkEmpty(value: string): string {
     if (value) {
       return value;
@@ -46,26 +62,16 @@ export class CreateUserComponent {
   }
   
   onSubmit(): void {
-    if (this.createUserForm.valid) {
-      const rawValue: IUser = this.createUserForm.getRawValue();
+    if (this.userForm.valid) {
+      const rawValue: IUser = this.userForm.getRawValue();
       
       const newUser: IUser = {
-        ...rawValue,
+        ...this.cleanEmptyStrings(rawValue),
         id: Date.now(),
-        website: this.checkEmpty(rawValue.website),
-        address: {
-          ...rawValue.address,
-          suite: this.checkEmpty(rawValue.address.suite)
-        },
-        company: {
-          ...rawValue.company,
-          catchPhrase: this.checkEmpty(rawValue.company.catchPhrase),
-          bs: this.checkEmpty(rawValue.company.bs)
-        }
       }
       
-      this.userCreated.emit(newUser);
-      this.createUserForm.reset();
+      this.onUserCreate.emit(newUser);
+      this.userForm.reset();
     }
   }
   

@@ -21,27 +21,28 @@ export class UsersPageComponent implements OnInit {
   searchTerm$: Observable<string> = this.searchTermSubject.asObservable();
   
   filteredUsers$: Observable<IUser[]> = combineLatest([
-  this.users$,
-  this.searchTerm$
+    this.users$,
+    this.searchTerm$
   ]).pipe(
-    map(([users, term]: [IUser[], string]) => {
-      const filterValue: string = term.toLowerCase().trim();
-      if (!filterValue) {
-        return users;
-      }
-      return users.filter((user: IUser) => 
-        user.name.toLowerCase().includes(filterValue)
-      );
-    })
-  );
+      map(([users, term]: [IUser[], string]) => {
+        const filterValue: string = term.toLowerCase().trim();
+        if (!filterValue) {
+          return users;
+        }
+        return users.filter((user: IUser) => 
+          user.name.toLowerCase().includes(filterValue)
+        );
+      })
+    );
   
   ngOnInit() {
-    this.userService.loadUsers()
-      .pipe(
-        tap((data: IUser[]) => {
-          this.userService.setUsers(data)
-        })
-      ).subscribe();
+    this.fetchAndSetUsers(this.userService.loadUsers());
+  }
+  
+  private fetchAndSetUsers(source$: Observable<IUser[]>): void {
+    source$.pipe(
+      tap((data: IUser[]) => this.userService.setUsers(data))
+    ).subscribe();
   }
   
   onUserAdd(user: IUser): void {
@@ -53,12 +54,7 @@ export class UsersPageComponent implements OnInit {
   }
   
   onRefresh(): void {
-    this.userService.userApiService.getUsers()
-      .pipe(
-        tap((data: IUser[]) => {
-          this.userService.setUsers(data);
-        })
-      ).subscribe();
+    this.fetchAndSetUsers(this.userService.userApiService.getUsers());
   }
   
   onSearch(event: Event): void {
