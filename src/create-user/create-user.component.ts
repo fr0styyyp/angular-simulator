@@ -38,27 +38,21 @@ export class CreateUserComponent {
   });
   
   private cleanEmptyStrings<T extends object>(obj: T): T {
-    const cleaned = { ...obj } as any;
-    
-    for (const key in cleaned) {
-      const value = cleaned[key];
-      
+    const cleaned: Record<string, unknown> = { ...obj } as Record<string, unknown>;
+    Object.keys(cleaned).forEach((key: string) => {
+      const value: unknown = cleaned[key];
       if (value !== null && typeof value === 'object' && !Array.isArray(value)) {
-        cleaned[key] = this.cleanEmptyStrings(value);
-      } else if (typeof value === 'string') {
+        cleaned[key] = this.cleanEmptyStrings(value as object);
+      } 
+      else if (typeof value === 'string') {
         cleaned[key] = this.checkEmpty(value);
       }
-    }
-    
+    });
     return cleaned as T;
   }
   
   checkEmpty(value: string): string {
-    if (value) {
-      return value;
-    } else {
-      return 'Неизвестно';
-    }
+    return value ? value : 'Неизвестно';
   }
   
   onSubmit(): void {

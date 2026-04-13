@@ -64,4 +64,17 @@ export class UserService {
     this.setUsers(updatedUsers);
   }
   
+  refreshUsers(): Observable<IUser[]> {
+    this.loaderService.show();
+    return this.userApiService.getUsers()
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        const errorMessage = `Ошибка ${error.status}: Не удалось загрузить данные`;
+        this.messageService.showError(errorMessage);
+        return of([]);
+      }),
+      finalize(() => this.loaderService.hide())
+    );
+  }
+  
 }
