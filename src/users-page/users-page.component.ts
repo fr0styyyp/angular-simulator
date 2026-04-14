@@ -36,14 +36,13 @@ export class UsersPageComponent implements OnInit {
     );
   
   ngOnInit(): void {
-    this.loadUsers();
+    this.loadUsers(this.userService.loadUsers());
   }
   
-  private loadUsers(): void {
-    this.userService.loadUsers()
-      .pipe(
-        tap((data: IUser[]) => this.userService.setUsers(data))
-      ).subscribe();
+  private loadUsers(users: Observable<IUser[]>): void {
+    users.pipe(
+      tap((data: IUser[]) => this.userService.setUsers(data))
+    ).subscribe();
   }
   
   onUserAdd(user: IUser): void {
@@ -55,10 +54,7 @@ export class UsersPageComponent implements OnInit {
   }
   
   onRefresh(): void {
-    this.userService.refreshUsers()
-      .pipe(
-        tap((data: IUser[]) => this.userService.setUsers(data))
-      ).subscribe();
+    this.loadUsers(this.userService.refreshUsers());
   }
   
   onSearch(event: Event): void {
