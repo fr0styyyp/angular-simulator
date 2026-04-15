@@ -31,30 +31,16 @@ export class UserService {
     return this.usersSubject.getValue();
   }
   
-  loadUsers(): Observable<IUser[]> {
-    const cachedUsers: string | null = localStorage.getItem(this.USERS_KEY);
-    if (cachedUsers) {
-      const users: IUser[] = JSON.parse(cachedUsers);
-      if (users.length > 0) {
-        return of(users);
+  loadUsers(forceRefresh: boolean = false): Observable<IUser[]> {
+    if (!forceRefresh) {
+      const cachedUsers: string | null = localStorage.getItem(this.USERS_KEY);
+      if (cachedUsers) {
+        const users: IUser[] = JSON.parse(cachedUsers);
+        if (users.length > 0) {
+          return of(users);
+        }
       }
     }
-    return this.refreshUsers();
-  }
-  
-  addUser(user: IUser): void {
-    const currentUsers: IUser[] = this.getUsers();
-    const updatedUsers: IUser[] = [...currentUsers, user];
-    this.setUsers(updatedUsers);
-  }
-  
-  deleteUser(userId: number): void {
-    const currentUsers: IUser[] = this.getUsers();
-    const updatedUsers: IUser[] = currentUsers.filter((user: IUser) => user.id !== userId);
-    this.setUsers(updatedUsers);
-  }
-  
-  refreshUsers(): Observable<IUser[]> {
     this.loaderService.show();
     return this.userApiService.getUsers()
       .pipe(
@@ -65,6 +51,18 @@ export class UserService {
         }),
         finalize(() => this.loaderService.hide())
       );
+  }
+  
+  addUser(user: IUser): void {
+    const currentUsers: IUser[] = this.getUsers();
+    const updatedUsers: IUser[] = [...currentUsers, user];
+    this.setUsers(updatedUsers);
+  }
+  
+  deleteUser(userId: number): void {
+    const currentUsers: IUser[] = this.getUsers();
+    const filtredUsers: IUser[] = currentUsers.filter((user: IUser) => user.id !== userId);
+    this.setUsers(filtredUsers);
   }
   
 }

@@ -1,13 +1,7 @@
 <section class="users">
   <span class="users-title green">Список Пользователей</span>
   <app-create-user (onUserCreate)="onUserAdd($event)"></app-create-user>
-  <div class="search-container">
-    <input 
-      type="text" 
-      placeholder="Поиск по имени" 
-      (input)="onSearch($event)"
-    />
-  </div>
+  <app-users-filter (onFilter)="onFilterChange($event)"></app-users-filter>
   <div class="users-container">
     <button (click)="onRefresh()">
       <img src="/images/refresh-icon.svg" alt="refresh-icon">

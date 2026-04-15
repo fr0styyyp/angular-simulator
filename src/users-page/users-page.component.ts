@@ -6,10 +6,11 @@ import { BehaviorSubject, combineLatest, map, Observable, tap } from 'rxjs';
 import { IUser } from '../app/interfaces/IUser';
 import { UserCardComponent } from "../user-card/user-card.component";
 import { CreateUserComponent } from '../create-user/create-user.component';
+import { UsersFilterComponent } from '../users-filter/users-filter.component';
 
 @Component({
   selector: 'app-users-page',
-  imports: [FormsModule, CommonModule, AsyncPipe, UserCardComponent, CreateUserComponent],
+  imports: [FormsModule, CommonModule, AsyncPipe, UserCardComponent, CreateUserComponent, UsersFilterComponent],
   templateUrl: './users-page.component.html',
   styleUrl: './users-page.component.scss',
 })
@@ -17,12 +18,11 @@ export class UsersPageComponent implements OnInit {
   
   userService: UserService = inject(UserService);
   users$: Observable<IUser[]> = this.userService.users$;
-  private searchTermSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  searchTerm$: Observable<string> = this.searchTermSubject.asObservable();
+  private filterSubject$ = new BehaviorSubject<string>('');
   
   filteredUsers$: Observable<IUser[]> = combineLatest([
     this.users$,
-    this.searchTerm$
+    this.filterSubject$
   ]).pipe(
       map(([users, term]: [IUser[], string]) => {
         const filterValue: string = term.toLowerCase().trim();
@@ -36,13 +36,14 @@ export class UsersPageComponent implements OnInit {
     );
   
   ngOnInit(): void {
-    this.loadUsers(this.userService.loadUsers());
+    this.loadUsers(false);
   }
   
-  private loadUsers(users: Observable<IUser[]>): void {
-    users.pipe(
-      tap((data: IUser[]) => this.userService.setUsers(data))
-    ).subscribe();
+  private loadUsers(force: boolean = false): void {
+    this.userService.loadUsers(force)
+      .pipe(
+        tap((data: IUser[]) => this.userService.setUsers(data))
+      ).subscribe();
   }
   
   onUserAdd(user: IUser): void {
@@ -54,12 +55,11 @@ export class UsersPageComponent implements OnInit {
   }
   
   onRefresh(): void {
-    this.loadUsers(this.userService.refreshUsers());
+    this.loadUsers(true);
   }
   
-  onSearch(event: Event): void {
-    const input: HTMLInputElement = event.target as HTMLInputElement;
-    this.searchTermSubject.next(input.value);
+  onFilterChange(term: string): void {
+    this.filterSubject$.next(term);
   }
   
 }
