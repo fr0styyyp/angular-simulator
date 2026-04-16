@@ -10,7 +10,7 @@ import { IUser } from '../app/interfaces/IUser';
 })
 export class CreateUserComponent {
   
-  @Output() onUserCreate: EventEmitter<IUser> = new EventEmitter<IUser>();
+  @Output() createUser: EventEmitter<IUser> = new EventEmitter<IUser>();
   
   private fb: FormBuilder = inject(FormBuilder);
   
@@ -64,7 +64,7 @@ export class CreateUserComponent {
         id: Date.now(),
       }
       
-      this.onUserCreate.emit(newUser);
+      this.createUser.emit(newUser);
       this.userForm.reset();
     }
   }

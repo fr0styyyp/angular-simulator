@@ -11,17 +11,17 @@ import { debounceTime, distinctUntilChanged, map, takeUntil, tap } from 'rxjs';
 })
 export class UsersFilterComponent {
   
-  @Output() onFilter: EventEmitter<string> = new EventEmitter<string>();
+  @Output() filter: EventEmitter<string> = new EventEmitter<string>();
   
-  searchControl: FormControl = new FormControl('');
+  filterControl: FormControl = new FormControl('');
   
   constructor() {
-    this.searchControl.valueChanges.pipe(
+    this.filterControl.valueChanges.pipe(
       debounceTime(200),
       distinctUntilChanged(),
-      tap((value: string | null) => this.onFilter.emit(value ?? '')),
+      tap((value: string | null) => this.filter.emit(value ?? '')),
       takeUntilDestroyed()
-    ).subscribe()
+    ).subscribe();
   }
   
 }

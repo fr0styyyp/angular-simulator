@@ -18,7 +18,7 @@ export class UsersPageComponent implements OnInit {
   
   userService: UserService = inject(UserService);
   users$: Observable<IUser[]> = this.userService.users$;
-  private filterSubject$ = new BehaviorSubject<string>('');
+  private filterSubject$: BehaviorSubject<string> = new BehaviorSubject<string>('');
   
   filteredUsers$: Observable<IUser[]> = combineLatest([
     this.users$,
@@ -46,11 +46,11 @@ export class UsersPageComponent implements OnInit {
       ).subscribe();
   }
   
-  onUserAdd(user: IUser): void {
+  onAddUser(user: IUser): void {
     this.userService.addUser(user);
   }
   
-  onUserDelete(id: number): void {
+  onDeleteUser(id: number): void {
     this.userService.deleteUser(id);
   }
   
@@ -58,7 +58,7 @@ export class UsersPageComponent implements OnInit {
     this.loadUsers(true);
   }
   
-  onFilterChange(term: string): void {
+  onChangeFilter(term: string): void {
     this.filterSubject$.next(term);
   }
   
