@@ -18,11 +18,11 @@ export class UsersPageComponent implements OnInit {
   
   userService: UserService = inject(UserService);
   users$: Observable<IUser[]> = this.userService.users$;
-  private filterSubject$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private filterSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
   
   filteredUsers$: Observable<IUser[]> = combineLatest([
     this.users$,
-    this.filterSubject$
+    this.filterSubject
   ]).pipe(
       map(([users, term]: [IUser[], string]) => {
         const filterValue: string = term.toLowerCase().trim();
@@ -59,7 +59,7 @@ export class UsersPageComponent implements OnInit {
   }
   
   onChangeFilter(term: string): void {
-    this.filterSubject$.next(term);
+    this.filterSubject.next(term);
   }
   
 }
