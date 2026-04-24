@@ -1,13 +1,13 @@
 <section class="users">
   <span class="users-title green">Список Пользователей</span>
-  <app-create-user (onUserCreate)="onUserAdd($event)"></app-create-user>
-  <app-users-filter (onFilter)="onFilterChange($event)"></app-users-filter>
+  <app-create-user (createUser)="onAddUser($event)"></app-create-user>
+  <app-users-filter (filter)="onChangeFilter($event)"></app-users-filter>
   <div class="users-container">
     <button (click)="onRefresh()">
       <img src="/images/refresh-icon.svg" alt="refresh-icon">
     </button>
     @for (user of filteredUsers$ | async; track user.id) {
-      <app-user-card [user]="user" (onDelete)="onUserDelete($event)"></app-user-card>
+      <app-user-card [user]="user" (deleteUser)="onDeleteUser($event)"></app-user-card>
     } @empty {
       <div class="empty-blank-container">
         <div class="empty-blank">
