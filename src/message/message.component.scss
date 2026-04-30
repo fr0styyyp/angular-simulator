@@ -17,8 +17,8 @@
   animation: slideIn 0.3s ease-out;
   width: 350px;
   height: 70px;
-  border: 1px solid rgba(255, 255, 255, 1);
-  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--secondary-text-color);
+  background: var(--primary-color-btn);
   border-radius: 10px;
   display: flex;
   box-sizing: border-box;
@@ -26,6 +26,12 @@
   gap: 15px;
   padding: 15px;
   position: relative;
+  
+  ::ng-deep {
+    fa-icon svg path {
+      fill: var(--secondary-text-color);
+    }
+  }
   
   button {
     position: absolute;
@@ -35,6 +41,7 @@
     cursor: pointer;
     top: 7px;
     right: 7px;
+    color: var(--secondary-text-color);
   }
   
   .title {
@@ -43,7 +50,7 @@
     font-size: 16px;
     line-height: 20px;
     letter-spacing: 0%;
-    color: #E8E9EB;
+    color: var(--secondary-text-color);
   }
   
   .text {
@@ -52,5 +59,6 @@
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0%;
+    color: var(--secondary-text-color);
   }
 }

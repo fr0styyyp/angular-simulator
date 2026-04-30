@@ -12,7 +12,7 @@
   z-index: 10;
   
   .active-link {
-    color: blue;
+    color: blue !important;
     text-decoration: underline;
   }
   
@@ -23,6 +23,24 @@
     width: 1180px;
     position: relative;
     height: 72px;
+    
+    ::ng-deep {
+      .p-toggleswitch-handle {
+        background-color: transparent;
+      }
+      
+      .p-toggleswitch:not(.p-disabled):has(.p-toggleswitch-input:hover) .p-toggleswitch-handle {
+        background-color: transparent;
+      }
+      
+      fa-icon svg path {
+        fill: yellow;
+      }
+      
+      .p-toggleswitch.p-toggleswitch-checked .p-toggleswitch-slider {
+        background-color: darkblue;
+      }
+    }
     
     .header-actions {
       position: absolute;
@@ -40,8 +58,8 @@
         font-size: 16px;
         line-height: 20px;
         letter-spacing: 1.2%;
-        color: rgba(26, 62, 62, 1);
-        background: rgba(253, 253, 253, 1);
+        color: var(--main-text-color);
+        background: var(--secondary-color-btn);
         border: 0px;
         border-radius: 4px;
         cursor: pointer;
@@ -55,6 +73,11 @@
       
       .counter-value {
         text-align: center;
+        color: var(--secondary-text-color);
+      }
+      
+      .data-time {
+        color: var(--secondary-text-color);
       }
       
       .counter-btn {
@@ -83,11 +106,13 @@
         letter-spacing: 8px;
         margin-top: 6px;
         text-transform: uppercase;
+        color: var(--secondary-text-color);
       }
     }
     
     .navigation a {
       margin-left: 24px;
+      color: var(--secondary-text-color);
     }
     
     .navigation button {
@@ -98,8 +123,8 @@
       font-size: 16px;
       line-height: 20px;
       letter-spacing: 1.2%;
-      color: rgba(26, 62, 62, 1);
-      background: rgba(253, 253, 253, 1);
+      color: var(--main-text-color);
+      background: var(--secondary-color-btn);
       border: 0px;
       border-radius: 4px;
       cursor: pointer;
