@@ -67,6 +67,10 @@ export class ThemeService {
   }
   
   setTheme(themeName: Theme): void {
+    if (!themeName) {
+      return;
+    }
+    
     const currentTheme: ThemeState = this.stateSubject.getValue();
     const newTheme: ThemeState = { ...currentTheme, theme: themeName };
     this.stateSubject.next(newTheme);

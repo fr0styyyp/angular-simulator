@@ -7,8 +7,8 @@
     
     <div class="theme-switcher">
       <p-toggleswitch 
-        [(ngModel)]="checked"
-        (onChange)="ThemeService.toggleMode()">
+        [ngModel]="(ThemeService.state$ | async)?.mode === 'dark'" 
+        (ngModelChange)="ThemeService.toggleMode()">
         
         <ng-template #handle let-checked="checked">
           <fa-icon
@@ -22,10 +22,11 @@
       </p-toggleswitch>
     </div>
     
-    <p-selectButton
+    <p-selectButton 
       [options]="stateOptions" 
-      [(ngModel)]="currentTheme" 
-      (onChange)="onThemeChange($event)">
+      [ngModel]="(ThemeService.state$ | async)?.theme" 
+      (ngModelChange)="ThemeService.setTheme($event)"
+      [allowEmpty]="false">
     </p-selectButton>
     
     <nav class="navigation">
