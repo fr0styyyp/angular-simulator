@@ -1,5 +1,5 @@
-import { Mode } from '../../enums/mode';
-import { Theme } from '../../enums/theme';
+import { Mode } from '../../enums/Mode';
+import { Theme } from '../../enums/Theme';
 
 export interface ThemeState {
   mode: Mode;

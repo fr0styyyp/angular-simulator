@@ -8,7 +8,7 @@ import { faMoon, faSun, IconDefinition } from '@fortawesome/free-solid-svg-icons
 import { FormsModule } from '@angular/forms';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { SelectOption } from '../app/interfaces/ISelectOption';
-import { Theme } from '../enums/theme';
+import { Theme } from '../enums/Theme';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
@@ -19,7 +19,7 @@ import { AsyncPipe } from '@angular/common';
 })
 export class HeaderComponent {
   
-  public ThemeService: ThemeService = inject(ThemeService);
+  themeService: ThemeService = inject(ThemeService);
   
   readonly companyName: string = 'Румтибет';
   currentDate: Date = new Date();
@@ -38,9 +38,9 @@ export class HeaderComponent {
   ];
   
   stateOptions: SelectOption[] = [
-    { label: 'Aura', value: Theme.Aura },
-    { label: 'Lara', value: Theme.Lara },
-    { label: 'Nora', value: Theme.Nora }
+    { label: 'Aura', value: Theme.AURA },
+    { label: 'Lara', value: Theme.LARA },
+    { label: 'Nora', value: Theme.NORA }
   ];
   
   constructor() {

@@ -6,7 +6,7 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import Lara from '@primeuix/themes/lara';
 import Nora from '@primeuix/themes/nora';
-import { Theme } from '../enums/theme';
+import { Theme } from '../enums/Theme';
 import { ThemeState } from './interfaces/IThemeState';
 
 function getInitialPreset() {
@@ -14,8 +14,8 @@ function getInitialPreset() {
   if (savedData) {
     try {
       const state = JSON.parse(savedData) as ThemeState;
-      if (state.theme === Theme.Lara) return Lara;
-      if (state.theme === Theme.Nora) return Nora;
+      if (state.theme === Theme.LARA) return Lara;
+      if (state.theme === Theme.NORA) return Nora;
     } catch (e) {
       
     }

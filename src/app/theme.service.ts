@@ -2,11 +2,12 @@ import { inject, Injectable } from '@angular/core';
 import { ThemeState } from './interfaces/IThemeState';
 import { BehaviorSubject, distinctUntilChanged, map, Observable, tap } from 'rxjs';
 import { PrimeNG } from 'primeng/config';
-import Aura from '@primeuix/themes/aura';
-import Lara from '@primeuix/themes/lara';
-import Nora from '@primeuix/themes/nora';
-import { Mode } from '../enums/mode';
-import { Theme } from '../enums/theme';
+import AURA from '@primeuix/themes/aura';
+import LARA from '@primeuix/themes/lara';
+import NORA from '@primeuix/themes/nora';
+import { Mode } from '../enums/Mode';
+import { Theme } from '../enums/Theme';
+import { SelectButtonChangeEvent } from 'primeng/selectbutton';
 
 @Injectable({
   providedIn: 'root',
@@ -16,8 +17,8 @@ export class ThemeService {
   primeNG: PrimeNG = inject(PrimeNG);
   
   private defaultState: ThemeState = {
-    mode: Mode.Light,
-    theme: Theme.Aura
+    mode: Mode.LIGHT,
+    theme: Theme.AURA
   }
   
   private stateSubject: BehaviorSubject<ThemeState> = new BehaviorSubject<ThemeState>(this.defaultState);
@@ -25,9 +26,9 @@ export class ThemeService {
   
   private readonly STORAGE_KEY: string = 'app-theme-settings';
   private readonly themes: Record<Theme, object> = {
-    [Theme.Aura]: Aura,
-    [Theme.Lara]: Lara,
-    [Theme.Nora]: Nora
+    [Theme.AURA]: AURA,
+    [Theme.LARA]: LARA,
+    [Theme.NORA]: NORA
   };
   
   constructor() {
@@ -52,7 +53,7 @@ export class ThemeService {
   
   applyMode(mode: Mode): void {
     const host: HTMLElement = document.documentElement;
-    if (mode === Mode.Dark) {
+    if (mode === Mode.DARK) {
       host.classList.add('my-app-dark');
     } else {
       host.classList.remove('my-app-dark');
@@ -61,12 +62,13 @@ export class ThemeService {
   
   toggleMode(): void {
     const currentState: ThemeState = this.stateSubject.value;
-    const newMode: Mode = currentState.mode === Mode.Light ? Mode.Dark : Mode.Light;
+    const newMode: Mode = currentState.mode === Mode.LIGHT ? Mode.DARK : Mode.LIGHT;
     const newState: ThemeState = { ...currentState, mode: newMode };
     this.stateSubject.next(newState);
   }
   
-  setTheme(themeName: Theme): void {
+  setTheme(event: SelectButtonChangeEvent): void {
+    const themeName = event.value;
     if (!themeName) {
       return;
     }
