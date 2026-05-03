@@ -4,7 +4,31 @@
       <img src="/images/company-logo-icon.svg" alt="icon" width="137" height="48">
       <span>{{ companyName }}</span>
     </div>
-
+    
+    <div class="theme-switcher">
+      <p-toggleswitch 
+        [ngModel]="(themeService.state$ | async)?.mode === 'dark'" 
+        (onChange)="themeService.toggleMode()">
+        
+        <ng-template #handle let-checked="checked">
+          <fa-icon
+            [icon]="checked ? faMoon : faSun" 
+            [class.sun-icon]="!checked"
+            [class.moon-icon]="checked"
+            class="switch-icon">
+          </fa-icon>
+        </ng-template>
+        
+      </p-toggleswitch>
+    </div>
+    
+    <p-selectButton 
+      [options]="stateOptions" 
+      [ngModel]="(themeService.state$ | async)?.theme" 
+      (onChange)="themeService.setTheme($event)"
+      [allowEmpty]="false">
+    </p-selectButton>
+    
     <nav class="navigation">
       @for (navItem of navItems; track navItem.path) {
         <a

@@ -1,5 +1,5 @@
 @mixin yellow-title {
-  color: #F2BE22;
+  color: var(--additional-text-color);
   font-weight: 400;
   font-style: Regular;
   font-size: 24px;
@@ -9,7 +9,7 @@
 }
 
 @mixin title {
-  color: #18121E;
+  color: var(--main-text-color);
   font-weight: 800;
   font-style: ExtraBold;
   font-size: 32px;
@@ -41,6 +41,7 @@
       text-transform: uppercase;
       margin: 0px;
       text-align: left;
+      color: var(--secondary-text-color);
     }
   }
   
@@ -55,12 +56,15 @@
     border-radius: 10px;
     margin-top: 41px;
     box-sizing: border-box;
+    color: var(--secondary-text-color);
     
     .main-btn {
       margin-bottom: 29px;
+      background-color: var(primary-color-btn);
+      color: var(--secondary-text-color);
       
       &:disabled {
-        background-color: #1A3E3E;
+        background-color: var(primary-button);
         color: #666666;
         opacity: 0.6;
         cursor: auto;
@@ -84,6 +88,10 @@
       padding: 0px 12px;
     }
     
+    .output-field {
+      color: var(--secondary-text-color);
+    }
+    
     input {
       background: transparent;
       border: none;
@@ -92,6 +100,7 @@
       background-image: url('/images/arrow-right-icon.svg');
       background-repeat: no-repeat;
       background-position: right 15px center;
+      color: var(--secondary-text-color);
     }
   }
   
@@ -203,6 +212,10 @@
         z-index: 3;
         border-radius: 100%;
       }
+      
+      .play-btn fa-icon ::ng-deep svg path {
+        fill: var(--primary-color-btn);
+      }
     }
   }
   
@@ -222,21 +235,13 @@
     }
     
     p {
-    color: #18121E;
+    color: var(--main-text-color);
     font-weight: 400;
     font-style: Regular;
     font-size: 18px;
     line-height: 150%;
     letter-spacing: 0%;
     margin: 40px 0px;
-    }
-    
-    button {
-    background-color: #1A3E3E;
-    width: 200px;
-    height: 52px;
-    cursor: pointer;
-    border-radius: 4px;
     }
   }
 }
@@ -246,19 +251,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
-  button {
-    width: 236px;
-    height: 52px;
-    border-radius: 4px;
-    background-color: #1A3E3E;
-    font-weight: 600;
-    font-style: SemiBold;
-    font-size: 16px;
-    line-height: 20px;
-    letter-spacing: 1.2%;
-    cursor: pointer;
-  }
   
   .offers-description {
     height: 187px;
@@ -275,7 +267,7 @@
     }
     
     p {
-      color: #18121E;
+      color: var(--main-text-color);
       font-weight: 400;
       font-style: Regular;
       font-size: 18px;
@@ -301,7 +293,7 @@
     }
     
     &:hover {
-      background-color: #ffffff;
+      background-color: var(bg-color);
       transform: scale(1.02);
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
@@ -312,7 +304,7 @@
       font-size: 18px;
       line-height: 20px;
       letter-spacing: 1.2%;
-      color: #18121E;
+      color: var(--main-text-color);
       margin: 0px;
     }
     
@@ -322,9 +314,13 @@
       font-size: 14px;
       line-height: 20px;
       letter-spacing: 0%;
-      color: #18121E;
+      color: var(--main-text-color);
       margin-top: 4px;
       margin-bottom: 0px;
+    }
+    
+    fa-icon ::ng-deep svg path {
+      fill: var(--main-text-color);
     }
   }
   
@@ -396,6 +392,10 @@
           font-size: 14px;
           line-height: 18px;
           letter-spacing: 0%;
+        }
+        
+        fa-icon ::ng-deep svg path {
+          fill: #f6cc22;
         }
       }
       
@@ -491,7 +491,7 @@
       width: 580px;
       height: 312px;
       box-shadow: 0px 0px 15px 0px rgba(24, 18, 30, 0.12);
-      background-color: #FDFDFD;
+      background-color: var(bg-color);
       padding: 16px;
       box-sizing: border-box;
 
@@ -512,7 +512,7 @@
             font-size: 24px;
             line-height: 32px;
             letter-spacing: 0%;
-            color: rgba(24, 18, 30, 1);
+            color: var(--main-text-color);
             margin-top: 16px;
             margin-bottom: 24px;
           }
@@ -523,7 +523,7 @@
             font-size: 14px;
             line-height: 20px;
             letter-spacing: 0%;
-            color: rgba(24, 18, 30, 1);
+            color: var(--main-text-color);
           }
         }
         
@@ -542,11 +542,11 @@
             font-size: 14px;
             line-height: 20px;
             letter-spacing: 0%;
-            color: rgba(242, 190, 34, 1);
+            color: var(--additional-text-color);
           }
           
           a {
-            color: rgba(26, 62, 62, 1);
+            color: var(--main-text-color);
             cursor: pointer;
             font-weight: 700;
             font-style: Bold;
@@ -600,7 +600,7 @@
   margin-bottom: -98px;
   display: flex;
   justify-content: center;
-  background: rgba(253, 253, 253, 1);
+  background: var(--bg-color);
   box-shadow: 0px 0px 15px 0px rgba(24, 18, 30, 0.12);
   border-radius: 6px;
   padding: 40px 100px;
@@ -618,7 +618,7 @@
     height: 90px;
     
     span {
-      color: rgba(242, 190, 34, 1);
+      color: var(--additional-text-color);
       font-weight: 400;
       font-style: Regular;
       font-size: 18px;
@@ -627,7 +627,7 @@
     }
     
     h2 {
-      color: rgba(24, 18, 30, 1);
+      color: var(--main-text-color);
       font-weight: 800;
       font-style: ExtraBold;
       font-size: 26px;
@@ -684,7 +684,7 @@
     }
     
     span {
-      color: rgba(24, 18, 30, 1);
+      color: var(--main-text-color);
       font-weight: 600;
       font-style: SemiBold;
       font-size: 16px;
@@ -698,7 +698,7 @@
       margin-top: 8px;
       
       p {
-        color: rgba(24, 18, 30, 1);
+        color: var(--main-text-color);
         font-weight: 600;
         font-style: SemiBold;
         font-size: 14px;
@@ -709,7 +709,7 @@
         a {
           text-decoration: underline;
           cursor: pointer;
-          color: rgba(24, 18, 30, 1);
+          color: var(--main-text-color);
           font-weight: 600;
           font-style: SemiBold;
           font-size: 14px;

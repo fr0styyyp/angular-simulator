@@ -6,7 +6,8 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  
+  margin-bottom: 80px;
+
   .users-title {
     font-weight: 800;
     font-style: ExtraBold;
@@ -27,7 +28,7 @@
     margin-top: 80px;
     
     button {
-      background-color: #D4A373;
+      background-color: var(--primary-color-btn);
       width: 80px;
       height: 80px;
       border: 0px;
@@ -37,6 +38,15 @@
       position: fixed;
       left: 60px;
       bottom: 60px;
+      
+      ::ng-deep svg {
+        width: 50%;
+        height: 50%;
+        
+        path {
+          color: var(--secondary-text-color);
+        }
+      }
     }
     
     .empty-blank-container {
@@ -64,7 +74,7 @@
           line-height: 29.9px;
           letter-spacing: 0%;
           vertical-align: middle;
-          color: rgba(255, 255, 255, 1);
+          color: var(--secondary-text-color);
         }
       }
     }

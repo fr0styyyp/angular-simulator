@@ -6,11 +6,41 @@
   font-weight: 600;
   font-size: 18px;
   line-height: 100%;
-  color: white;
 }
 
 a {
   text-decoration: none;
+}
+
+:root {
+  --bg-color: rgba(243, 245, 244, 1);
+  --main-text-color: rgba(24, 18, 30, 1);
+  --secondary-text-color: rgba(253, 253, 253, 1);
+  --additional-text-color: rgba(242, 190, 34, 1);
+  --primary-color-btn: rgba(26, 62, 62, 1);
+  --secondary-color-btn: rgba(253, 253, 253, 1);
+  --surface-card: rgba(253, 253, 253, 1);
+  --users-green: rgba(29, 57, 57, 1);
+  --users-gray: rgba(102, 124, 124, 1);
+  --users-orange: rgba(212, 163, 115, 1);
+}
+
+html.my-app-dark {
+  --bg-color: rgb(30, 31, 36); 
+  --main-text-color: rgba(224, 224, 224, 1);
+  --secondary-text-color: rgba(255, 255, 255, 1);
+  --additional-text-color: rgb(177, 133, 0);
+  --primary-color-btn: rgb(95, 49, 12); 
+  --secondary-color-btn: rgba(40, 40, 40, 1);
+  --surface-card: rgba(30, 30, 30, 1);
+  --users-green: rgba(142, 202, 202, 1);
+  --users-gray: rgba(170, 170, 170, 1);
+  --users-orange: rgba(225, 185, 140, 1);
+}
+
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--bg-color);
 }
 
 .container {
@@ -23,7 +53,8 @@ a {
   width: fit-content;
   padding: 16px 36px;
   border-radius: 4px;
-  background-color: #1A3E3E;
+  background-color: var(--primary-color-btn);
+  color: var(--secondary-text-color);
   font-weight: 600;
   font-size: 16px;
   line-height: 20px;
@@ -33,15 +64,15 @@ a {
 }
 
 .green {
-  color: rgba(29, 57, 57, 1);
+  color: var(--users-green);
 }
 
 .gray {
-  color: rgba(102, 124, 124, 1);
+  color: var(--users-gray);
 }
 
 .orange {
-  color: rgba(212, 163, 115, 1);
+  color: var(--users-orange)
 }
 
 .thin {
