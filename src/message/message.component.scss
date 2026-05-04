@@ -27,10 +27,8 @@
   padding: 15px;
   position: relative;
   
-  ::ng-deep {
-    fa-icon svg path {
-      fill: var(--secondary-text-color);
-    }
+  fa-icon {
+    color: var(--secondary-text-color);
   }
   
   button {

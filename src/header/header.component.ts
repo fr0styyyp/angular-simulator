@@ -37,12 +37,6 @@ export class HeaderComponent {
     { label: 'Пользователи', path: '/users' },
   ];
   
-  stateOptions: SelectOption[] = [
-    { label: 'Aura', value: Theme.AURA },
-    { label: 'Lara', value: Theme.LARA },
-    { label: 'Nora', value: Theme.NORA }
-  ];
-  
   constructor() {
     setInterval(() => {
       this.currentDate = new Date();

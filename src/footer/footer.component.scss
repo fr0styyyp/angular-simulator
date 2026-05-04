@@ -65,12 +65,12 @@
             max-width: 25px;
             max-height: 25px;
             cursor: pointer;
+            color: var(--secondary-text-color);
           }
           
           ::ng-deep svg {
             width: 100%;
             height: 100%;
-            color: var(--secondary-text-color);
           }
         }
       }

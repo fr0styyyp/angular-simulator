@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { DestroyRef, inject, Injectable } from '@angular/core';
 import { ThemeState } from './interfaces/IThemeState';
 import { BehaviorSubject, distinctUntilChanged, map, Observable, tap } from 'rxjs';
 import { PrimeNG } from 'primeng/config';
@@ -8,6 +8,8 @@ import NORA from '@primeuix/themes/nora';
 import { Mode } from '../enums/Mode';
 import { Theme } from '../enums/Theme';
 import { SelectButtonChangeEvent } from 'primeng/selectbutton';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SelectOption } from './interfaces/ISelectOption';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +17,13 @@ import { SelectButtonChangeEvent } from 'primeng/selectbutton';
 export class ThemeService {
   
   primeNG: PrimeNG = inject(PrimeNG);
+  private destroyRef: DestroyRef = inject(DestroyRef);
+  
+    stateOptions: SelectOption[] = [
+    { label: 'Aura', value: Theme.AURA },
+    { label: 'Lara', value: Theme.LARA },
+    { label: 'Nora', value: Theme.NORA }
+  ];
   
   private defaultState: ThemeState = {
     mode: Mode.LIGHT,
@@ -35,19 +44,12 @@ export class ThemeService {
     const savedState: ThemeState = this.loadFromStorage();
     this.stateSubject.next(savedState);
     this.state$.pipe(
-      tap((state: ThemeState) => this.saveToStorage(state))
-    ).subscribe();
-    
-    this.state$.pipe(
-      map((state: ThemeState) => state.mode),
-      distinctUntilChanged(),
-      tap((mode: Mode) => this.applyMode(mode))
-    ).subscribe();
-    
-    this.state$.pipe(
-      map((state: ThemeState) => state.theme),
-      distinctUntilChanged(),
-      tap((theme: Theme) => this.applyTheme(theme))
+      takeUntilDestroyed(this.destroyRef),
+      tap((state: ThemeState) => {
+        this.saveToStorage(state);
+        this.applyMode(state.mode);
+        this.applyTheme(state.theme);
+      })
     ).subscribe();
   }
   
@@ -68,7 +70,7 @@ export class ThemeService {
   }
   
   setTheme(event: SelectButtonChangeEvent): void {
-    const themeName = event.value;
+    const themeName: Theme = event.value;
     if (!themeName) {
       return;
     }

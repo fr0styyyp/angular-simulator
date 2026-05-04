@@ -23,7 +23,7 @@
     </div>
     
     <p-selectButton 
-      [options]="stateOptions" 
+      [options]="themeService.stateOptions" 
       [ngModel]="(themeService.state$ | async)?.theme" 
       (onChange)="themeService.setTheme($event)"
       [allowEmpty]="false">

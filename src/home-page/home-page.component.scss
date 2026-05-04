@@ -213,8 +213,8 @@
         border-radius: 100%;
       }
       
-      .play-btn fa-icon ::ng-deep svg path {
-        fill: var(--primary-color-btn);
+      .play-btn fa-icon {
+        color: var(--primary-color-btn);
       }
     }
   }
@@ -319,8 +319,8 @@
       margin-bottom: 0px;
     }
     
-    fa-icon ::ng-deep svg path {
-      fill: var(--main-text-color);
+    fa-icon {
+      color: var(--main-text-color);
     }
   }
   
@@ -394,8 +394,8 @@
           letter-spacing: 0%;
         }
         
-        fa-icon ::ng-deep svg path {
-          fill: #f6cc22;
+        fa-icon {
+          color: #f6cc22;
         }
       }
       

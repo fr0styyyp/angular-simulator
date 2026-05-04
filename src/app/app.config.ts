@@ -8,19 +8,24 @@ import Lara from '@primeuix/themes/lara';
 import Nora from '@primeuix/themes/nora';
 import { Theme } from '../enums/Theme';
 import { ThemeState } from './interfaces/IThemeState';
+import { AuraBaseDesignTokens } from '@primeuix/themes/aura/base';
+import { Preset } from '@primeuix/themes/types';
 
-function getInitialPreset() {
-  const savedData = localStorage.getItem('app-theme-settings');
-  if (savedData) {
-    try {
-      const state = JSON.parse(savedData) as ThemeState;
-      if (state.theme === Theme.LARA) return Lara;
-      if (state.theme === Theme.NORA) return Nora;
-    } catch (e) {
-      
-    }
+function getInitialPreset(): Preset<AuraBaseDesignTokens> {
+  const savedData: string | null = localStorage.getItem('app-theme-settings');
+  
+  if (!savedData) {
+    return Aura;
   }
-  return Aura;
+
+  const state: ThemeState = JSON.parse(savedData) as ThemeState;
+  const themesMap: Record<Theme, Preset<AuraBaseDesignTokens>> = {
+    [Theme.AURA]: Aura,
+    [Theme.LARA]: Lara,
+    [Theme.NORA]: Nora
+  };
+
+  return themesMap[state.theme] ?? Aura;
 }
 
 export const appConfig: ApplicationConfig = {
