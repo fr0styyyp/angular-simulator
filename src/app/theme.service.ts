@@ -1,7 +1,7 @@
 import { DestroyRef, inject, Injectable } from '@angular/core';
 import { ThemeState } from './interfaces/IThemeState';
-import { BehaviorSubject, distinctUntilChanged, map, Observable, tap } from 'rxjs';
-import { PrimeNG } from 'primeng/config';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { usePreset } from '@primeuix/themes';
 import AURA from '@primeuix/themes/aura';
 import LARA from '@primeuix/themes/lara';
 import NORA from '@primeuix/themes/nora';
@@ -10,19 +10,19 @@ import { Theme } from '../enums/Theme';
 import { SelectButtonChangeEvent } from 'primeng/selectbutton';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SelectOption } from './interfaces/ISelectOption';
+import { ThemePreset } from './types/ThemePreset';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ThemeService {
   
-  primeNG: PrimeNG = inject(PrimeNG);
   private destroyRef: DestroyRef = inject(DestroyRef);
   
     stateOptions: SelectOption[] = [
-    { label: 'Aura', value: Theme.AURA },
-    { label: 'Lara', value: Theme.LARA },
-    { label: 'Nora', value: Theme.NORA }
+      { label: 'Aura', value: Theme.AURA },
+      { label: 'Lara', value: Theme.LARA },
+      { label: 'Nora', value: Theme.NORA }
   ];
   
   private defaultState: ThemeState = {
@@ -34,7 +34,7 @@ export class ThemeService {
   state$: Observable<ThemeState> = this.stateSubject.asObservable();
   
   private readonly STORAGE_KEY: string = 'app-theme-settings';
-  private readonly themes: Record<Theme, object> = {
+  private readonly themes: Record<Theme, ThemePreset> = {
     [Theme.AURA]: AURA,
     [Theme.LARA]: LARA,
     [Theme.NORA]: NORA
@@ -81,7 +81,7 @@ export class ThemeService {
   }
   
   private applyTheme(theme: Theme): void {
-    this.primeNG.theme.set({ preset: this.themes[theme] });
+    usePreset(this.themes[theme]);
   }
   
   private saveToStorage(state: ThemeState): void {
