@@ -19,19 +19,16 @@ export class ThemeService {
   
   private destroyRef: DestroyRef = inject(DestroyRef);
   
-    stateOptions: SelectOption[] = [
-      { label: 'Aura', value: Theme.AURA },
-      { label: 'Lara', value: Theme.LARA },
-      { label: 'Nora', value: Theme.NORA }
-  ];
-  
   private defaultState: ThemeState = {
     mode: Mode.LIGHT,
     theme: Theme.AURA
   }
   
-  private stateSubject: BehaviorSubject<ThemeState> = new BehaviorSubject<ThemeState>(this.defaultState);
-  state$: Observable<ThemeState> = this.stateSubject.asObservable();
+  stateOptions: SelectOption[] = [
+    { label: 'Aura', value: Theme.AURA },
+    { label: 'Lara', value: Theme.LARA },
+    { label: 'Nora', value: Theme.NORA }
+  ];
   
   private readonly STORAGE_KEY: string = 'app-theme-settings';
   private readonly themes: Record<Theme, Preset> = {
@@ -40,9 +37,10 @@ export class ThemeService {
     [Theme.NORA]: NORA
   };
   
+  private stateSubject: BehaviorSubject<ThemeState> = new BehaviorSubject<ThemeState>(this.loadFromStorage());
+  state$: Observable<ThemeState> = this.stateSubject.asObservable();
+  
   constructor() {
-    const savedState: ThemeState = this.loadFromStorage();
-    this.stateSubject.next(savedState);
     this.state$.pipe(
       takeUntilDestroyed(this.destroyRef),
       tap((state: ThemeState) => {
