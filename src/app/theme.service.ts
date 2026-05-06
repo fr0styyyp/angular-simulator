@@ -10,7 +10,7 @@ import { Theme } from '../enums/Theme';
 import { SelectButtonChangeEvent } from 'primeng/selectbutton';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SelectOption } from './interfaces/ISelectOption';
-import { ThemePreset } from './types/ThemePreset';
+import { Preset } from '@primeuix/themes/types';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +34,7 @@ export class ThemeService {
   state$: Observable<ThemeState> = this.stateSubject.asObservable();
   
   private readonly STORAGE_KEY: string = 'app-theme-settings';
-  private readonly themes: Record<Theme, ThemePreset> = {
+  private readonly themes: Record<Theme, Preset> = {
     [Theme.AURA]: AURA,
     [Theme.LARA]: LARA,
     [Theme.NORA]: NORA
