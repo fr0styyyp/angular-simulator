@@ -56,7 +56,7 @@
       <img class="nature-img" src="/images/nature.png" alt="nature" width="350" height="400">
       
       <div class="play-btn">
-        <img src="/images/play-icon.svg" alt="play">
+        <fa-icon [icon]="faPlay"></fa-icon>
       </div>
     </div>
   </div>
@@ -65,7 +65,7 @@
     <span>о нашем походе</span>
     <h2>Исследуйте все горные массивы мира вместе с нами</h2>
     <p>Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.</p>
-    <button (click)="messageService.showWarn('Программа недоступна')" id="tour-description-btn">Программа тура</button>
+    <button (click)="messageService.showWarn('Программа недоступна')" id="tour-description-btn" class="main-btn">Программа тура</button>
   </div>
 </section>
 
@@ -79,7 +79,7 @@
     
     @for (card of cards; track card.title) {
       <div class="services-card">
-        <img [src]="'/images/' + card.icon + '.svg'" alt="icon" height="50px" width="50px">
+        <fa-icon [icon]="card.icon"></fa-icon>
         <div class="card-content">
           <h3>{{ card.title }}</h3>
           <p>{{ card.text }}</p>
@@ -89,7 +89,7 @@
       <p>Карточек пока нету</p>
     }
     
-    <button (click)="messageService.showInfo('Стоимость отправлена на почту')" id="price-btn">Стоимость программ</button>
+    <button (click)="messageService.showInfo('Стоимость отправлена на почту')" id="price-btn" class="main-btn">Стоимость программ</button>
   </div>
   
   <div class="offers-grid">
@@ -111,7 +111,7 @@
       <div class="destinate-card" [style.backgroundImage]="'url(/images/' + card.imageUrl + '.png)'">
       
         <div class="rating-wrapper">
-          <img [src]="'/images/' + card.starIcon + '.svg'" alt="star">
+          <fa-icon [icon]="card.starIcon"></fa-icon>
           <span>{{ card.rating }}</span>
         </div>
         

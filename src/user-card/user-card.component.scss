@@ -1,7 +1,7 @@
 .user {
   max-width: 440px;
   height: 630px;
-  background-color: #FFFFFF;
+  background-color: var(--surface-card);
   box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.06);
   padding: 0 0 50px 0;
   box-sizing: border-box;
@@ -15,7 +15,7 @@
     border: 0px;
     border-radius: 4px;
     background-color: red;
-    color: white;
+    color: var(--secondary-text-color);
     cursor: pointer;
   }
   
@@ -53,7 +53,7 @@
   
   &::before {
     content: '';
-    border-bottom: 4px solid rgba(212, 163, 115, 1);
+    border-bottom: 4px solid var(--users-orange);
     display: inline-block;
     width: 440px;
     position: absolute;

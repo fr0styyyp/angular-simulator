@@ -1,11 +1,5 @@
 @if (isLoading$ | async) {
   <div class="loader-overlay">
-    <img 
-      src="/images/loading-icon.svg"
-      alt="refresh-icon"
-      class="spinner"
-      width="51"
-      height="51"
-    >
+    <fa-icon [icon]="faSpinner" class="spinner"></fa-icon>
   </div>
 }

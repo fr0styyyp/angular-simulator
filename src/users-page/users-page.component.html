@@ -4,7 +4,7 @@
   <app-users-filter (filter)="onChangeFilter($event)"></app-users-filter>
   <div class="users-container">
     <button (click)="onRefresh()">
-      <img src="/images/refresh-icon.svg" alt="refresh-icon">
+      <fa-icon [icon]="faArrowsRotate"></fa-icon>
     </button>
     @for (user of filteredUsers$ | async; track user.id) {
       <app-user-card [user]="user" (deleteUser)="onDeleteUser($event)"></app-user-card>

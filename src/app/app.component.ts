@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import './training';
-import { Color } from '../enums/color';
+import { Color } from '../enums/Color';
 import { Collection } from '../collection';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';

@@ -7,10 +7,12 @@ import { ICard } from '../app/interfaces/ICard';
 import { IDestination } from '../app/interfaces/IDestination';
 import { IBlog } from '../app/interfaces/IBlog';
 import { IImpressionImage } from '../app/interfaces/IImpressionImage';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faPlay, IconDefinition, faPeopleGroup, faShield, faTags, faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home-page',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, FontAwesomeModule],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
@@ -23,22 +25,27 @@ export class HomePageComponent {
   selectedDate!: string;
   participantsCount: number | null = null;
   liveTextInput: string = '';
+  faPlay: IconDefinition = faPlay;
+  faPeopleGroup: IconDefinition = faPeopleGroup;
+  faShield: IconDefinition = faShield;
+  faTags: IconDefinition = faTags;
+  faStar: IconDefinition = faStar;
   
   cards: ICard[] = [
     {
       title: 'Опытный гид',
       text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      icon: 'experienced-guide-icon',
+      icon: faPeopleGroup,
     },
     {
       title: 'Безопасный поход',
       text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      icon: 'armour-icon',
+      icon: faShield,
     },
     {
       title: 'Лояльные цены',
       text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      icon: 'price-icon',
+      icon: faTags,
     },
   ];
   
@@ -47,7 +54,7 @@ export class HomePageComponent {
       title: 'Озеро возле гор',
       description: 'романтическое приключение',
       price: '480 $',
-      starIcon: 'star-icon',
+      starIcon: faStar,
       rating: 4.9,
       imageUrl: 'lake',
     },
@@ -55,7 +62,7 @@ export class HomePageComponent {
       title: 'Ночь в горах',
       description: 'в компании друзей',
       price: '500 $',
-      starIcon: 'star-icon',
+      starIcon: faStar,
       rating: 4.5,
       imageUrl: 'winter-mountain',
     },
@@ -63,7 +70,7 @@ export class HomePageComponent {
       title: 'Йога в горах',
       description: 'для тех, кто забоится о себе',
       price: '230 $',
-      starIcon: 'star-icon',
+      starIcon: faStar,
       rating: 5.0,
       imageUrl: 'mountain-yoga',
     },

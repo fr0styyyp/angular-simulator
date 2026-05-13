@@ -7,10 +7,12 @@ import { IUser } from '../app/interfaces/IUser';
 import { UserCardComponent } from "../user-card/user-card.component";
 import { CreateUserComponent } from '../create-user/create-user.component';
 import { UsersFilterComponent } from '../users-filter/users-filter.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faArrowsRotate, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-users-page',
-  imports: [FormsModule, CommonModule, AsyncPipe, UserCardComponent, CreateUserComponent, UsersFilterComponent],
+  imports: [FormsModule, CommonModule, AsyncPipe, UserCardComponent, CreateUserComponent, FontAwesomeModule, UsersFilterComponent],
   templateUrl: './users-page.component.html',
   styleUrl: './users-page.component.scss',
 })
@@ -19,6 +21,7 @@ export class UsersPageComponent implements OnInit {
   userService: UserService = inject(UserService);
   users$: Observable<IUser[]> = this.userService.users$;
   private filterSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  faArrowsRotate: IconDefinition = faArrowsRotate;
   
   filteredUsers$: Observable<IUser[]> = combineLatest([
     this.users$,
