@@ -2,61 +2,61 @@
   <form [formGroup]="userForm">
     <div>
       <label for="name">Name</label>
-      <input type="text" id="name" formControlName="name" />
+      <input AnimatedGradient type="text" id="name" formControlName="name" />
     </div>
 
     <div>
       <label for="username">Username</label>
-      <input type="text" id="username" formControlName="username" />
+      <input AnimatedGradient type="text" id="username" formControlName="username" />
     </div>
 
     <div>
       <label for="email">Email</label>
-      <input type="email" id="email" formControlName="email" />
+      <input AnimatedGradient type="email" id="email" formControlName="email" />
     </div>
 
     <div>
       <label for="phone">Phone</label>
-      <input type="tel" id="phone" formControlName="phone" />
+      <input AnimatedGradient type="tel" id="phone" formControlName="phone" />
     </div>
 
     <div>
-      <label  for="website">Website</label>
-      <input type="text" id="website" formControlName="website" />
+      <label for="website">Website</label>
+      <input AnimatedGradient type="text" id="website" formControlName="website" />
     </div>
 
     <ng-container formGroupName="address">
       <span>Address:</span>
       <div>
         <label for="address-city">City</label>
-        <input type="text" id="address-city" formControlName="city" />
+        <input AnimatedGradient type="text" id="address-city" formControlName="city" />
       </div>
 
       <div for="address-street">
         <label>Street</label>
-        <input type="text" id="address-street" formControlName="street" />
+        <input AnimatedGradient type="text" id="address-street" formControlName="street" />
       </div>
 
       <div>
         <label for="address-suite">Suite</label>
-        <input type="text" id="address-suite" formControlName="suite" />
+        <input AnimatedGradient type="text" id="address-suite" formControlName="suite" />
       </div>
 
       <div>
         <label for="address-zipcode">Zipcode</label>
-        <input type="tel" id="address-zipcode" formControlName="zipcode" />
+        <input AnimatedGradient type="tel" id="address-zipcode" formControlName="zipcode" />
       </div>
 
       <ng-container formGroupName="geo">
         <span>Geo:</span>
         <div>
           <label for="address-geo-lat">lat</label>
-          <input type="tel" id="address-geo-lat" formControlName="lat" />
+          <input AnimatedGradient type="tel" id="address-geo-lat" formControlName="lat" />
         </div>
 
         <div>
           <label for="address-geo-lng">lng</label>
-          <input type="tel" id="address-geo-lng" formControlName="lng" />
+          <input AnimatedGradient type="tel" id="address-geo-lng" formControlName="lng" />
         </div>
       </ng-container>
     </ng-container>
@@ -65,19 +65,19 @@
       <span>Company:</span>
       <div>
         <label for="company-name">Name</label>
-        <input type="text" id="company-name" formControlName="name" />
+        <input AnimatedGradient type="text" id="company-name" formControlName="name" />
       </div>
 
       <div>
         <label for="company-catchPhrase">Catch phrase</label>
-        <input type="text" id="company-catchPhrase" formControlName="catchPhrase" />
+        <input AnimatedGradient type="text" id="company-catchPhrase" formControlName="catchPhrase" />
       </div>
 
       <div>
         <label for="company-bs">bs</label>
-        <input type="text" id="company-bs" formControlName="bs" />
+        <input AnimatedGradient type="text" id="company-bs" formControlName="bs" />
       </div>
     </ng-container>
   </form>
-  <button type="button" (click)="onSubmit()" [disabled]="userForm.invalid">Создать пользователя</button>
+  <button type="button" boldOnHover (click)="onSubmit()" [disabled]="userForm.invalid">Создать пользователя</button>
 </div>

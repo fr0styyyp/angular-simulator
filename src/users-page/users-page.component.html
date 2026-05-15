@@ -2,6 +2,7 @@
   <span class="users-title green">Список Пользователей</span>
   <app-create-user (createUser)="onAddUser($event)"></app-create-user>
   <app-users-filter (filter)="onChangeFilter($event)"></app-users-filter>
+  <span class="users-length">Найдено {{ (filteredUsers$ | async)?.length ?? 0}} {{ (filteredUsers$ | async)?.length ?? 0 | plural:'пользователь':'пользователя':'пользователей' }}</span>
   <div class="users-container">
     <button (click)="onRefresh()">
       <fa-icon [icon]="faArrowsRotate"></fa-icon>

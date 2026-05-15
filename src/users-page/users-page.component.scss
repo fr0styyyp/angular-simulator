@@ -7,6 +7,12 @@
   align-items: center;
   flex-direction: column;
   margin-bottom: 80px;
+  
+  .users-length {
+    margin-top: 60px;
+    font-size: 20px;
+    color: var(--users-green);
+  }
 
   .users-title {
     font-weight: 800;
