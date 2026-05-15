@@ -15,7 +15,7 @@ export class AnimatedGradientDirective implements OnDestroy {
     colors: ['#ff007f', '#7f00ff', '#00f0ff', '#ff007f'],
     thickness: '2px'
   }
-  private get config() {
+  private get config(): IGradientConfiguration {
     return { ...this.defaultConfig, ...this.GradientConfiguration };
   }
 
@@ -25,7 +25,7 @@ export class AnimatedGradientDirective implements OnDestroy {
   
   constructor(private el: ElementRef) {
     if (!document.getElementById('animated-gradient-styles')) {
-      const style = document.createElement('style');
+      const style: HTMLStyleElement = document.createElement('style');
       style.id = 'animated-gradient-styles';
       style.textContent = `
         @keyframes moveGradient {
@@ -62,16 +62,16 @@ export class AnimatedGradientDirective implements OnDestroy {
   
   
   @HostListener('mouseenter')
-  onMouseEnter() {
+  onMouseEnter(): void {
     const delay: number | undefined = this.GradientConfiguration?.delay ?? this.defaultConfig.delay;
     
-    this.timerId = setTimeout(() => {
+    this.timerId = setTimeout((): void => {
       this.isActive = true;
     }, delay);
   }
   
   @HostListener('mouseleave')
-  onMouseLeave() {
+  onMouseLeave(): void {
     clearTimeout(this.timerId);
     this.isActive = false;
   }

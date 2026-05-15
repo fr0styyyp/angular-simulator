@@ -10,12 +10,12 @@ export class BoldOnHoverDirective {
   @HostBinding('style.fontWeight') fontWeight: number = 600;
   
   @HostListener('mouseenter')
-  onEnter() {
+  onEnter(): void {
     this.fontWeight = 900;
   }
   
   @HostListener('mouseleave')
-  onLeave() {
+  onLeave(): void {
     this.fontWeight = 600;
   }
   
