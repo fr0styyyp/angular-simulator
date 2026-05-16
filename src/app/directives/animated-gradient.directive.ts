@@ -47,7 +47,7 @@ export class AnimatedGradientDirective implements OnDestroy {
   @HostBinding('style.backgroundImage')
   get bgImg(): string {
     if (!this.isActive) return 'none';
-    return `linear-gradient(var(--surface-card), var(--surface-card)), linear-gradient(135deg, ${this.gradientConfiguration.colors!.join(', ')})`;
+    return `linear-gradient(var(--surface-card), var(--surface-card)), linear-gradient(135deg, ${ this.gradientConfiguration.colors!.join(', ') })`;
   }
   
   @HostBinding('style.animation')
