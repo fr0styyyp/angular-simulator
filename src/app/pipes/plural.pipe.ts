@@ -7,13 +7,25 @@ export class PluralPipe implements PipeTransform {
 
   transform(value: number | string, firstFormat: string, secondFormat: string, thirdFormat: string): string {
     const number: number = Math.abs(Number(value));
+    const remainder100: number = number % 100;
+    const remainder10: number = number % 10;
     
-    if (number % 10 === 1 && number % 100 !== 11) {
+    const isTeenExclusion: boolean = remainder100 >= 11 && remainder100 <= 14;
+    const endsWithOne: boolean = remainder10 === 1;
+    const endsWithFew = remainder10 >= 2 && remainder10 <= 4;
+    
+    if (isTeenExclusion) {
+      return `${number} ${thirdFormat}`;
+    }
+
+    if (endsWithOne) {
       return `${number} ${firstFormat}`;
     }
-    if (number % 10 >= 2 && number % 10 <= 4 && (number % 100 < 10 || number % 100 >= 20)) {
+
+    if (endsWithFew) {
       return `${number} ${secondFormat}`;
     }
+
     return `${number} ${thirdFormat}`;
   }
 
