@@ -6,18 +6,14 @@ import { IGradientConfiguration } from '../interfaces/IGradientConfiguration';
 })
 export class AnimatedGradientDirective implements OnDestroy {
   
-  @Input() GradientConfiguration!: IGradientConfiguration;
-  
-  isActive: boolean = false;
-  private timerId!: number;
-  private readonly defaultConfig: IGradientConfiguration = {
+  @Input() gradientConfiguration: IGradientConfiguration = {
     delay: 1000,
     colors: ['#ff007f', '#7f00ff', '#00f0ff', '#ff007f'],
     thickness: '2px'
-  }
-  private get config(): IGradientConfiguration {
-    return { ...this.defaultConfig, ...this.GradientConfiguration };
-  }
+  };
+  
+  isActive: boolean = false;
+  private timerId!: number;
 
   ngOnDestroy(): void {
     clearTimeout(this.timerId);
@@ -42,28 +38,31 @@ export class AnimatedGradientDirective implements OnDestroy {
   @HostBinding('style.borderColor') borderColor: string = 'transparent';
   @HostBinding('style.backgroundOrigin') bgOrigin: string = 'border-box';
   @HostBinding('style.backgroundClip') bgClip: string = 'padding-box, border-box';
+  
   @HostBinding('style.borderWidth')
   get borderWidth(): string | undefined {
-    return this.isActive ? this.config.thickness : '0px';
+    return this.isActive ? this.gradientConfiguration.thickness : '0px';
   }
+  
   @HostBinding('style.backgroundImage')
   get bgImg(): string {
     if (!this.isActive) return 'none';
-    return `linear-gradient(var(--surface-card), var(--surface-card)), linear-gradient(135deg, ${this.config.colors!.join(', ')})`;
+    return `linear-gradient(var(--surface-card), var(--surface-card)), linear-gradient(135deg, ${this.gradientConfiguration.colors!.join(', ')})`;
   }
+  
   @HostBinding('style.animation')
     get animation(): string {
     return this.isActive ? 'moveGradient 1s linear infinite' : 'none';
   }
+  
   @HostBinding('style.backgroundSize')
   get bgSize(): string {
     return this.isActive ? '100% 100%, 300% 300%' : 'auto';
   }
   
-  
   @HostListener('mouseenter')
   onMouseEnter(): void {
-    const delay: number | undefined = this.GradientConfiguration?.delay ?? this.defaultConfig.delay;
+    const delay: number | undefined = this.gradientConfiguration?.delay;
     
     this.timerId = setTimeout((): void => {
       this.isActive = true;

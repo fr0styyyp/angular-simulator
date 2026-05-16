@@ -1,1 +1,0 @@
-export type PhoneMode = 'compact' | 'international' | 'national' | 'masked';
