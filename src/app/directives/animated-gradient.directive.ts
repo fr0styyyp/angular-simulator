@@ -1,8 +1,8 @@
-import { Directive, ElementRef, HostBinding, HostListener, Input, OnDestroy } from '@angular/core';
+import { Directive, HostBinding, HostListener, Input, OnDestroy } from '@angular/core';
 import { IGradientConfiguration } from '../interfaces/IGradientConfiguration';
 
 @Directive({
-  selector: '[AnimatedGradient]',
+  selector: '[animatedGradient]',
 })
 export class AnimatedGradientDirective implements OnDestroy {
   
@@ -14,21 +14,17 @@ export class AnimatedGradientDirective implements OnDestroy {
   
   isActive: boolean = false;
   private timerId!: number;
-
-  ngOnDestroy(): void {
-    clearTimeout(this.timerId);
-  }
   
-  constructor(private el: ElementRef) {
+  constructor() {
     if (!document.getElementById('animated-gradient-styles')) {
       const style: HTMLStyleElement = document.createElement('style');
       style.id = 'animated-gradient-styles';
       style.textContent = `
-        @keyframes moveGradient {
-          0% { background-position: 0% 0%, 0% 50%; }
-          50% { background-position: 0% 0%, 100% 50%; }
-          100% { background-position: 0% 0%, 0% 50%; }
-        }
+      @keyframes moveGradient {
+        0% { background-position: 0% 0%, 0% 50%; }
+        50% { background-position: 0% 0%, 100% 50%; }
+        100% { background-position: 0% 0%, 0% 50%; }
+      }
       `;
       document.head.appendChild(style);
     }
@@ -46,12 +42,15 @@ export class AnimatedGradientDirective implements OnDestroy {
   
   @HostBinding('style.backgroundImage')
   get bgImg(): string {
-    if (!this.isActive) return 'none';
-    return `linear-gradient(var(--surface-card), var(--surface-card)), linear-gradient(135deg, ${ this.gradientConfiguration.colors!.join(', ') })`;
+    if (!this.isActive) {
+      return 'none';
+    } else {
+      return `linear-gradient(var(--surface-card), var(--surface-card)), linear-gradient(135deg, ${ this.gradientConfiguration.colors!.join(', ') })`;
+    }
   }
   
   @HostBinding('style.animation')
-    get animation(): string {
+  get animation(): string {
     return this.isActive ? 'moveGradient 1s linear infinite' : 'none';
   }
   
@@ -73,6 +72,10 @@ export class AnimatedGradientDirective implements OnDestroy {
   onMouseLeave(): void {
     clearTimeout(this.timerId);
     this.isActive = false;
+  }
+  
+  ngOnDestroy(): void {
+    clearTimeout(this.timerId);
   }
   
 }

@@ -12,21 +12,17 @@ export class PluralPipe implements PipeTransform {
     
     const isTeenExclusion: boolean = remainder100 >= 11 && remainder100 <= 14;
     const endsWithOne: boolean = remainder10 === 1;
-    const endsWithFew = remainder10 >= 2 && remainder10 <= 4;
+    const endsWithFew: boolean = remainder10 >= 2 && remainder10 <= 4;
     
     if (isTeenExclusion) {
-      return `${number} ${thirdFormat}`;
+      return `${ number } ${ thirdFormat }`;
+    } else if (endsWithOne) {
+      return `${ number } ${ firstFormat }`;
+    } else if (endsWithFew) {
+      return `${ number } ${ secondFormat }`;
+    } else {
+      return `${ number } ${ thirdFormat }`;
     }
-
-    if (endsWithOne) {
-      return `${number} ${firstFormat}`;
-    }
-
-    if (endsWithFew) {
-      return `${number} ${secondFormat}`;
-    }
-
-    return `${number} ${thirdFormat}`;
   }
 
 }

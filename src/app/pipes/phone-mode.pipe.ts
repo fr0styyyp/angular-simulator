@@ -22,13 +22,13 @@ export class PhoneModePipe implements PipeTransform {
     
     switch (phoneMode) {
       case PhoneMode.COMPACT:
-        return `+${country}${op}${g1}${g2}${g3}`;
+        return `+${ country }${ op }${ g1 }${ g2 }${ g3 }`;
       case PhoneMode.INTERNATIONAL:
-        return `+${country} ${op} ${g1} ${g2} ${g3}`;
+        return `+${ country } ${ op } ${ g1 } ${ g2 } ${ g3 }`;
       case PhoneMode.NATIONAL:
-        return `${op} ${g1} ${g2} ${g3}`;
+        return `${ op } ${ g1 } ${ g2 } ${ g3 }`;
       case PhoneMode.MASKED:
-        return `+${country} ${op} *** ** ${g3}`;
+        return `+${ country } ${ op } *** ** ${ g3 }`;
       default:
         return clean;
     }
