@@ -1,8 +1,8 @@
-<div class="user">
-  <button (click)="onDeleteClick()">х</button>
+<div class="user" animatedGradient>
+  <button boldOnHover (click)="onDeleteClick()">х</button>
   
   <div class="user-name-container">
-    <span class="name green">{{ user.name }}</span>
+    <span class="name green">{{ user.name | uppercase }}</span>
     <span class="username orange">@{{ user.username }}</span>
   </div>
   
@@ -15,7 +15,7 @@
       </div>
       <div>
         <span class="gray thin">Телефон:</span>
-        <span  class="green bold">{{ user.phone }}</span>
+        <span  class="green bold">{{ user.phone | phoneMode: phoneMode.INTERNATIONAL }}</span>
       </div>
       <div>
         <span class="gray thin">Веб-сайт:</span>

@@ -9,10 +9,11 @@ import { CreateUserComponent } from '../create-user/create-user.component';
 import { UsersFilterComponent } from '../users-filter/users-filter.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowsRotate, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { PluralPipe } from '../app/pipes/plural.pipe';
 
 @Component({
   selector: 'app-users-page',
-  imports: [FormsModule, CommonModule, AsyncPipe, UserCardComponent, CreateUserComponent, FontAwesomeModule, UsersFilterComponent],
+  imports: [FormsModule, CommonModule, AsyncPipe, UserCardComponent, CreateUserComponent, FontAwesomeModule, UsersFilterComponent, PluralPipe],
   templateUrl: './users-page.component.html',
   styleUrl: './users-page.component.scss',
 })
