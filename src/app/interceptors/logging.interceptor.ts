@@ -1,7 +1,7 @@
-import { HttpErrorResponse, HttpEvent, HttpEventType, HttpInterceptorFn } from '@angular/common/http';
-import { finalize, tap } from 'rxjs';
+import { HttpErrorResponse, HttpEvent, HttpEventType, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
+import { finalize, Observable, tap } from 'rxjs';
 
-export const loggingInterceptor: HttpInterceptorFn = (req, next) => {
+export const loggingInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> => {
   const start: number = performance.now();
   let status: number;
   
@@ -17,12 +17,13 @@ export const loggingInterceptor: HttpInterceptorFn = (req, next) => {
       }
     }),
     finalize(() => {
-      console.log(`HTTP метод запроса: ${req.method}`);
-      console.log(`URL запроса: ${req.url}`);
-      console.log(`Статус ответа: ${status}`);
       const end: number = performance.now();
       const duration: number = end - start;
-      console.log(`Время выполнения запроса: ${duration}`);
+      
+      console.log(`HTTP метод запроса: ${ req.method }`);
+      console.log(`URL запроса: ${ req.url }`);
+      console.log(`Статус ответа: ${ status }`);
+      console.log(`Время выполнения запроса: ${ duration.toFixed(2) } мс`);
     })
   );
 };
