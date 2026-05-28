@@ -20,10 +20,12 @@ export const loggingInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>,
       const end: number = performance.now();
       const duration: number = end - start;
       
-      console.log(`HTTP метод запроса: ${ req.method }`);
-      console.log(`URL запроса: ${ req.url }`);
-      console.log(`Статус ответа: ${ status }`);
-      console.log(`Время выполнения запроса: ${ duration.toFixed(2) } мс`);
+      console.log('HTTP Request Info:', {
+        method: req.method,
+        url: req.url,
+        status: status,
+        durationMs: parseFloat(duration.toFixed(2))
+      });
     })
   );
 };
