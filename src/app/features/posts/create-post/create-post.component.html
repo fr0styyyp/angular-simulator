@@ -1,0 +1,42 @@
+<div class="form-container">
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="title">Title</label>
+      <input type="text" id="title" formControlName="title" />
+    </div>
+    
+    <div>
+      <label for="body">Body</label>
+      <input type="text" id="body" formControlName="body" />
+    </div>
+    
+    <div>
+      <label for="tags">Tags</label>
+      <input type="text" id="tags" formControlName="tags" />
+    </div>
+    
+    <ng-container formGroupName="reactions">
+      <div>
+        <label for="likes">Likes</label>
+        <input type="number" id="likes" formControlName="likes" />
+      </div>
+      
+      <div>
+        <label for="dislikes">Dislikes</label>
+        <input type="number" id="dislikes" formControlName="dislikes" />
+      </div>
+    </ng-container>
+    
+    <div>
+      <label for="views">Views</label>
+      <input type="number" id="views" formControlName="views" />
+    </div>
+    
+    <div>
+      <label for="userId">userId</label>
+      <input type="number" id="userId" formControlName="userId" />
+    </div>
+    
+    <button type="submit" [disabled]="postForm.invalid">Создать пост</button>
+  </form>
+</div>

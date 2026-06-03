@@ -1,0 +1,21 @@
+<div class="form-container">
+  <form [formGroup]="editForm" (ngSubmit)="onSave()">
+    <button type="button" (click)="onClose()">Закрыть</button>
+    <div>
+      <label for="title">Title</label>
+      <input type="text" id="title" formControlName="title" />
+    </div>
+    
+    <div>
+      <label for="tags">Tags</label>
+      <input type="text" id="tags" formControlName="tags" />
+    </div>
+    
+    <div>
+      <label for="views">Views</label>
+      <input type="number" id="views" formControlName="views" />
+    </div>
+    
+    <button type="submit" [disabled]="editForm.invalid">Обновить пост</button>
+  </form>
+</div>
