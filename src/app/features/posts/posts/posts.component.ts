@@ -48,9 +48,9 @@ export class PostsComponent implements OnInit {
   
   ngOnInit(): void {
     this.items = [
-      { label: 'View', icon: 'pi pi-fw pi-search', command: () => this.viewPost(this.selectedPost) },
-      { label: 'Delete', icon: 'pi pi-fw pi-times', command: () => this.deletePost(this.selectedPost) },
-      { label: 'Edit', icon: 'pi pi-fw pi-times', command: () => this.editPost(this.selectedPost) },
+      { label: 'View', icon: 'fa-solid fa-magnifying-glass', command: () => this.viewPost(this.selectedPost) },
+      { label: 'Delete', icon: 'fa-solid fa-trash', command: () => this.deletePost(this.selectedPost) },
+      { label: 'Edit', icon: 'fa-solid fa-pen-to-square', command: () => this.editPost(this.selectedPost) },
     ];
   }
   
@@ -93,7 +93,7 @@ export class PostsComponent implements OnInit {
     if (post) {
       this.postApiService.deletePostById(post.id).pipe(
         tap(() => {
-          this.posts = this.posts.filter((p) => p.id !== post.id);
+          this.posts = this.posts.filter((p: IPost) => p.id !== post.id);
           this.messageService.add({ severity: 'error', summary: 'Post Deleted', detail: post.title });
           this.selectedPost = null;
         }),
@@ -115,7 +115,7 @@ export class PostsComponent implements OnInit {
       return;
     }
     
-    const ref = this.dialogService.open(PostEditDialogComponent, {
+      this.dialogService.open(PostEditDialogComponent, {
       header: 'Edit post',
       width: '50vw',
       modal:true,
@@ -124,9 +124,7 @@ export class PostsComponent implements OnInit {
         '640px': '90vw'
       },
       data: { title: post.title, tags: post.tags, views: post.views }
-    });
-    
-    ref?.onClose.pipe(
+    })?.onClose.pipe(
       switchMap((updatedFields: postEditData) => {
         if (!updatedFields) {
           return of();

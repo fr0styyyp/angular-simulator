@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { catchError, of, tap } from 'rxjs';
 import { MessageService } from '../../../message.service';
 import { IPost } from '../interfaces/IPost';
+import { HttpErrorResponse } from '@angular/common/http';
+import { postFormValue } from '../types/postFormValue';
 
 @Component({
   selector: 'app-create-post',
@@ -36,7 +38,7 @@ export class CreatePostComponent {
       return;
     }
     
-    const rawValues: IPostFormValue = this.postForm.value;
+    const rawValues: postFormValue = this.postForm.value;
     const formattedTags: string[] = rawValues.tags.split(',').map((tag: string) => tag.trim()); 
     const postData: IPost = { ...rawValues, tags: formattedTags };
     
@@ -44,11 +46,11 @@ export class CreatePostComponent {
       tap(() => {
         this.router.navigate(['posts']);
       }),
-      catchError((err) => {
-        this.messageService.showError(err);
+      catchError((err: HttpErrorResponse) => {
+        this.messageService.showError(err.message);
         return of([]);
       })
-    ).subscribe()
+    ).subscribe();
   }
   
 }

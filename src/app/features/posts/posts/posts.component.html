@@ -4,19 +4,19 @@
   } @else {
     <p-contextmenu #cm [model]="items" (onHide)="selectedPost = null" />
     <p-table
-    [value]="isDataExist ? posts : artificialArray"
-    [(contextMenuSelection)]="selectedPost"
-    [contextMenu]="cm"
-    dataKey="id"
-    [tableStyle]="{ 'min-width': '50rem' }"
-    [lazy]="true"
-    [paginator]="true"
-    [rows]="rows"
-    [totalRecords]="totalPosts"
-    (onLazyLoad)="loadPosts($event)"
-    [rowsPerPageOptions]="[10, 25, 50]"
-    [showCurrentPageReport]="true"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [value]="isDataExist ? posts : artificialArray"
+      [(contextMenuSelection)]="selectedPost"
+      [contextMenu]="cm"
+      dataKey="id"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      [lazy]="true"
+      [paginator]="true"
+      [rows]="rows"
+      [totalRecords]="totalPosts"
+      (onLazyLoad)="loadPosts($event)"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Showing { first } to { last } of { totalRecords } entries"
     >
       <ng-template #header>
         <tr>
