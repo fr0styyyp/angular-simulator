@@ -1,3 +1,3 @@
 import { IPost } from "../interfaces/IPost";
 
-export type postFormValue = Omit<IPost, 'tags'> & { tags: string };
+export type PostFormValue = Omit<IPost, 'tags'> & { tags: string };

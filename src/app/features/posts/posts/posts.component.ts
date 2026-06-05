@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { PostApiService } from '../services/post-api.service';
 import { IPost } from '../interfaces/IPost';
 import { catchError, of, switchMap, tap } from 'rxjs';
@@ -6,20 +6,20 @@ import { IPostRespone } from '../interfaces/IPostResponse';
 import { SkeletonModule } from 'primeng/skeleton';
 import { TableLazyLoadEvent, TableModule } from 'primeng/table';
 import { Router, RouterLink } from '@angular/router';
-import { MenuItem, MessageService } from 'primeng/api';
+import { MenuItem } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { ContextMenuModule } from 'primeng/contextmenu';
-import { DialogService, DynamicDialogModule, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { PostEditDialogComponent } from '../post-edit-dialog/post-edit-dialog.component';
-import { postEditData } from '../types/postEditData';
-import { IPostEditFormValue } from '../interfaces/IPostEditFormValue';
+import { PostEditData } from '../types/PostEditData';
+import { MessageService } from '../../../message.service';
 
 @Component({
   selector: 'app-posts',
   imports: [SkeletonModule, TableModule, ToastModule, ContextMenuModule, RouterLink, DynamicDialogModule],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss',
-  providers: [MessageService, DialogService]
+  providers: [ DialogService]
 })
 export class PostsComponent implements OnInit {
   
@@ -65,11 +65,7 @@ export class PostsComponent implements OnInit {
         this.totalPosts = data.total
       }),
       catchError((error: Error) => {
-        this.messageService.add({ 
-          severity: 'error', 
-          summary: 'Ошибка загрузки постов', 
-          detail: error.message 
-        });
+        this.messageService.showError(error.message);
         this.errorMessage = error.message;
         this.isDataExist = true;
         this.posts = [];
@@ -84,7 +80,7 @@ export class PostsComponent implements OnInit {
   
   viewPost(post: IPost | null): void {
     if (post) {
-      this.messageService.add({ severity: 'info', summary: 'Post Selected', detail: post.title });
+      this.messageService.showInfo('Post Selected');
       this.onRowDblClick(post.id);
     }
   }
@@ -94,15 +90,11 @@ export class PostsComponent implements OnInit {
       this.postApiService.deletePostById(post.id).pipe(
         tap(() => {
           this.posts = this.posts.filter((p: IPost) => p.id !== post.id);
-          this.messageService.add({ severity: 'error', summary: 'Post Deleted', detail: post.title });
+          this.messageService.showInfo('Post Deleted');
           this.selectedPost = null;
         }),
         catchError((error: Error) => {
-          this.messageService.add({ 
-            severity: 'error', 
-            summary: 'Ошибка удаления', 
-            detail: error.message 
-          });
+          this.messageService.showError(error.message);
           
           return of([]);
         })
@@ -125,7 +117,7 @@ export class PostsComponent implements OnInit {
       },
       data: { title: post.title, tags: post.tags, views: post.views }
     })?.onClose.pipe(
-      switchMap((updatedFields: postEditData) => {
+      switchMap((updatedFields: PostEditData) => {
         if (!updatedFields) {
           return of();
         }
@@ -139,19 +131,11 @@ export class PostsComponent implements OnInit {
             p.id === post.id ? { ...p, ...updatedFields } : p
           );
           
-          this.messageService.add({
-            severity: 'success', 
-            summary: 'Post Updated', 
-            detail: updatedFields.title
-          });
+          this.messageService.showInfo('Post Updated');
         }
       }),
       catchError((error: Error) => {
-        this.messageService.add({ 
-          severity: 'error', 
-          summary: 'Ошибка изменения', 
-          detail: error.message 
-        });
+        this.messageService.showError(error.message);
         
         return of([]);
       })

@@ -6,7 +6,7 @@ import { catchError, of, tap } from 'rxjs';
 import { MessageService } from '../../../message.service';
 import { IPost } from '../interfaces/IPost';
 import { HttpErrorResponse } from '@angular/common/http';
-import { postFormValue } from '../types/postFormValue';
+import { PostFormValue } from '../types/postFormValue';
 
 @Component({
   selector: 'app-create-post',
@@ -38,7 +38,7 @@ export class CreatePostComponent {
       return;
     }
     
-    const rawValues: postFormValue = this.postForm.value;
+    const rawValues: PostFormValue = this.postForm.value;
     const formattedTags: string[] = rawValues.tags.split(',').map((tag: string) => tag.trim()); 
     const postData: IPost = { ...rawValues, tags: formattedTags };
     
