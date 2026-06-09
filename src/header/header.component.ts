@@ -7,8 +7,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faMoon, faSun, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FormsModule } from '@angular/forms';
 import { SelectButtonModule } from 'primeng/selectbutton';
-import { SelectOption } from '../app/interfaces/ISelectOption';
-import { Theme } from '../enums/Theme';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
@@ -35,6 +33,7 @@ export class HeaderComponent {
   navItems: INavItem[] = [
     { label: 'Главная', path: '/' },
     { label: 'Пользователи', path: '/users' },
+    { label: 'Посты', path: '/posts' }
   ];
   
   constructor() {

@@ -17,6 +17,9 @@ export const errorInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, n
       if (errorStatus >= 500) {
         messageService.showError('Внутренняя ошибка сервера. Попробуйте позже');
       }
+      if (errorStatus >= 400) {
+        messageService.showError('Неправильный URL или отсутствие прав')
+      }
       
       return throwError(() => error);
     })
