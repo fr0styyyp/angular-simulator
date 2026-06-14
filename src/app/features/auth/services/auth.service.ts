@@ -1,9 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { IAuthUser } from '../interfaces/IAuthUser';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IAuthResponse } from '../interfaces/IAuthResponse';
 import { Router } from '@angular/router';
+import { LocalStorageService } from '../../../local-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,43 +13,43 @@ export class AuthService {
   
   private http: HttpClient = inject(HttpClient);
   private router: Router = inject(Router);
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
   
-  private authSubject: BehaviorSubject<IAuthUser | null> = new BehaviorSubject<IAuthUser | null>(null);
-  auth$: Observable<IAuthUser | null> = this.authSubject.asObservable();
+  private authUserSubject: BehaviorSubject<IAuthUser | null> = new BehaviorSubject<IAuthUser | null>(null);
+  authUser$: Observable<IAuthUser | null> = this.authUserSubject.asObservable();
   
   constructor() {
-    const user: string | null = localStorage.getItem('user');
+    const user: IAuthUser | null = this.localStorageService.getItem<IAuthUser>('user');
     if (user) {
-      this.authSubject.next(JSON.parse(user));
+      this.authUserSubject.next(user);
     }
   }
   
   login(username: string, password: string): Observable<IAuthResponse> {
-    return this.http.post<IAuthResponse>('https://dummyjson.com/auth/login', {username, password}).pipe(
+    return this.http.post<IAuthResponse>('https://dummyjson.com/auth/login', { username, password }).pipe(
       tap((res: IAuthResponse) => {
-        this.authSubject.next(res);
-        localStorage.setItem('accessToken', res.accessToken);
-        localStorage.setItem('refreshToken', res.refreshToken);
-        const formattedRes: string = JSON.stringify(res);
-        localStorage.setItem('user', formattedRes);
+        this.localStorageService.setItem('accessToken', res.accessToken);
+        this.localStorageService.setItem('refreshToken', res.refreshToken);
+        this.authUserSubject.next(res);
+        this.localStorageService.setItem('user', res);
       })
     );
   }
   
   logout(): void {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    localStorage.removeItem('user');
-    this.authSubject.next(null);
+    this.localStorageService.removeItem('accessToken');
+    this.localStorageService.removeItem('refreshToken');
+    this.localStorageService.removeItem('user');
+    this.authUserSubject.next(null);
     this.router.navigate(['/login']);
   }
   
   refreshToken(): Observable<IAuthResponse> {
-    const refreshToken: string | null = localStorage.getItem('refreshToken');
-    return this.http.post<IAuthResponse>('https://dummyjson.com/auth/refresh', {refreshToken}).pipe(
+    const refreshToken: string | null = this.localStorageService.getItem('refreshToken');
+    return this.http.post<IAuthResponse>('https://dummyjson.com/auth/refresh', { refreshToken }).pipe(
       tap((res: IAuthResponse) => {
-        localStorage.setItem('accessToken', res.accessToken);
-        localStorage.setItem('refreshToken', res.refreshToken);
+        this.localStorageService.setItem('accessToken', res.accessToken);
+        this.localStorageService.setItem('refreshToken', res.refreshToken);
       })
     )
   }

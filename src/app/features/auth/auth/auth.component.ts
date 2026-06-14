@@ -30,8 +30,8 @@ export class AuthComponent {
   onSubmit(): void {
     if (this.loginForm.valid) {
       this.isLoading = true;
-      const formValues = this.loginForm.value;
-      this.authService.login(formValues.username, formValues.password).pipe(
+      const formValues: Record<string, string> = this.loginForm.value;
+      this.authService.login(formValues['username'], formValues['password']).pipe(
         tap((res: IAuthResponse) => {
           this.router.navigate(['/']);
           this.isLoading = false;

@@ -1,4 +1,4 @@
 import { IAuthUser } from "./IAuthUser";
-import { ITokens } from "./ITokens";
+import { IToken } from "./IToken";
 
-export interface IAuthResponse extends IAuthUser, ITokens {}
+export interface IAuthResponse extends IAuthUser, IToken {}

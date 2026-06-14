@@ -30,7 +30,7 @@
     </p-selectButton>
     
     <nav class="navigation">
-      @if (authService.auth$ | async; as user) {
+      @if (authService.authUser$ | async; as user) {
         @for (navItem of navItems; track navItem.path) {
           <a
             [routerLink]="navItem.path"

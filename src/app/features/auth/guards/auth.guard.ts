@@ -2,15 +2,19 @@ import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } fr
 import { AuthService } from '../services/auth.service';
 import { inject } from '@angular/core';
 import { map, take } from 'rxjs';
+import { IAuthUser } from '../interfaces/IAuthUser';
+import { LocalStorageService } from '../../../local-storage.service';
 
 export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const authService: AuthService = inject(AuthService);
   const router: Router = inject(Router);
+  const localStorageService: LocalStorageService = inject(LocalStorageService);
   
-  return authService.auth$.pipe(
+  return authService.authUser$.pipe(
     take(1),
-    map((user) => {
-      if (user && localStorage.getItem('accessToken')) {
+    map((user: IAuthUser | null) => {
+      const isAuthenticated: boolean = !!user && !!localStorageService.getItem('accessToken');
+      if (isAuthenticated) {
         return true;
       } else {
         return router.createUrlTree(['/login']);
