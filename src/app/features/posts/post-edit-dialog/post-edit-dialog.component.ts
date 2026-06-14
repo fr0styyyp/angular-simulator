@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { postEditData } from '../types/PostEditData';
+import { postEditData } from '../types/postEditData';
 import { IPostEditFormValue } from '../interfaces/IPostEditFormValue';
 
 @Component({

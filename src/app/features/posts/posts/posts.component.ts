@@ -11,15 +11,15 @@ import { ToastModule } from 'primeng/toast';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { PostEditDialogComponent } from '../post-edit-dialog/post-edit-dialog.component';
-import { PostEditData } from '../types/PostEditData';
+import { postEditData } from '../types/postEditData';
 import { MessageService } from '../../../message.service';
 
 @Component({
   selector: 'app-posts',
-  imports: [SkeletonModule, TableModule, ToastModule, ContextMenuModule, RouterLink, DynamicDialogModule],
+  imports: [SkeletonModule, TableModule, ContextMenuModule, RouterLink, DynamicDialogModule],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss',
-  providers: [ DialogService]
+  providers: [DialogService]
 })
 export class PostsComponent implements OnInit {
   
@@ -117,7 +117,7 @@ export class PostsComponent implements OnInit {
       },
       data: { title: post.title, tags: post.tags, views: post.views }
     })?.onClose.pipe(
-      switchMap((updatedFields: PostEditData) => {
+      switchMap((updatedFields: postEditData) => {
         if (!updatedFields) {
           return of();
         }

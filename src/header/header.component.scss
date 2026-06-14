@@ -110,24 +110,42 @@
       }
     }
     
-    .navigation a {
-      margin-left: 24px;
-      color: var(--secondary-text-color);
-    }
-    
-    .navigation button {
-      margin-left: 49px;
-      padding: 12px 24px;
-      font-weight: 600;
-      font-style: 'SemiBold';
-      font-size: 16px;
-      line-height: 20px;
-      letter-spacing: 1.2%;
-      color: var(--main-text-color);
-      background: var(--secondary-color-btn);
-      border: 0px;
-      border-radius: 4px;
-      cursor: pointer;
+    .navigation {
+      
+      .logout-btn {
+        margin-left: 49px;
+        padding: 12px 24px;
+        font-weight: 600;
+        font-style: 'SemiBold';
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: 1.2%;
+        color: var(--main-text-color);
+        background: var(--secondary-color-btn);
+        border: 0px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      
+      a {
+        margin-left: 24px;
+        color: var(--secondary-text-color);
+      }
+      
+      .consult-btn {
+        margin-left: 49px;
+        padding: 12px 24px;
+        font-weight: 600;
+        font-style: 'SemiBold';
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: 1.2%;
+        color: var(--main-text-color);
+        background: var(--secondary-color-btn);
+        border: 0px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
     }
   }
 }
