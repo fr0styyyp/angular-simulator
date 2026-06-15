@@ -18,11 +18,21 @@ export class AuthService {
   private authUserSubject: BehaviorSubject<IAuthUser | null> = new BehaviorSubject<IAuthUser | null>(null);
   authUser$: Observable<IAuthUser | null> = this.authUserSubject.asObservable();
   
-  constructor() {
-    const user: IAuthUser | null = this.localStorageService.getItem<IAuthUser>('user');
-    if (user) {
-      this.authUserSubject.next(user);
+  initializeApp(): Observable<IAuthUser | null> {
+    const token: string | null = this.localStorageService.getItem('accessToken');
+    if (token) {
+      return this.http.get<IAuthUser>('https://dummyjson.com/auth/me').pipe(
+        tap((user: IAuthUser) => {
+          this.authUserSubject.next(user);
+        }),
+        catchError(() => {
+          this.authUserSubject.next(null);
+          return of(null);
+        })
+      );
     }
+    
+    return of(null);
   }
   
   login(username: string, password: string): Observable<IAuthResponse> {
@@ -31,7 +41,6 @@ export class AuthService {
         this.localStorageService.setItem('accessToken', res.accessToken);
         this.localStorageService.setItem('refreshToken', res.refreshToken);
         this.authUserSubject.next(res);
-        this.localStorageService.setItem('user', res);
       })
     );
   }
@@ -39,7 +48,6 @@ export class AuthService {
   logout(): void {
     this.localStorageService.removeItem('accessToken');
     this.localStorageService.removeItem('refreshToken');
-    this.localStorageService.removeItem('user');
     this.authUserSubject.next(null);
     this.router.navigate(['/login']);
   }

@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import { APP_INITIALIZER, ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -13,6 +13,8 @@ import { AuraBaseDesignTokens } from '@primeuix/themes/aura/base';
 import { Preset } from '@primeuix/themes/types';
 import { loggingInterceptor } from './interceptors/logging.interceptor';
 import { errorInterceptor } from './interceptors/error.interceptor';
+import { AuthService } from './features/auth/services/auth.service';
+import { authReqInterceptor } from './features/auth/interceptors/auth-req.interceptor';
 
 function getInitialPreset(): Preset<AuraBaseDesignTokens> {
   const savedData: string | null = localStorage.getItem('app-theme-settings');
@@ -36,7 +38,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideZoneChangeDetection(),
-    provideHttpClient(withInterceptors([loggingInterceptor, errorInterceptor])),
+    provideHttpClient(withInterceptors([authReqInterceptor, loggingInterceptor, errorInterceptor])),
     providePrimeNG({
       theme: {
         preset: getInitialPreset(),
@@ -44,6 +46,12 @@ export const appConfig: ApplicationConfig = {
           darkModeSelector: '.my-app-dark'
         }
       }
-    })
+    }),
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (authService: AuthService) => () => authService.initializeApp(),
+      deps: [AuthService],
+      multi: true
+    }
   ]
 };
