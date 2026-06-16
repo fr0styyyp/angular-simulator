@@ -1,9 +1,15 @@
-<app-header></app-header>
-
-<main>
-  <router-outlet></router-outlet>
-</main>
-
-<app-footer></app-footer>
+@if (authService.authUser$ | async; as user) {
+  <app-header></app-header>
+  
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+  
+  <app-footer></app-footer>
+} @else {
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+}
 <app-loader></app-loader>
 <app-message></app-message>

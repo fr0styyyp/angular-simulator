@@ -30,22 +30,17 @@
     </p-selectButton>
     
     <nav class="navigation">
-      @if (authService.authUser$ | async; as user) {
-        @for (navItem of navItems; track navItem.path) {
-          <a
-            [routerLink]="navItem.path"
-            routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{ exact: navItem.path === '/' }"
-            >
-            {{ navItem.label }}
-          </a>
-        }
-        <button id="logout-btn" class="logout-btn" (click)="logout()">logout</button>
-        <p>авторизован</p>
-      } @else {
-        <p>не авторизован</p>
-        <a routerLink="/login" class="login-btn" routerLinkActive="active-link">login</a>
+      @for (navItem of navItems; track navItem.path) {
+        <a
+          [routerLink]="navItem.path"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: navItem.path === '/' }"
+          >
+          {{ navItem.label }}
+        </a>
       }
+      <button id="logout-btn" class="logout-btn" (click)="logout()">logout</button>
+      <p>авторизован</p>
       <button id="consult-btn" class="consult-btn">Консультация</button>
     </nav>
     

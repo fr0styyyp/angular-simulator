@@ -13,8 +13,7 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
   return authService.authUser$.pipe(
     take(1),
     map((user: IAuthUser | null) => {
-      const isAuthenticated: boolean = !!user && !!localStorageService.getItem('accessToken');
-      if (isAuthenticated) {
+      if (user) {
         return true;
       } else {
         return router.createUrlTree(['/login']);

@@ -12,6 +12,7 @@ import { HeaderComponent } from '../header/header.component';
 import { MessageComponent } from '../message/message.component';
 import { LoaderService } from './loader.service';
 import { LoaderComponent } from "../loader/loader.component";
+import { AuthService } from './features/auth/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +24,7 @@ export class AppComponent {
   
   private localStorageService: LocalStorageService = inject(LocalStorageService);
   loaderService: LoaderService = inject(LoaderService);
+  authService: AuthService = inject(AuthService);
   
   messageType: typeof Message = Message;
   tours: Collection<string> = new Collection<string>();
