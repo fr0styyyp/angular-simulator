@@ -11,11 +11,11 @@ export const authReqInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>,
   const localStorageService: LocalStorageService = inject(LocalStorageService);
   
   const tokens: IToken | null = localStorageService.getItem<IToken>('authTokens');
-  const token = tokens?.accessToken;
-  if (token) {
+  const accessToken: string | undefined = tokens?.accessToken;
+  if (accessToken) {
     const authReq: HttpRequest<unknown> = req.clone({
       setHeaders: {
-        Authorization: `Bearer ${ token }`
+        Authorization: `Bearer ${ accessToken }`
       }
     });
     return next(authReq).pipe(

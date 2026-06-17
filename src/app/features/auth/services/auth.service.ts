@@ -19,13 +19,13 @@ export class AuthService {
   private authUserSubject: BehaviorSubject<IAuthUser | null> = new BehaviorSubject<IAuthUser | null>(null);
   authUser$: Observable<IAuthUser | null> = this.authUserSubject.asObservable();
   
-  private readonly authUrl: string = 'https://dummyjson.com/auth';
+  private readonly apiUrl: string = 'https://dummyjson.com/auth';
   
   initializeApp(): Observable<IAuthUser | null> {
     const tokens: IToken | null = this.localStorageService.getItem<IToken>('authTokens');
     
     if (tokens?.accessToken) {
-      return this.http.get<IAuthUser>(`${ this.authUrl }/me`).pipe(
+      return this.http.get<IAuthUser>(`${ this.apiUrl }/me`).pipe(
         tap((user: IAuthUser) => this.authUserSubject.next(user)),
         catchError(() => {
           this.authUserSubject.next(null);
@@ -38,7 +38,7 @@ export class AuthService {
   }
   
   login(username: string, password: string): Observable<IAuthResponse> {
-    return this.http.post<IAuthResponse>(`${ this.authUrl }/login`, { username, password }).pipe(
+    return this.http.post<IAuthResponse>(`${ this.apiUrl }/login`, { username, password }).pipe(
       tap((res: IAuthResponse) => {
         const tokens: IToken = { accessToken: res.accessToken, refreshToken: res.refreshToken };
         this.localStorageService.setItem('authTokens', tokens);
@@ -55,10 +55,10 @@ export class AuthService {
   
   refreshToken(): Observable<IAuthResponse> {
     const tokens: IToken | null = this.localStorageService.getItem<IToken>('authTokens');
-    const refreshToken = tokens?.refreshToken;
-    return this.http.post<IAuthResponse>(`${ this.authUrl }/refresh`, { refreshToken }).pipe(
+    const refreshToken: string | undefined = tokens?.refreshToken;
+    return this.http.post<IAuthResponse>(`${ this.apiUrl }/refresh`, { refreshToken }).pipe(
       tap((res: IAuthResponse) => {
-        const updatedTokens = { accessToken: res.accessToken, refreshToken: res.refreshToken };
+        const updatedTokens: IToken = { accessToken: res.accessToken, refreshToken: res.refreshToken };
         this.localStorageService.setItem('authTokens', updatedTokens);
       })
     )
