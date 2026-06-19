@@ -38,7 +38,7 @@ export class AuthService {
   }
   
   getUserById(id: number): Observable<IAuthUser> {
-    return this.http.get<IAuthUser>(`${ this.apiUrl }/users/${ id }`)
+    return this.http.get<IAuthUser>(`${ this.apiUrl }/users/${ id }`);
   }
   
   login(username: string, password: string): Observable<IAuthUser> {
