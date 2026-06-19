@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { IAuthUser } from '../interfaces/IAuthUser';
-import { BehaviorSubject, catchError, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IAuthResponse } from '../interfaces/IAuthResponse';
 import { Router } from '@angular/router';
@@ -19,13 +19,13 @@ export class AuthService {
   private authUserSubject: BehaviorSubject<IAuthUser | null> = new BehaviorSubject<IAuthUser | null>(null);
   authUser$: Observable<IAuthUser | null> = this.authUserSubject.asObservable();
   
-  private readonly apiUrl: string = 'https://dummyjson.com/auth';
+  private readonly apiUrl: string = 'https://dummyjson.com';
   
   initializeApp(): Observable<IAuthUser | null> {
     const tokens: IToken | null = this.localStorageService.getItem<IToken>('authTokens');
     
     if (tokens?.accessToken) {
-      return this.http.get<IAuthUser>(`${ this.apiUrl }/me`).pipe(
+      return this.http.get<IAuthUser>(`${ this.apiUrl }/auth/me`).pipe(
         tap((user: IAuthUser) => this.authUserSubject.next(user)),
         catchError(() => {
           this.authUserSubject.next(null);
@@ -37,12 +37,16 @@ export class AuthService {
     return of(null);
   }
   
-  login(username: string, password: string): Observable<IAuthResponse> {
-    return this.http.post<IAuthResponse>(`${ this.apiUrl }/login`, { username, password }).pipe(
+  login(username: string, password: string): Observable<IAuthUser> {
+    return this.http.post<IAuthResponse>(`${ this.apiUrl }/auth/login`, { username, password }).pipe(
       tap((res: IAuthResponse) => {
         const tokens: IToken = { accessToken: res.accessToken, refreshToken: res.refreshToken };
         this.localStorageService.setItem('authTokens', tokens);
-        this.authUserSubject.next(res);
+      }),
+      switchMap((res: IAuthResponse) => {
+        return this.http.get<IAuthUser>(`${ this.apiUrl }/users/${ res.id }`).pipe(
+          tap((user: IAuthUser) => this.authUserSubject.next(user))
+        );
       })
     );
   }
@@ -56,7 +60,7 @@ export class AuthService {
   refreshToken(): Observable<IAuthResponse> {
     const tokens: IToken | null = this.localStorageService.getItem<IToken>('authTokens');
     const refreshToken: string | undefined = tokens?.refreshToken;
-    return this.http.post<IAuthResponse>(`${ this.apiUrl }/refresh`, { refreshToken }).pipe(
+    return this.http.post<IAuthResponse>(`${ this.apiUrl }/auth/refresh`, { refreshToken }).pipe(
       tap((res: IAuthResponse) => {
         const updatedTokens: IToken = { accessToken: res.accessToken, refreshToken: res.refreshToken };
         this.localStorageService.setItem('authTokens', updatedTokens);

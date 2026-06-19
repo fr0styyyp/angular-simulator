@@ -6,6 +6,7 @@ import { IAuthResponse } from '../interfaces/IAuthResponse';
 import { catchError, tap, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MessageService } from '../../../message.service';
+import { IAuthUser } from '../interfaces/IAuthUser';
 
 @Component({
   selector: 'app-auth',
@@ -32,7 +33,7 @@ export class AuthComponent {
       this.isLoading = true;
       const formValues: Record<'username' | 'password', string> = this.loginForm.value;
       this.authService.login(formValues.username, formValues.password).pipe(
-        tap((res: IAuthResponse) => {
+        tap((res: IAuthUser) => {
           this.router.navigate(['/']);
           this.isLoading = false;
         }),
