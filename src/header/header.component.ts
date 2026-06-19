@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { INavItem } from '../app/interfaces/INavItem';
 import { ThemeService } from '../app/theme.service';
 import { ToggleSwitch } from 'primeng/toggleswitch';
@@ -8,6 +8,7 @@ import { faMoon, faSun, IconDefinition } from '@fortawesome/free-solid-svg-icons
 import { FormsModule } from '@angular/forms';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { AsyncPipe } from '@angular/common';
+import { AuthService } from '../app/features/auth/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -18,6 +19,8 @@ import { AsyncPipe } from '@angular/common';
 export class HeaderComponent {
   
   themeService: ThemeService = inject(ThemeService);
+  authService: AuthService = inject(AuthService);
+  router: Router = inject(Router);
   
   readonly companyName: string = 'Румтибет';
   currentDate: Date = new Date();
@@ -40,6 +43,10 @@ export class HeaderComponent {
     setInterval(() => {
       this.currentDate = new Date();
     }, 1000);
+  }
+  
+  logout(): void {
+    this.authService.logout();
   }
   
   isFormValid(): boolean {
