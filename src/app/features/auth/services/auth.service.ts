@@ -37,17 +37,18 @@ export class AuthService {
     return of(null);
   }
   
+  getUserById(id: number): Observable<IAuthUser> {
+    return this.http.get<IAuthUser>(`${ this.apiUrl }/users/${ id }`)
+  }
+  
   login(username: string, password: string): Observable<IAuthUser> {
     return this.http.post<IAuthResponse>(`${ this.apiUrl }/auth/login`, { username, password }).pipe(
       tap((res: IAuthResponse) => {
         const tokens: IToken = { accessToken: res.accessToken, refreshToken: res.refreshToken };
         this.localStorageService.setItem('authTokens', tokens);
       }),
-      switchMap((res: IAuthResponse) => {
-        return this.http.get<IAuthUser>(`${ this.apiUrl }/users/${ res.id }`).pipe(
-          tap((user: IAuthUser) => this.authUserSubject.next(user))
-        );
-      })
+      switchMap((res: IAuthResponse) => this.getUserById(res.id)),
+      tap((user: IAuthUser) => this.authUserSubject.next(user))
     );
   }
   
