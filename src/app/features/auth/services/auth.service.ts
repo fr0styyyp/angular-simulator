@@ -19,13 +19,13 @@ export class AuthService {
   private authUserSubject: BehaviorSubject<IAuthUser | null> = new BehaviorSubject<IAuthUser | null>(null);
   authUser$: Observable<IAuthUser | null> = this.authUserSubject.asObservable();
   
-  private readonly apiUrl: string = 'https://dummyjson.com';
+  private readonly apiUrl: string = 'https://dummyjson.com/auth';
   
   initializeApp(): Observable<IAuthUser | null> {
     const tokens: IToken | null = this.localStorageService.getItem<IToken>('authTokens');
     
     if (tokens?.accessToken) {
-      return this.http.get<IAuthUser>(`${ this.apiUrl }/auth/me`).pipe(
+      return this.http.get<IAuthUser>(`${ this.apiUrl }/me`).pipe(
         tap((user: IAuthUser) => this.authUserSubject.next(user)),
         catchError(() => {
           this.authUserSubject.next(null);
@@ -37,17 +37,17 @@ export class AuthService {
     return of(null);
   }
   
-  getUserById(id: number): Observable<IAuthUser> {
-    return this.http.get<IAuthUser>(`${ this.apiUrl }/users/${ id }`);
+  getUser(): Observable<IAuthUser> {
+    return this.http.get<IAuthUser>(`${ this.apiUrl }/me`);
   }
   
   login(username: string, password: string): Observable<IAuthUser> {
-    return this.http.post<IAuthResponse>(`${ this.apiUrl }/auth/login`, { username, password }).pipe(
+    return this.http.post<IAuthResponse>(`${ this.apiUrl }/login`, { username, password }).pipe(
       tap((res: IAuthResponse) => {
         const tokens: IToken = { accessToken: res.accessToken, refreshToken: res.refreshToken };
         this.localStorageService.setItem('authTokens', tokens);
       }),
-      switchMap((res: IAuthResponse) => this.getUserById(res.id)),
+      switchMap(() => this.getUser()),
       tap((user: IAuthUser) => this.authUserSubject.next(user))
     );
   }
@@ -61,7 +61,7 @@ export class AuthService {
   refreshToken(): Observable<IAuthResponse> {
     const tokens: IToken | null = this.localStorageService.getItem<IToken>('authTokens');
     const refreshToken: string | undefined = tokens?.refreshToken;
-    return this.http.post<IAuthResponse>(`${ this.apiUrl }/auth/refresh`, { refreshToken }).pipe(
+    return this.http.post<IAuthResponse>(`${ this.apiUrl }/refresh`, { refreshToken }).pipe(
       tap((res: IAuthResponse) => {
         const updatedTokens: IToken = { accessToken: res.accessToken, refreshToken: res.refreshToken };
         this.localStorageService.setItem('authTokens', updatedTokens);
