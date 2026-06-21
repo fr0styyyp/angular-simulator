@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { IAuthUser } from '../interfaces/IAuthUser';
-import { BehaviorSubject, catchError, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IAuthResponse } from '../interfaces/IAuthResponse';
 import { Router } from '@angular/router';
@@ -37,13 +37,18 @@ export class AuthService {
     return of(null);
   }
   
-  login(username: string, password: string): Observable<IAuthResponse> {
+  getCurrentProfile(): Observable<IAuthUser> {
+    return this.http.get<IAuthUser>(`${ this.apiUrl }/me`);
+  }
+  
+  login(username: string, password: string): Observable<IAuthUser> {
     return this.http.post<IAuthResponse>(`${ this.apiUrl }/login`, { username, password }).pipe(
       tap((res: IAuthResponse) => {
         const tokens: IToken = { accessToken: res.accessToken, refreshToken: res.refreshToken };
         this.localStorageService.setItem('authTokens', tokens);
-        this.authUserSubject.next(res);
-      })
+      }),
+      switchMap(() => this.getCurrentProfile()),
+      tap((user: IAuthUser) => this.authUserSubject.next(user))
     );
   }
   

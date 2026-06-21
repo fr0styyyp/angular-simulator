@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { postResolver } from './features/posts/resolvers/post.resolver';
 import { authGuard } from './features/auth/guards/auth.guard';
+import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
   {
@@ -26,8 +27,8 @@ export const routes: Routes = [
         loadComponent: () => import('./features/posts/posts/posts.component').then(m => m.PostsComponent),
       },
     ],
-    canActivate: [authGuard],
-    canActivateChild: [authGuard],
+    canActivate: [authGuard, adminGuard],
+    canActivateChild: [authGuard, adminGuard],
   },
   {
     path: '',
@@ -37,7 +38,7 @@ export const routes: Routes = [
   {
     path: 'users',
     loadComponent: () => import('../users-page/users-page.component').then(m => m.UsersPageComponent),
-    canActivate: [authGuard]
+    canActivate: [authGuard, adminGuard]
   },
   {
     path: '**',
