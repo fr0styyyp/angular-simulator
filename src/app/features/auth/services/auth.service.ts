@@ -37,7 +37,7 @@ export class AuthService {
     return of(null);
   }
   
-  getUser(): Observable<IAuthUser> {
+  getCurrentProfile(): Observable<IAuthUser> {
     return this.http.get<IAuthUser>(`${ this.apiUrl }/me`);
   }
   
@@ -47,7 +47,7 @@ export class AuthService {
         const tokens: IToken = { accessToken: res.accessToken, refreshToken: res.refreshToken };
         this.localStorageService.setItem('authTokens', tokens);
       }),
-      switchMap(() => this.getUser()),
+      switchMap(() => this.getCurrentProfile()),
       tap((user: IAuthUser) => this.authUserSubject.next(user))
     );
   }
