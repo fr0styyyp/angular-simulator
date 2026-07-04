@@ -1,3 +1,3 @@
-import { IPost } from "../interfaces/IPost";
+import { IPost } from '../interfaces/IPost';
 
 export type postEditData = Pick<IPost, 'title' | 'tags' | 'views'>;

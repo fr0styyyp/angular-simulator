@@ -12,14 +12,14 @@ export class PhoneModePipe implements PipeTransform {
     if (clean.length < 10) {
       return clean;
     }
-    
+
     const body: string = clean.slice(-7);
     const op: string = clean.slice(-10, -7);
-    const country: string = clean.slice(0, -10)
+    const country: string = clean.slice(0, -10);
     const g1: string = body.slice(0, 3);
     const g2: string = body.slice(3, 5);
     const g3: string = body.slice(5, 7);
-    
+
     switch (phoneMode) {
       case PhoneMode.COMPACT:
         return `+${ country }${ op }${ g1 }${ g2 }${ g3 }`;

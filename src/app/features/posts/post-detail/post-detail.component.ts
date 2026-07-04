@@ -9,13 +9,13 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './post-detail.component.scss',
 })
 export class PostDetailComponent implements OnInit {
-  
-  route: ActivatedRoute = inject(ActivatedRoute)
-  
+
+  route: ActivatedRoute = inject(ActivatedRoute);
+
   post!: IPost;
-  
+
   ngOnInit(): void {
     this.post = this.route.snapshot.data['post'];
   }
-  
+
 }

@@ -14,10 +14,10 @@ import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
   styleUrl: './message.component.scss',
 })
 export class MessageComponent {
-  
+
   messageService: MessageService = inject(MessageService);
   messages$: Observable<IMessage[]> = this.messageService.messages$;
   faEnvelope: IconDefinition = faEnvelope;
   faCircleXmark: IconDefinition = faCircleXmark;
-  
+
 }

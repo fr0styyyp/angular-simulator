@@ -17,7 +17,7 @@ interface IAddress {
   geo: {
     lat: string;
     lng: string;
-  }
+  };
 }
 
 interface ICompany {

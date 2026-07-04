@@ -12,43 +12,51 @@ import { AuthService } from '../app/features/auth/services/auth.service';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive, FontAwesomeModule, ToggleSwitch, FormsModule, SelectButtonModule, AsyncPipe],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    FontAwesomeModule,
+    ToggleSwitch,
+    FormsModule,
+    SelectButtonModule,
+    AsyncPipe,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  
+
   themeService: ThemeService = inject(ThemeService);
   authService: AuthService = inject(AuthService);
   router: Router = inject(Router);
-  
+
   readonly companyName: string = 'Румтибет';
   currentDate: Date = new Date();
-  counter: number = 0;
-  isTimerVisible: boolean = true;
-  liveTextInput: string = '';
+  counter = 0;
+  isTimerVisible = true;
+  liveTextInput = '';
   selectedDirection!: string;
   selectedDate!: string;
   participantsCount: number | null = null;
   faSun: IconDefinition = faSun;
   faMoon: IconDefinition = faMoon;
-  
+
   navItems: INavItem[] = [
     { label: 'Главная', path: '/' },
     { label: 'Пользователи', path: '/users' },
-    { label: 'Посты', path: '/posts' }
+    { label: 'Посты', path: '/posts' },
   ];
-  
+
   constructor() {
     setInterval(() => {
       this.currentDate = new Date();
     }, 1000);
   }
-  
+
   logout(): void {
     this.authService.logout();
   }
-  
+
   isFormValid(): boolean {
     return !!(
       this.selectedDate &&
@@ -57,19 +65,19 @@ export class HeaderComponent {
       this.participantsCount >= 4
     );
   }
-  
+
   onIncrementCounter(): void {
     this.counter++;
   }
-  
+
   onDecrementCounter(): void {
     if (this.counter > 0) {
       this.counter--;
     }
   }
-  
+
   onToggleTimerVisibility(): void {
     this.isTimerVisible = !this.isTimerVisible;
   }
-  
+
 }
