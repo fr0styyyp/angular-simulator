@@ -19,7 +19,7 @@ export class AuthComponent {
   private router: Router = inject(Router);
   private messageService: MessageService = inject(MessageService);
 
-  isLoading = false;
+  isLoading: boolean = false;
 
   loginForm: FormGroup = this.fb.nonNullable.group({
     username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(25)]],

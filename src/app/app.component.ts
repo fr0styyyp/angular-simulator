@@ -37,7 +37,7 @@ export class AppComponent {
   tours: Collection<string> = new Collection<string>();
   prices: Collection<number> = new Collection<number>();
   currentDate: Date = new Date();
-  counter = 0;
+  counter: number = 0;
 
   constructor() {
     this.setLastVisitDate();

@@ -28,12 +28,12 @@ export class PostsComponent implements OnInit {
   private dialogService: DialogService = inject(DialogService);
 
   totalPosts!: number;
-  first = 0;
-  rows = 10;
+  first: number = 0;
+  rows: number = 10;
   posts!: IPost[];
   selectedPost!: IPost | null;
   items!: MenuItem[];
-  isDataExist = false;
+  isDataExist: boolean = false;
   errorMessage: string | null = null;
   artificialArray: IPost[] = Array.from({ length: 5 }).map(() => ({
     id: 0,
@@ -50,17 +50,17 @@ export class PostsComponent implements OnInit {
       {
         label: 'View',
         icon: 'fa-solid fa-magnifying-glass',
-        command: () => this.viewPost(this.selectedPost),
+        command: (): void => this.viewPost(this.selectedPost),
       },
       {
         label: 'Delete',
         icon: 'fa-solid fa-trash',
-        command: () => this.deletePost(this.selectedPost),
+        command: (): void => this.deletePost(this.selectedPost),
       },
       {
         label: 'Edit',
         icon: 'fa-solid fa-pen-to-square',
-        command: () => this.editPost(this.selectedPost),
+        command: (): void => this.editPost(this.selectedPost),
       },
     ];
   }

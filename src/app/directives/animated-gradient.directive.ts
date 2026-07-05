@@ -12,7 +12,7 @@ export class AnimatedGradientDirective implements OnDestroy {
     thickness: '2px',
   };
 
-  isActive = false;
+  isActive: boolean = false;
   private timerId!: number;
 
   constructor() {
@@ -30,10 +30,10 @@ export class AnimatedGradientDirective implements OnDestroy {
     }
   }
 
-  @HostBinding('style.borderStyle') borderStyle = 'solid';
-  @HostBinding('style.borderColor') borderColor = 'transparent';
-  @HostBinding('style.backgroundOrigin') bgOrigin = 'border-box';
-  @HostBinding('style.backgroundClip') bgClip = 'padding-box, border-box';
+  @HostBinding('style.borderStyle') borderStyle: string = 'solid';
+  @HostBinding('style.borderColor') borderColor: string = 'transparent';
+  @HostBinding('style.backgroundOrigin') bgOrigin: string = 'border-box';
+  @HostBinding('style.backgroundClip') bgClip: string = 'padding-box, border-box';
 
   @HostBinding('style.borderWidth')
   get borderWidth(): string | undefined {

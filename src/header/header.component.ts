@@ -32,9 +32,9 @@ export class HeaderComponent {
 
   readonly companyName: string = 'Румтибет';
   currentDate: Date = new Date();
-  counter = 0;
-  isTimerVisible = true;
-  liveTextInput = '';
+  counter: number = 0;
+  isTimerVisible: boolean = true;
+  liveTextInput: string = '';
   selectedDirection!: string;
   selectedDate!: string;
   participantsCount: number | null = null;

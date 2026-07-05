@@ -31,7 +31,7 @@ export class HomePageComponent {
   selectedDirection!: string;
   selectedDate!: string;
   participantsCount: number | null = null;
-  liveTextInput = '';
+  liveTextInput: string = '';
   faPlay: IconDefinition = faPlay;
   faPeopleGroup: IconDefinition = faPeopleGroup;
   faShield: IconDefinition = faShield;

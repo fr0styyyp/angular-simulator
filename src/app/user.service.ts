@@ -30,7 +30,7 @@ export class UserService {
     return this.usersSubject.getValue();
   }
 
-  loadUsers(forceRefresh = false): Observable<IUser[]> {
+  loadUsers(forceRefresh: boolean = false): Observable<IUser[]> {
     if (!forceRefresh) {
       const cachedUsers: string | null = localStorage.getItem(this.USERS_KEY);
       if (cachedUsers) {

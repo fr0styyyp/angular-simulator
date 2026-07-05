@@ -47,7 +47,7 @@ export class UsersPageComponent implements OnInit {
     this.loadUsers(false);
   }
 
-  private loadUsers(force = false): void {
+  private loadUsers(force: boolean = false): void {
     this.userService
       .loadUsers(force)
       .pipe(tap((data: IUser[]) => this.userService.setUsers(data)))
