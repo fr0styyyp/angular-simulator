@@ -10,10 +10,10 @@ import { faPinterest, faSkype, faTelegram, faVk } from '@fortawesome/free-brands
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
-  
+
   faTelegram: IconDefinition = faTelegram;
   faVk: IconDefinition = faVk;
   faPinterest: IconDefinition = faPinterest;
   faSkype: IconDefinition = faSkype;
-  
+
 }

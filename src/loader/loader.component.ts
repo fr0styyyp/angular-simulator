@@ -12,9 +12,9 @@ import { faSpinner, IconDefinition } from '@fortawesome/free-solid-svg-icons';
   styleUrl: './loader.component.scss',
 })
 export class LoaderComponent {
-  
+
   loaderService: LoaderService = inject(LoaderService);
   isLoading$: Observable<boolean> = this.loaderService.isLoading$;
   faSpinner: IconDefinition = faSpinner;
-  
+
 }

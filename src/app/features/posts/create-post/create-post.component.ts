@@ -15,12 +15,12 @@ import { PostFormValue } from '../types/postFormValue';
   styleUrl: './create-post.component.scss',
 })
 export class CreatePostComponent {
-  
+
   private fb: FormBuilder = inject(FormBuilder);
   private postApiService: PostApiService = inject(PostApiService);
   private router: Router = inject(Router);
   private messageService: MessageService = inject(MessageService);
-  
+
   postForm: FormGroup = this.fb.nonNullable.group({
     title: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
     body: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
@@ -32,25 +32,28 @@ export class CreatePostComponent {
     views: [0, [Validators.required, Validators.min(0), Validators.max(9999)]],
     userId: [0, [Validators.required, Validators.min(0), Validators.max(9999)]],
   });
-  
+
   onSubmit(): void {
     if (this.postForm.invalid) {
       return;
     }
-    
+
     const rawValues: PostFormValue = this.postForm.value;
-    const formattedTags: string[] = rawValues.tags.split(',').map((tag: string) => tag.trim()); 
+    const formattedTags: string[] = rawValues.tags.split(',').map((tag: string) => tag.trim());
     const postData: IPost = { ...rawValues, tags: formattedTags };
-    
-    this.postApiService.createPost(postData).pipe(
-      tap(() => {
-        this.router.navigate(['posts']);
-      }),
-      catchError((err: HttpErrorResponse) => {
-        this.messageService.showError(err.message);
-        return of([]);
-      })
-    ).subscribe();
+
+    this.postApiService
+      .createPost(postData)
+      .pipe(
+        tap(() => {
+          this.router.navigate(['posts']);
+        }),
+        catchError((err: HttpErrorResponse) => {
+          this.messageService.showError(err.message);
+          return of([]);
+        }),
+      )
+      .subscribe();
   }
-  
+
 }

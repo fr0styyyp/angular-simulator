@@ -8,7 +8,14 @@ import { IDestination } from '../app/interfaces/IDestination';
 import { IBlog } from '../app/interfaces/IBlog';
 import { IImpressionImage } from '../app/interfaces/IImpressionImage';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faPlay, IconDefinition, faPeopleGroup, faShield, faTags, faStar } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPlay,
+  IconDefinition,
+  faPeopleGroup,
+  faShield,
+  faTags,
+  faStar,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home-page',
@@ -17,10 +24,10 @@ import { faPlay, IconDefinition, faPeopleGroup, faShield, faTags, faStar } from 
   styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent {
-  
+
   messageService: MessageService = inject(MessageService);
   private localStorageService: LocalStorageService = inject(LocalStorageService);
-  
+
   selectedDirection!: string;
   selectedDate!: string;
   participantsCount: number | null = null;
@@ -30,7 +37,7 @@ export class HomePageComponent {
   faShield: IconDefinition = faShield;
   faTags: IconDefinition = faTags;
   faStar: IconDefinition = faStar;
-  
+
   cards: ICard[] = [
     {
       title: 'Опытный гид',
@@ -48,7 +55,7 @@ export class HomePageComponent {
       icon: faTags,
     },
   ];
-  
+
   destinations: IDestination[] = [
     {
       title: 'Озеро возле гор',
@@ -75,18 +82,20 @@ export class HomePageComponent {
       imageUrl: 'mountain-yoga',
     },
   ];
-  
+
   blogs: IBlog[] = [
     {
       title: 'Красивая Италия, какая она в реальности?',
-      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      description:
+        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
       date: '01/04/2023',
       link: 'читать статью',
       imageUrl: 'italy-mountain',
     },
     {
       title: 'Долой сомнения! Весь мир открыт для вас!',
-      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих...',
+      description:
+        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих...',
       date: '01/04/2023',
       link: 'читать статью',
       imageUrl: 'plane-view',
@@ -106,7 +115,7 @@ export class HomePageComponent {
       imageUrl: 'mosque',
     },
   ];
-  
+
   impressionImages: IImpressionImage[] = [
     {
       id: 1,
@@ -133,7 +142,7 @@ export class HomePageComponent {
       imageUrl: 'detective-stuff',
     },
   ];
-  
+
   isFormValid(): boolean {
     return !!(
       this.selectedDate &&
@@ -142,5 +151,5 @@ export class HomePageComponent {
       this.participantsCount >= 4
     );
   }
-  
+
 }

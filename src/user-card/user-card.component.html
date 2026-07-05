@@ -1,11 +1,11 @@
-<div class="user" animatedGradient>
-  <button boldOnHover (click)="onDeleteClick()">х</button>
-  
+<div class="user" appAnimatedGradient>
+  <button appBoldOnHover (click)="onDeleteClick()">х</button>
+
   <div class="user-name-container">
     <span class="name green">{{ user.name | uppercase }}</span>
     <span class="username orange">@{{ user.username }}</span>
   </div>
-  
+
   <div class="user-contact-container">
     <span class="green contact">Контакты</span>
     <div class="contacts">
@@ -15,7 +15,7 @@
       </div>
       <div>
         <span class="gray thin">Телефон:</span>
-        <span  class="green bold">{{ user.phone | phoneMode: phoneMode.INTERNATIONAL }}</span>
+        <span class="green bold">{{ user.phone | phoneMode: phoneMode.INTERNATIONAL }}</span>
       </div>
       <div>
         <span class="gray thin">Веб-сайт:</span>
@@ -23,7 +23,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="user-address-container">
     <span class="green address title">адрес проживания</span>
     <div class="addresses">
@@ -37,7 +37,7 @@
       </div>
       <div>
         <span class="gray thin">Офис:</span>
-        <span  class="green bold">{{ user.address.suite }}</span>
+        <span class="green bold">{{ user.address.suite }}</span>
       </div>
       <div>
         <span class="gray thin">Индекс:</span>
@@ -56,7 +56,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="user-job-container">
     <span class="green job title">Место работы</span>
     <div class="jobs">
@@ -66,7 +66,7 @@
       </div>
       <div>
         <span class="gray thin">Миссия:</span>
-        <span  class="gray-italic">{{ user.company.catchPhrase }}</span>
+        <span class="gray-italic">{{ user.company.catchPhrase }}</span>
       </div>
       <div>
         <span class="gray thin">Специализация:</span>

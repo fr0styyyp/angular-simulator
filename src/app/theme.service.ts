@@ -1,5 +1,5 @@
 import { DestroyRef, inject, Injectable } from '@angular/core';
-import { ThemeState } from './interfaces/IThemeState';
+import { IThemeState } from './interfaces/IThemeState';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { usePreset } from '@primeuix/themes';
 import AURA from '@primeuix/themes/aura';
@@ -9,48 +9,53 @@ import { Mode } from '../enums/Mode';
 import { Theme } from '../enums/Theme';
 import { SelectButtonChangeEvent } from 'primeng/selectbutton';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { SelectOption } from './interfaces/ISelectOption';
+import { ISelectOption } from './interfaces/ISelectOption';
 import { Preset } from '@primeuix/themes/types';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ThemeService {
-  
+
   private destroyRef: DestroyRef = inject(DestroyRef);
-  
-  private defaultState: ThemeState = {
+
+  private defaultState: IThemeState = {
     mode: Mode.LIGHT,
-    theme: Theme.AURA
-  }
-  
-  stateOptions: SelectOption[] = [
+    theme: Theme.AURA,
+  };
+
+  stateOptions: ISelectOption[] = [
     { label: 'Aura', value: Theme.AURA },
     { label: 'Lara', value: Theme.LARA },
-    { label: 'Nora', value: Theme.NORA }
+    { label: 'Nora', value: Theme.NORA },
   ];
-  
+
   private readonly STORAGE_KEY: string = 'app-theme-settings';
   private readonly themes: Record<Theme, Preset> = {
     [Theme.AURA]: AURA,
     [Theme.LARA]: LARA,
-    [Theme.NORA]: NORA
+    [Theme.NORA]: NORA,
   };
-  
-  private stateSubject: BehaviorSubject<ThemeState> = new BehaviorSubject<ThemeState>(this.loadFromStorage());
-  state$: Observable<ThemeState> = this.stateSubject.asObservable();
-  
+
+  private stateSubject: BehaviorSubject<IThemeState> = new BehaviorSubject<IThemeState>(
+    this.loadFromStorage(),
+  );
+
+  state$: Observable<IThemeState> = this.stateSubject.asObservable();
+
   constructor() {
-    this.state$.pipe(
-      takeUntilDestroyed(this.destroyRef),
-      tap((state: ThemeState) => {
-        this.saveToStorage(state);
-        this.applyMode(state.mode);
-        this.applyTheme(state.theme);
-      })
-    ).subscribe();
+    this.state$
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        tap((state: IThemeState) => {
+          this.saveToStorage(state);
+          this.applyMode(state.mode);
+          this.applyTheme(state.theme);
+        }),
+      )
+      .subscribe();
   }
-  
+
   applyMode(mode: Mode): void {
     const host: HTMLElement = document.documentElement;
     if (mode === Mode.DARK) {
@@ -59,41 +64,41 @@ export class ThemeService {
       host.classList.remove('my-app-dark');
     }
   }
-  
+
   toggleMode(): void {
-    const currentState: ThemeState = this.stateSubject.value;
+    const currentState: IThemeState = this.stateSubject.value;
     const newMode: Mode = currentState.mode === Mode.LIGHT ? Mode.DARK : Mode.LIGHT;
-    const newState: ThemeState = { ...currentState, mode: newMode };
+    const newState: IThemeState = { ...currentState, mode: newMode };
     this.stateSubject.next(newState);
   }
-  
+
   setTheme(event: SelectButtonChangeEvent): void {
     const themeName: Theme = event.value;
     if (!themeName) {
       return;
     }
-    
-    const currentTheme: ThemeState = this.stateSubject.getValue();
-    const newTheme: ThemeState = { ...currentTheme, theme: themeName };
+
+    const currentTheme: IThemeState = this.stateSubject.getValue();
+    const newTheme: IThemeState = { ...currentTheme, theme: themeName };
     this.stateSubject.next(newTheme);
   }
-  
+
   private applyTheme(theme: Theme): void {
     usePreset(this.themes[theme]);
   }
-  
-  private saveToStorage(state: ThemeState): void {
+
+  private saveToStorage(state: IThemeState): void {
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(state));
   }
-  
-  private loadFromStorage(): ThemeState {
+
+  private loadFromStorage(): IThemeState {
     const currentState: string | null = localStorage.getItem(this.STORAGE_KEY);
-    
+
     if (currentState) {
       return JSON.parse(currentState);
     } else {
       return this.defaultState;
     }
   }
-  
+
 }
