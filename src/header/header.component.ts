@@ -9,6 +9,10 @@ import { FormsModule } from '@angular/forms';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { AsyncPipe } from '@angular/common';
 import { AuthService } from '../app/features/auth/services/auth.service';
+import { AppDatePipe } from '../app/pipes/date.pipe';
+import { LocalStorageService } from '../app/local-storage.service';
+import { IAppConfig } from '../app/interfaces/IAppConfig';
+import { APP_CONFIG_TOKEN } from '../app/tokens/app-config.token';
 
 @Component({
   selector: 'app-header',
@@ -20,6 +24,7 @@ import { AuthService } from '../app/features/auth/services/auth.service';
     FormsModule,
     SelectButtonModule,
     AsyncPipe,
+    AppDatePipe
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -29,8 +34,9 @@ export class HeaderComponent {
   themeService: ThemeService = inject(ThemeService);
   authService: AuthService = inject(AuthService);
   router: Router = inject(Router);
+  localStorageService: LocalStorageService = inject(LocalStorageService);
+  appConfig: IAppConfig = inject(APP_CONFIG_TOKEN);
 
-  readonly companyName: string = 'Румтибет';
   currentDate: Date = new Date();
   counter: number = 0;
   isTimerVisible: boolean = true;
@@ -40,6 +46,7 @@ export class HeaderComponent {
   participantsCount: number | null = null;
   faSun: IconDefinition = faSun;
   faMoon: IconDefinition = faMoon;
+  lastLoginDate: string = this.localStorageService.getItem<string>('last visit') ?? 'даты нету';
 
   navItems: INavItem[] = [
     { label: 'Главная', path: '/' },

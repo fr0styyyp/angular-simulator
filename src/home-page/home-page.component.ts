@@ -16,10 +16,11 @@ import {
   faTags,
   faStar,
 } from '@fortawesome/free-solid-svg-icons';
+import { AppDatePipe } from '../app/pipes/date.pipe';
 
 @Component({
   selector: 'app-home-page',
-  imports: [FormsModule, CommonModule, FontAwesomeModule],
+  imports: [FormsModule, CommonModule, FontAwesomeModule, AppDatePipe],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
