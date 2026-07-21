@@ -46,7 +46,7 @@ export class HeaderComponent {
   participantsCount: number | null = null;
   faSun: IconDefinition = faSun;
   faMoon: IconDefinition = faMoon;
-  lastLoginDate: string = this.localStorageService.getItem<string>('last visit') ?? 'даты нету';
+  lastLoginDate: string | null = this.localStorageService.getItem<string>('last-visit');
 
   navItems: INavItem[] = [
     { label: 'Главная', path: '/' },

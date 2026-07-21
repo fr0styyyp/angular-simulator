@@ -1,14 +1,12 @@
 import { inject, Pipe, PipeTransform } from '@angular/core';
 import { DATE_FORMAT_TOKEN } from '../tokens/date-format-token';
-import { IDateFormatProvider } from '../interfaces/IDateFormatProvider';
 
 @Pipe({
   name: 'appDate',
-  pure: false
 })
 export class AppDatePipe implements PipeTransform {
   
-  private readonly dateFormatProvider: IDateFormatProvider = inject(DATE_FORMAT_TOKEN);
+  private readonly dateFormat: string = inject(DATE_FORMAT_TOKEN);
   
   transform(value: Date | string): string {
     const parsedDate: Date = new Date(value);
@@ -18,8 +16,7 @@ export class AppDatePipe implements PipeTransform {
     const hour: string = String(parsedDate.getHours()).padStart(2, '0');
     const minute: string = String(parsedDate.getMinutes()).padStart(2, '0');
     
-    const format: string = this.dateFormatProvider.getCurrentFormat();
-    const [datePart, timePart]: string[] = format.split(' ');
+    const [datePart, timePart]: string[] = this.dateFormat.split(' ');
     const formattedDate: string = datePart
       .replace('dd', day)
       .replace('mm', month)

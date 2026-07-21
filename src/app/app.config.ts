@@ -21,7 +21,6 @@ import { AuthService } from './features/auth/services/auth.service';
 import { authReqInterceptor } from './features/auth/interceptors/auth-req.interceptor';
 import { Theme } from '../enums/Theme';
 import { DATE_FORMAT_TOKEN } from './tokens/date-format-token';
-import { DateFormatService } from './services/date-format.service';
 import { APP_CONFIG_TOKEN } from './tokens/app-config.token';
 import { IAppConfig } from './interfaces/IAppConfig';
 
@@ -72,7 +71,7 @@ export const appConfig: ApplicationConfig = {
     },
     {
       provide: DATE_FORMAT_TOKEN,
-      useExisting: DateFormatService
+      useValue: 'dd.mm.yyyy hh:mm'
     },
     {
       provide: APP_CONFIG_TOKEN,

@@ -46,9 +46,11 @@
     <div class="header-actions">
       @if (isTimerVisible) {
         <div class="data-time">
-          {{ currentDate.toLocaleString('ru-RU') }}
+          {{ currentDate | appDate }}
         </div>
-        <div class="last-login">Последний вход: {{ lastLoginDate | appDate }}</div>
+        <div class="last-login">
+          Последний вход: {{ lastLoginDate ? (lastLoginDate | appDate) : 'даты нету' }}
+        </div>
       } @else {
         <div class="clicker">
           <button id="counter-inc-btn" class="counter-btn" (click)="onIncrementCounter()">+</button>
