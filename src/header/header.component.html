@@ -2,7 +2,7 @@
   <div class="header-container container">
     <div class="logo-block">
       <img src="/images/company-logo-icon.svg" alt="icon" width="137" height="48" />
-      <span>{{ companyName }}</span>
+      <span>{{ appConfig.companyName }}</span>
     </div>
 
     <div class="theme-switcher">
@@ -46,7 +46,10 @@
     <div class="header-actions">
       @if (isTimerVisible) {
         <div class="data-time">
-          {{ currentDate.toLocaleString('ru-RU') }}
+          {{ currentDate | appDate }}
+        </div>
+        <div class="last-login">
+          Последний вход: {{ lastLoginDate ? (lastLoginDate | appDate) : 'даты нету' }}
         </div>
       } @else {
         <div class="clicker">

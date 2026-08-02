@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { Color } from '../enums/Color';
 import { Collection } from '../collection';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -12,6 +11,7 @@ import { MessageComponent } from '../message/message.component';
 import { LoaderService } from './loader.service';
 import { LoaderComponent } from '../loader/loader.component';
 import { AuthService } from './features/auth/services/auth.service';
+import { Color } from '../enums/Color';
 
 @Component({
   selector: 'app-root',
@@ -53,7 +53,7 @@ export class AppComponent {
   }
 
   private setLastVisitDate(): void {
-    const currentDate: string = new Date().toLocaleString();
+    const currentDate: string = new Date().toISOString();
     this.localStorageService.setItem('last visit', currentDate);
   }
 

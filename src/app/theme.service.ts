@@ -11,6 +11,8 @@ import { SelectButtonChangeEvent } from 'primeng/selectbutton';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ISelectOption } from './interfaces/ISelectOption';
 import { Preset } from '@primeuix/themes/types';
+import { IAppConfig } from './interfaces/IAppConfig';
+import { APP_CONFIG_TOKEN } from './tokens/app-config.token';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +20,7 @@ import { Preset } from '@primeuix/themes/types';
 export class ThemeService {
 
   private destroyRef: DestroyRef = inject(DestroyRef);
+  private readonly appConfig: IAppConfig = inject(APP_CONFIG_TOKEN);
 
   private defaultState: IThemeState = {
     mode: Mode.LIGHT,
@@ -66,6 +69,10 @@ export class ThemeService {
   }
 
   toggleMode(): void {
+    if (!this.appConfig.enableTheming) {
+      return;
+    }
+    
     const currentState: IThemeState = this.stateSubject.value;
     const newMode: Mode = currentState.mode === Mode.LIGHT ? Mode.DARK : Mode.LIGHT;
     const newState: IThemeState = { ...currentState, mode: newMode };
@@ -73,6 +80,10 @@ export class ThemeService {
   }
 
   setTheme(event: SelectButtonChangeEvent): void {
+    if (!this.appConfig.enableTheming) {
+      return;
+    }
+    
     const themeName: Theme = event.value;
     if (!themeName) {
       return;

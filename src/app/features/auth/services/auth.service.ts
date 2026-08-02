@@ -1,11 +1,13 @@
 import { inject, Injectable } from '@angular/core';
 import { IAuthUser } from '../interfaces/IAuthUser';
-import { BehaviorSubject, catchError, Observable, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, switchMap, tap, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IAuthResponse } from '../interfaces/IAuthResponse';
 import { Router } from '@angular/router';
 import { LocalStorageService } from '../../../local-storage.service';
 import { IToken } from '../interfaces/IToken';
+import { IAppConfig } from '../../../interfaces/IAppConfig';
+import { APP_CONFIG_TOKEN } from '../../../tokens/app-config.token';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +17,7 @@ export class AuthService {
   private http: HttpClient = inject(HttpClient);
   private router: Router = inject(Router);
   private localStorageService: LocalStorageService = inject(LocalStorageService);
+  private appConfig: IAppConfig = inject(APP_CONFIG_TOKEN);
 
   private authUserSubject: BehaviorSubject<IAuthUser | null> =
     new BehaviorSubject<IAuthUser | null>(null);
@@ -44,7 +47,7 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<IAuthUser> {
-    return this.http.post<IAuthResponse>(`${ this.apiUrl }/login`, { username, password }).pipe(
+    return this.http.post<IAuthResponse>(`${ this.apiUrl }/login`, { username, password, expiresInMins: this.appConfig.sessionTimeout }).pipe(
       tap((res: IAuthResponse) => {
         const tokens: IToken = { accessToken: res.accessToken, refreshToken: res.refreshToken };
         this.localStorageService.setItem('authTokens', tokens);
@@ -63,7 +66,12 @@ export class AuthService {
   refreshToken(): Observable<IAuthResponse> {
     const tokens: IToken | null = this.localStorageService.getItem<IToken>('authTokens');
     const refreshToken: string | undefined = tokens?.refreshToken;
-    return this.http.post<IAuthResponse>(`${ this.apiUrl }/refresh`, { refreshToken }).pipe(
+    
+    if (!refreshToken) {
+      return throwError(() => new Error('Refresh token not found'));
+    }
+    
+    return this.http.post<IAuthResponse>(`${ this.apiUrl }/refresh`, { refreshToken, expiresInMins: this.appConfig.sessionTimeout }).pipe(
       tap((res: IAuthResponse) => {
         const updatedTokens: IToken = {
           accessToken: res.accessToken,
