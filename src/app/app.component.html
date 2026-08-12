@@ -1,8 +1,10 @@
 @if (authService.authUser$ | async; as user) {
   <app-header></app-header>
-
   <main>
     <router-outlet></router-outlet>
+    <app-parent></app-parent>
+    <app-cd-default></app-cd-default>
+    <app-cd-on-push></app-cd-on-push>
   </main>
 
   <app-footer></app-footer>

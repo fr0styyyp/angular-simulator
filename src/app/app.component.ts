@@ -12,6 +12,9 @@ import { LoaderService } from './loader.service';
 import { LoaderComponent } from '../loader/loader.component';
 import { AuthService } from './features/auth/services/auth.service';
 import { Color } from '../enums/Color';
+import { ParentComponent } from './homework-28/parent/parent.component';
+import { CdDefaultComponent } from './homework-28/cd-default/cd-default.component';
+import { CdOnPushComponent } from './homework-28/cd-on-push/cd-on-push.component';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +26,9 @@ import { Color } from '../enums/Color';
     FooterComponent,
     MessageComponent,
     LoaderComponent,
+    ParentComponent,
+    CdDefaultComponent,
+    CdOnPushComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
