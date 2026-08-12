@@ -1,12 +1,15 @@
 <section class="users">
-  <span class="users-title green">Список Пользователей</span>
+  <span class="users-title green">{{ 'users.page.title' | translate }}</span>
   <app-create-user (createUser)="onAddUser($event)"></app-create-user>
   <app-users-filter (filter)="onChangeFilter($event)"></app-users-filter>
   <span class="users-length">
-    Найдено
+    {{ 'users.page.found' | translate }}
     {{
       (filteredUsers$ | async)?.length ?? 0
-        | plural: 'пользователь' : 'пользователя' : 'пользователей'
+        | plural
+          : ('users.page.count.one' | translate)
+          : ('users.page.count.few' | translate)
+          : ('users.page.count.many' | translate)
     }}
   </span>
   <div class="users-container">
@@ -18,7 +21,7 @@
     } @empty {
       <div class="empty-blank-container">
         <div class="empty-blank">
-          <span>Нет пользователей для отображения</span>
+          <span>{{ 'users.page.empty' | translate }}</span>
         </div>
       </div>
     }

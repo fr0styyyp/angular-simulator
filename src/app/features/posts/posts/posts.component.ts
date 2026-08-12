@@ -1,4 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PostApiService } from '../services/post-api.service';
 import { IPost } from '../interfaces/IPost';
 import { catchError, of, switchMap, tap } from 'rxjs';
@@ -12,10 +13,11 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { PostEditDialogComponent } from '../post-edit-dialog/post-edit-dialog.component';
 import { postEditData } from '../types/postEditData';
 import { MessageService } from '../../../message.service';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-posts',
-  imports: [SkeletonModule, TableModule, ContextMenuModule, RouterLink, DynamicDialogModule],
+  imports: [SkeletonModule, TableModule, ContextMenuModule, RouterLink, DynamicDialogModule, TranslatePipe],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss',
   providers: [DialogService],
@@ -26,6 +28,8 @@ export class PostsComponent implements OnInit {
   private router: Router = inject(Router);
   private messageService: MessageService = inject(MessageService);
   private dialogService: DialogService = inject(DialogService);
+  private translateService: TranslateService = inject(TranslateService);
+  private destroyRef: DestroyRef = inject(DestroyRef);
 
   totalPosts!: number;
   first: number = 0;
@@ -46,19 +50,26 @@ export class PostsComponent implements OnInit {
   }));
 
   ngOnInit(): void {
+    this.buildContextMenuItems();
+    this.translateService.onLangChange
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.buildContextMenuItems());
+  }
+
+  private buildContextMenuItems(): void {
     this.items = [
       {
-        label: 'View',
+        label: this.translateService.instant('posts.list.contextMenu.view'),
         icon: 'fa-solid fa-magnifying-glass',
         command: (): void => this.viewPost(this.selectedPost),
       },
       {
-        label: 'Delete',
+        label: this.translateService.instant('posts.list.contextMenu.delete'),
         icon: 'fa-solid fa-trash',
         command: (): void => this.deletePost(this.selectedPost),
       },
       {
-        label: 'Edit',
+        label: this.translateService.instant('posts.list.contextMenu.edit'),
         icon: 'fa-solid fa-pen-to-square',
         command: (): void => this.editPost(this.selectedPost),
       },
@@ -94,7 +105,7 @@ export class PostsComponent implements OnInit {
 
   viewPost(post: IPost | null): void {
     if (post) {
-      this.messageService.showInfo('Post Selected');
+      this.messageService.showInfo(this.translateService.instant('posts.list.toast.selected'));
       this.onRowDblClick(post.id);
     }
   }
@@ -106,7 +117,7 @@ export class PostsComponent implements OnInit {
         .pipe(
           tap(() => {
             this.posts = this.posts.filter((p: IPost) => p.id !== post.id);
-            this.messageService.showInfo('Post Deleted');
+            this.messageService.showInfo(this.translateService.instant('posts.list.toast.deleted'));
             this.selectedPost = null;
           }),
           catchError((error: Error) => {
@@ -126,7 +137,7 @@ export class PostsComponent implements OnInit {
 
     this.dialogService
       .open(PostEditDialogComponent, {
-        header: 'Edit post',
+        header: this.translateService.instant('posts.list.editDialog.header'),
         width: '50vw',
         modal: true,
         breakpoints: {
@@ -150,7 +161,7 @@ export class PostsComponent implements OnInit {
               p.id === post.id ? { ...p, ...updatedFields } : p,
             );
 
-            this.messageService.showInfo('Post Updated');
+            this.messageService.showInfo(this.translateService.instant('posts.list.toast.updated'));
           }
         }),
         catchError((error: Error) => {

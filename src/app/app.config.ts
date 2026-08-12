@@ -1,6 +1,8 @@
 import {
   APP_INITIALIZER,
   ApplicationConfig,
+  inject,
+  provideAppInitializer,
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
 } from '@angular/core';
@@ -23,6 +25,10 @@ import { Theme } from '../enums/Theme';
 import { DATE_FORMAT_TOKEN } from './tokens/date-format-token';
 import { APP_CONFIG_TOKEN } from './tokens/app-config.token';
 import { IAppConfig } from './interfaces/IAppConfig';
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LANGUAGE_STORAGE_TOKEN } from './features/language/language-storage-key.token';
+import { LanguageService } from './features/language/language.service';
 
 function getInitialPreset(): Preset<AuraBaseDesignTokens> {
   const savedData: string | null = localStorage.getItem('app-theme-settings');
@@ -51,6 +57,14 @@ const appConfigValue: IAppConfig = {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideTranslateService({
+      loader: provideTranslateHttpLoader({
+        prefix: '/i18n/',
+        suffix: '.json'
+      }),
+      fallbackLang: 'en',
+      lang: 'en'
+    }),
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideZoneChangeDetection(),
@@ -76,6 +90,14 @@ export const appConfig: ApplicationConfig = {
     {
       provide: APP_CONFIG_TOKEN,
       useValue: appConfigValue
-    }
+    },
+    {
+      provide: LANGUAGE_STORAGE_TOKEN,
+      useValue: 'app-language'
+    },
+    provideAppInitializer(() => {
+      const languageService: LanguageService = inject(LanguageService);
+      languageService.init();
+    })
   ],
 };

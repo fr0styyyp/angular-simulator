@@ -1,42 +1,44 @@
 <div class="form-container">
   <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
     <div>
-      <label for="title">Title</label>
+      <label for="title">{{ 'posts.createPost.titleLabel' | translate }}</label>
       <input type="text" id="title" formControlName="title" />
     </div>
 
     <div>
-      <label for="body">Body</label>
+      <label for="body">{{ 'posts.createPost.bodyLabel' | translate }}</label>
       <input type="text" id="body" formControlName="body" />
     </div>
 
     <div>
-      <label for="tags">Tags</label>
+      <label for="tags">{{ 'posts.createPost.tagsLabel' | translate }}</label>
       <input type="text" id="tags" formControlName="tags" />
     </div>
 
     <ng-container formGroupName="reactions">
       <div>
-        <label for="likes">Likes</label>
+        <label for="likes">{{ 'posts.createPost.likesLabel' | translate }}</label>
         <input type="number" id="likes" formControlName="likes" />
       </div>
 
       <div>
-        <label for="dislikes">Dislikes</label>
+        <label for="dislikes">{{ 'posts.createPost.dislikesLabel' | translate }}</label>
         <input type="number" id="dislikes" formControlName="dislikes" />
       </div>
     </ng-container>
 
     <div>
-      <label for="views">Views</label>
+      <label for="views">{{ 'posts.createPost.viewsLabel' | translate }}</label>
       <input type="number" id="views" formControlName="views" />
     </div>
 
     <div>
-      <label for="userId">userId</label>
+      <label for="userId">{{ 'posts.createPost.userIdLabel' | translate }}</label>
       <input type="number" id="userId" formControlName="userId" />
     </div>
 
-    <button type="submit" [disabled]="postForm.invalid">Создать пост</button>
+    <button type="submit" [disabled]="postForm.invalid">
+      {{ 'posts.createPost.submitButton' | translate }}
+    </button>
   </form>
 </div>

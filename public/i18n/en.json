@@ -1,0 +1,275 @@
+{
+  "common": {
+    "logout": "Log out"
+  },
+  "header": {
+    "authorized": "authorized",
+    "consultButton": "Consultation",
+    "lastLogin": "Last login:",
+    "noDate": "no date",
+    "showClicker": "Show clicker",
+    "showDate": "Show date",
+    "nav": {
+      "home": "Home",
+      "users": "Users",
+      "posts": "Posts"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": {
+        "line1": "Enjoy a mountain walk",
+        "line2": "with a team of like-minded people"
+      },
+      "locationPlaceholder": "Tour location",
+      "mountains": "Mountains",
+      "forest": "Forest",
+      "chooseFromList": "choose from the list",
+      "datePlaceholder": "Tour date",
+      "specifyDate": "specify a date",
+      "participantsPlaceholder": "Number of people",
+      "participants": {
+        "four": "4 people",
+        "five": "5 people",
+        "six": "6 people",
+        "seven": "7 people",
+        "eightPlus": "8+ people"
+      },
+      "submitButton": "Find a program",
+      "liveTextPlaceholder": "Live text"
+    },
+    "tourDescription": {
+      "label": "about our hike",
+      "title": "Explore all the mountain ranges of the world with us",
+      "text": "Its roots go back to a fragment of classical Latin from 45 BC, more than two millennia ago. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, \"consectetur\", from a Lorem Ipsum passage.",
+      "button": "Tour program",
+      "unavailable": "Program unavailable"
+    },
+    "offers": {
+      "label": "our offer",
+      "title": "The best programs for you",
+      "text": "Its roots go back to a fragment of classical Latin from 45 BC, more than two millennia ago. Richard McClintock, a Latin professor at a college.",
+      "emptyCards": "No cards yet",
+      "priceButton": "Program pricing",
+      "priceSent": "The price has been sent to your email",
+      "cards": {
+        "guide": {
+          "title": "Experienced guide",
+          "text": "For the modern world, the basic development vector implies independent ways of implementing the relevant activation conditions."
+        },
+        "safety": {
+          "title": "Safe hike",
+          "text": "For the modern world, the basic development vector implies independent ways of implementing the relevant activation conditions."
+        },
+        "pricing": {
+          "title": "Loyal pricing",
+          "text": "For the modern world, the basic development vector implies independent ways of implementing the relevant activation conditions."
+        }
+      }
+    },
+    "destinations": {
+      "label": "according to travelers",
+      "title": "Popular destinations",
+      "ratingButton": "Destination ratings",
+      "ratingReceived": "destination received",
+      "cards": {
+        "lake": {
+          "title": "Lake near the mountains",
+          "description": "a romantic adventure"
+        },
+        "winterMountain": {
+          "title": "A night in the mountains",
+          "description": "with friends"
+        },
+        "mountainYoga": {
+          "title": "Yoga in the mountains",
+          "description": "for those who care about themselves"
+        }
+      }
+    },
+    "blog": {
+      "label": "sharing impressions",
+      "title": "Travel blog",
+      "readArticle": "read article",
+      "materialsUnavailable": "Materials unavailable",
+      "otherMaterialsButton": "Other materials",
+      "posts": {
+        "italy": {
+          "title": "Beautiful Italy, what is it really like?",
+          "description": "For the modern world, the basic development vector implies independent ways of implementing the relevant activation conditions."
+        },
+        "plane": {
+          "title": "Away with doubts! The whole world is open to you!",
+          "description": "For the modern world, the basic development vector implies independent ways of implementing the relevant activation conditions ... independent ways of implementing the relevant..."
+        },
+        "solo": {
+          "title": "How to prepare for a solo trip?",
+          "description": "For the modern world, the basic development vector implies."
+        },
+        "india": {
+          "title": "India ... let's fly?",
+          "description": "For the modern world, the basics."
+        }
+      }
+    },
+    "impressions": {
+      "label": "photo report",
+      "title": "Sharing impressions",
+      "pinterestButton": "Our pinterest"
+    },
+    "mailings": {
+      "label": "trending",
+      "title": "Get useful travel newsletters",
+      "emailLabel": "Enter your e-mail address",
+      "subscribeButton": "Subscribe to news",
+      "consentPrefix": "by subscribing to the newsletter, you automatically agree to the",
+      "privacyPolicyLink": "personal data processing terms",
+      "consentAnd": "and",
+      "rulesLink": "advertising mailing rules"
+    }
+  },
+  "footer": {
+    "companyPrefix": "Company",
+    "description": "Its roots go back to a fragment of classical Latin from 45 BC, more than two millennia ago. Richard McClintock, a Latin professor at Hampden-Sydney College.",
+    "servicesTitle": "Our services",
+    "services": {
+      "summer": "Summer mountain walks",
+      "winter": "Winter mountain hikes",
+      "temples": "Visiting mountain temples",
+      "extreme": "Extreme tourism",
+      "amazon": "Amazon jungle treks",
+      "africa": "Trip to Africa"
+    },
+    "remindsTitle": "Important for travel",
+    "reminds": {
+      "packing": "How to pack for a long hike?",
+      "essentials": "Essential items for a hike",
+      "insurance": "Medical insurance, safety guarantees",
+      "forDoctors": "If you are a doctor - check this out"
+    },
+    "copyrightPrefix": "IE Konstantinopolsky K.K.,",
+    "privacyPolicy": "Privacy policy"
+  },
+  "auth": {
+    "login": {
+      "usernameLabel": "username",
+      "passwordLabel": "password",
+      "submitButton": "Log in"
+    }
+  },
+  "posts": {
+    "createPost": {
+      "titleLabel": "Title",
+      "bodyLabel": "Body",
+      "tagsLabel": "Tags",
+      "likesLabel": "Likes",
+      "dislikesLabel": "Dislikes",
+      "viewsLabel": "Views",
+      "userIdLabel": "User ID",
+      "submitButton": "Create post"
+    },
+      "postEditDialog": {
+      "closeButton": "Close",
+      "updateButton": "Update post"
+    },
+    "list": {
+      "error": "Error:",
+      "createButton": "Create post",
+      "table": {
+        "columns": {
+          "title": "Title",
+          "tags": "Tags",
+          "views": "Views"
+        }
+      },
+      "contextMenu": {
+        "view": "View",
+        "delete": "Delete",
+        "edit": "Edit"
+      },
+      "toast": {
+        "selected": "Post selected",
+        "deleted": "Post deleted",
+        "updated": "Post updated"
+      },
+      "editDialog": {
+        "header": "Edit post"
+      }
+    },
+    "postDetail": {
+      "titleLabel": "Title:",
+      "bodyLabel": "Body:",
+      "tagsLabel": "Tags:",
+      "reactionsTitle": "Reactions",
+      "likes": "likes",
+      "dislikes": "dislikes",
+      "viewsTitle": "Views",
+      "viewsLabel": "views",
+      "userIdLabel": "User ID:"
+    }
+  },
+  "users": {
+    "search": {
+      "placeholder": "Search by name"
+    },
+    "createForm": {
+      "fields": {
+        "name": "Name",
+        "username": "Username",
+        "email": "Email",
+        "phone": "Phone",
+        "website": "Website"
+      },
+      "address": {
+        "title": "Address:",
+        "city": "City",
+        "street": "Street",
+        "suite": "Suite",
+        "zipcode": "Zipcode"
+      },
+      "geo": {
+        "title": "Geo:",
+        "lat": "Lat",
+        "lng": "Lng"
+      },
+      "company": {
+        "title": "Company:",
+        "name": "Name",
+        "catchPhrase": "Catch phrase",
+        "bs": "Business scope"
+      },
+      "submitButton": "Create user",
+      "unknownFallback": "Unknown"
+    },
+    "page": {
+      "title": "User List",
+      "found": "Found",
+      "empty": "No users to display",
+      "count": {
+        "one": "user",
+        "few": "users",
+        "many": "users"
+      }
+    },
+    "card": {
+      "contactsTitle": "Contacts",
+      "emailLabel": "Email:",
+      "phoneLabel": "Phone:",
+      "websiteLabel": "Website:",
+      "addressTitle": "residential address",
+      "cityLabel": "City:",
+      "streetLabel": "Street:",
+      "suiteLabel": "Suite:",
+      "zipcodeLabel": "Zipcode:",
+      "coordinatesLabel": "Coordinates:",
+      "jobTitle": "Workplace",
+      "companyLabel": "Company:",
+      "missionLabel": "Mission:",
+      "specializationLabel": "Specialization:"
+    }
+  },
+  "primeng": {
+    "currentPageReportTemplate": "Showing { first } to { last } of { totalRecords } entries",
+    "emptyMessage": "No records found"
+  }
+}

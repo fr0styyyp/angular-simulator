@@ -5,10 +5,11 @@ import { Router } from '@angular/router';
 import { catchError, tap, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MessageService } from '../../../message.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-auth',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TranslatePipe],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss',
 })

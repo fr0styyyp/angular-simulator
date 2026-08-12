@@ -17,10 +17,11 @@ import {
   faStar,
 } from '@fortawesome/free-solid-svg-icons';
 import { AppDatePipe } from '../app/pipes/date.pipe';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home-page',
-  imports: [FormsModule, CommonModule, FontAwesomeModule, AppDatePipe],
+  imports: [FormsModule, CommonModule, FontAwesomeModule, AppDatePipe, TranslatePipe],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
@@ -28,6 +29,7 @@ export class HomePageComponent {
 
   messageService: MessageService = inject(MessageService);
   private localStorageService: LocalStorageService = inject(LocalStorageService);
+  private translateService: TranslateService = inject(TranslateService);
 
   selectedDirection!: string;
   selectedDate!: string;
@@ -40,43 +42,31 @@ export class HomePageComponent {
   faStar: IconDefinition = faStar;
 
   cards: ICard[] = [
-    {
-      title: 'Опытный гид',
-      text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      icon: faPeopleGroup,
-    },
-    {
-      title: 'Безопасный поход',
-      text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      icon: faShield,
-    },
-    {
-      title: 'Лояльные цены',
-      text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      icon: faTags,
-    },
+    { title: 'home.offers.cards.guide.title', text: 'home.offers.cards.guide.text', icon: faPeopleGroup },
+    { title: 'home.offers.cards.safety.title', text: 'home.offers.cards.safety.text', icon: faShield },
+    { title: 'home.offers.cards.pricing.title', text: 'home.offers.cards.pricing.text', icon: faTags },
   ];
 
   destinations: IDestination[] = [
     {
-      title: 'Озеро возле гор',
-      description: 'романтическое приключение',
+      title: 'home.destinations.cards.lake.title',
+      description: 'home.destinations.cards.lake.description',
       price: '480 $',
       starIcon: faStar,
       rating: 4.9,
       imageUrl: 'lake',
     },
     {
-      title: 'Ночь в горах',
-      description: 'в компании друзей',
+      title: 'home.destinations.cards.winterMountain.title',
+      description: 'home.destinations.cards.winterMountain.description',
       price: '500 $',
       starIcon: faStar,
       rating: 4.5,
       imageUrl: 'winter-mountain',
     },
     {
-      title: 'Йога в горах',
-      description: 'для тех, кто забоится о себе',
+      title: 'home.destinations.cards.mountainYoga.title',
+      description: 'home.destinations.cards.mountainYoga.description',
       price: '230 $',
       starIcon: faStar,
       rating: 5.0,
@@ -86,33 +76,31 @@ export class HomePageComponent {
 
   blogs: IBlog[] = [
     {
-      title: 'Красивая Италия, какая она в реальности?',
-      description:
-        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      title: 'home.blog.posts.italy.title',
+      description: 'home.blog.posts.italy.description',
       date: '01/04/2023',
-      link: 'читать статью',
+      link: 'home.blog.readArticle',
       imageUrl: 'italy-mountain',
     },
     {
-      title: 'Долой сомнения! Весь мир открыт для вас!',
-      description:
-        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих...',
+      title: 'home.blog.posts.plane.title',
+      description: 'home.blog.posts.plane.description',
       date: '01/04/2023',
-      link: 'читать статью',
+      link: 'home.blog.readArticle',
       imageUrl: 'plane-view',
     },
     {
-      title: 'Как подготовиться к путешествию в одиночку? ',
-      description: 'Для современного мира базовый вектор развития предполагает.',
+      title: 'home.blog.posts.solo.title',
+      description: 'home.blog.posts.solo.description',
       date: '01/04/2023',
-      link: 'читать статью',
+      link: 'home.blog.readArticle',
       imageUrl: 'human-between-buildings',
     },
     {
-      title: 'Индия ... летим?',
-      description: 'Для современного мира базовый.',
+      title: 'home.blog.posts.india.title',
+      description: 'home.blog.posts.india.description',
       date: '01/04/2023',
-      link: 'читать статью',
+      link: 'home.blog.readArticle',
       imageUrl: 'mosque',
     },
   ];
@@ -151,6 +139,22 @@ export class HomePageComponent {
       this.participantsCount &&
       this.participantsCount >= 4
     );
+  }
+  
+  onTourDescriptionClick(): void {
+    this.messageService.showWarn(this.translateService.instant('home.tourDescription.unavailable'));
+  }
+  
+  onPriceClick(): void {
+    this.messageService.showInfo(this.translateService.instant('home.offers.priceSent'));
+  }
+
+  onDestinationsRatingClick(): void {
+    this.messageService.showSuccess(this.translateService.instant('home.destinations.ratingReceived'));
+  }
+
+  onOtherMaterialsClick(): void {
+    this.messageService.showError(this.translateService.instant('home.blog.materialsUnavailable'));
   }
 
 }

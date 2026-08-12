@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs';
 
 @Component({
   selector: 'app-users-filter',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TranslatePipe],
   templateUrl: './users-filter.component.html',
   styleUrl: './users-filter.component.scss',
 })

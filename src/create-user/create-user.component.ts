@@ -3,10 +3,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { IUser } from '../app/interfaces/IUser';
 import { BoldOnHoverDirective } from '../app/directives/bold-on-hover.directive';
 import { AnimatedGradientDirective } from '../app/directives/animated-gradient.directive';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-user',
-  imports: [ReactiveFormsModule, BoldOnHoverDirective, AnimatedGradientDirective],
+  imports: [ReactiveFormsModule, BoldOnHoverDirective, AnimatedGradientDirective, TranslatePipe],
   templateUrl: './create-user.component.html',
   styleUrl: './create-user.component.scss',
 })

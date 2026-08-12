@@ -13,6 +13,11 @@ import { AppDatePipe } from '../app/pipes/date.pipe';
 import { LocalStorageService } from '../app/local-storage.service';
 import { IAppConfig } from '../app/interfaces/IAppConfig';
 import { APP_CONFIG_TOKEN } from '../app/tokens/app-config.token';
+import { LanguageService } from '../app/features/language/language.service';
+import { SelectModule } from 'primeng/select';
+import { ILanguage } from '../app/features/language/ILanguage';
+import { AVAILABLE_LANGUAGES, LANGUAGE_LABELS } from '../app/features/language/language.constants';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -24,7 +29,9 @@ import { APP_CONFIG_TOKEN } from '../app/tokens/app-config.token';
     FormsModule,
     SelectButtonModule,
     AsyncPipe,
-    AppDatePipe
+    AppDatePipe,
+    SelectModule,
+    TranslatePipe
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -36,6 +43,7 @@ export class HeaderComponent {
   router: Router = inject(Router);
   localStorageService: LocalStorageService = inject(LocalStorageService);
   appConfig: IAppConfig = inject(APP_CONFIG_TOKEN);
+  languageService: LanguageService = inject(LanguageService);
 
   currentDate: Date = new Date();
   counter: number = 0;
@@ -47,12 +55,17 @@ export class HeaderComponent {
   faSun: IconDefinition = faSun;
   faMoon: IconDefinition = faMoon;
   lastLoginDate: string | null = this.localStorageService.getItem<string>('last-visit');
-
+  
   navItems: INavItem[] = [
-    { label: 'Главная', path: '/' },
-    { label: 'Пользователи', path: '/users' },
-    { label: 'Посты', path: '/posts' },
+    { label: 'header.nav.home', path: '/' },
+    { label: 'header.nav.users', path: '/users' },
+    { label: 'header.nav.posts', path: '/posts' },
   ];
+  
+  languages: ILanguage[] = AVAILABLE_LANGUAGES.map(lang => ({
+    label: LANGUAGE_LABELS[lang],
+    value: lang
+  }));
 
   constructor() {
     setInterval(() => {

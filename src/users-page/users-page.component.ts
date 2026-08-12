@@ -10,6 +10,7 @@ import { UsersFilterComponent } from '../users-filter/users-filter.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowsRotate, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { PluralPipe } from '../app/pipes/plural.pipe';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-users-page',
@@ -22,6 +23,7 @@ import { PluralPipe } from '../app/pipes/plural.pipe';
     FontAwesomeModule,
     UsersFilterComponent,
     PluralPipe,
+    TranslatePipe
   ],
   templateUrl: './users-page.component.html',
   styleUrl: './users-page.component.scss',

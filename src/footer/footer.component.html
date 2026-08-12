@@ -3,11 +3,8 @@
     <div class="main-footer-wrapper container">
       <div class="company-info">
         <div class="company-info-text">
-          <span>Компания {{ appConfig.companyName }}</span>
-          <p>
-            Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
-            тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney.
-          </p>
+          <span>{{ 'footer.companyPrefix' | translate }} {{ appConfig.companyName }}</span>
+          <p>{{ 'footer.description' | translate }}</p>
         </div>
 
         <div class="company-contacts">
@@ -24,43 +21,43 @@
       </div>
 
       <div class="company-services">
-        <span>Наши услуги</span>
+        <span>{{ 'footer.servicesTitle' | translate }}</span>
         <ul class="services">
           <li>
-            <a href="#">Прогулки в горы летом</a>
+            <a href="#">{{ 'footer.services.summer' | translate }}</a>
           </li>
           <li>
-            <a href="#">Зимние походы в горы</a>
+            <a href="#">{{ 'footer.services.winter' | translate }}</a>
           </li>
           <li>
-            <a href="#">Посещение храмов в горах</a>
+            <a href="#">{{ 'footer.services.temples' | translate }}</a>
           </li>
           <li>
-            <a href="#">Экстремальные виды туризма</a>
+            <a href="#">{{ 'footer.services.extreme' | translate }}</a>
           </li>
           <li>
-            <a href="#">Походы в джунглях Амазонии</a>
+            <a href="#">{{ 'footer.services.amazon' | translate }}</a>
           </li>
           <li>
-            <a href="#">Поездка в Африку</a>
+            <a href="#">{{ 'footer.services.africa' | translate }}</a>
           </li>
         </ul>
       </div>
 
       <div class="important-reminds">
-        <span>Важно для путешествий</span>
+        <span>{{ 'footer.remindsTitle' | translate }}</span>
         <ul class="reminds">
           <li>
-            <a href="#">Как собрать в долгий поход?</a>
+            <a href="#">{{ 'footer.reminds.packing' | translate }}</a>
           </li>
           <li>
-            <a href="#">Жизненно важные предметы для похода</a>
+            <a href="#">{{ 'footer.reminds.essentials' | translate }}</a>
           </li>
           <li>
-            <a href="#">Медицинская страховка, гарантии безопасности</a>
+            <a href="#">{{ 'footer.reminds.insurance' | translate }}</a>
           </li>
           <li>
-            <a href="#">Если вы врач - загляните сюда</a>
+            <a href="#">{{ 'footer.reminds.forDoctors' | translate }}</a>
           </li>
         </ul>
       </div>
@@ -69,8 +66,8 @@
 
   <div class="super-footer-wrapper">
     <div class="super-footer-container">
-      <span>ИП Константинопольский К.К., 2023</span>
-      <a href="#">Политика обработки персональных данных</a>
+      <span>{{ 'footer.copyrightPrefix' | translate }} 2023</span>
+      <a href="#">{{ 'footer.privacyPolicy' | translate }}</a>
     </div>
   </div>
 </section>
