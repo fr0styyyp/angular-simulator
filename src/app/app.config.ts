@@ -27,7 +27,6 @@ import { APP_CONFIG_TOKEN } from './tokens/app-config.token';
 import { IAppConfig } from './interfaces/IAppConfig';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
-import { LANGUAGE_STORAGE_TOKEN } from './features/language/language-storage-key.token';
 import { LanguageService } from './features/language/language.service';
 
 function getInitialPreset(): Preset<AuraBaseDesignTokens> {
@@ -90,10 +89,6 @@ export const appConfig: ApplicationConfig = {
     {
       provide: APP_CONFIG_TOKEN,
       useValue: appConfigValue
-    },
-    {
-      provide: LANGUAGE_STORAGE_TOKEN,
-      useValue: 'app-language'
     },
     provideAppInitializer(() => {
       const languageService: LanguageService = inject(LanguageService);

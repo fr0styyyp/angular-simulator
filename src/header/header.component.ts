@@ -16,7 +16,6 @@ import { APP_CONFIG_TOKEN } from '../app/tokens/app-config.token';
 import { LanguageService } from '../app/features/language/language.service';
 import { SelectModule } from 'primeng/select';
 import { ILanguage } from '../app/features/language/ILanguage';
-import { AVAILABLE_LANGUAGES, LANGUAGE_LABELS } from '../app/features/language/language.constants';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
@@ -62,8 +61,8 @@ export class HeaderComponent {
     { label: 'header.nav.posts', path: '/posts' },
   ];
   
-  languages: ILanguage[] = AVAILABLE_LANGUAGES.map(lang => ({
-    label: LANGUAGE_LABELS[lang],
+  languages: ILanguage[] = this.languageService.availableLanguages.map(lang => ({
+    label: this.languageService.languageLabels[lang],
     value: lang
   }));
 
