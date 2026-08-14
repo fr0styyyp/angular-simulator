@@ -30,12 +30,18 @@
 
     <p-select
       [options]="languages"
-      optionLabel="label"
       optionValue="value"
       [ngModel]="languageService.language$ | async"
-      placeholder="Select a language"
+      [placeholder]="'languageSwitcher.placeholder' | translate"
       (onChange)="languageService.setLanguage($event.value)"
-    ></p-select>
+    >
+      <ng-template #selectedItem let-selected>
+        <span>{{ selected.label | translate }}</span>
+      </ng-template>
+      <ng-template #item let-lang>
+        <span>{{ lang.label | translate }}</span>
+      </ng-template>
+    </p-select>
 
     <nav class="navigation">
       @for (navItem of navItems; track navItem.path) {

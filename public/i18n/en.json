@@ -2,6 +2,12 @@
   "common": {
     "logout": "Log out"
   },
+  "languageSwitcher": {
+    "en": "English",
+    "ru": "Русский",
+    "kk": "Қазақша",
+    "placeholder": "Select a language"
+  },
   "header": {
     "authorized": "authorized",
     "consultButton": "Consultation",

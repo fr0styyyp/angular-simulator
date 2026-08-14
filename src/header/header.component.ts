@@ -17,6 +17,7 @@ import { LanguageService } from '../app/features/language/language.service';
 import { SelectModule } from 'primeng/select';
 import { ILanguage } from '../app/features/language/ILanguage';
 import { TranslatePipe } from '@ngx-translate/core';
+import { Language } from '../app/features/language/Language';
 
 @Component({
   selector: 'app-header',
@@ -61,8 +62,8 @@ export class HeaderComponent {
     { label: 'header.nav.posts', path: '/posts' },
   ];
   
-  languages: ILanguage[] = this.languageService.availableLanguages.map(lang => ({
-    label: this.languageService.languageLabels[lang],
+  languages: ILanguage[] = this.languageService.availableLanguages.map((lang: Language) => ({
+    label: `languageSwitcher.${ lang }`,
     value: lang
   }));
 

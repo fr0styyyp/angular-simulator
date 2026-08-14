@@ -18,11 +18,6 @@ export class LanguageService {
   private readonly defaultLanguage: Language = Language.EN;
   
   readonly availableLanguages: readonly Language[] = Object.values(Language);
-  readonly languageLabels: Record<Language, string> = {
-    [Language.EN]: 'English',
-    [Language.RU]: 'Русский',
-    [Language.KK]: 'Қазақша',
-  };
   
   private languageSubject: BehaviorSubject<Language> = new BehaviorSubject<Language>(this.defaultLanguage);
   language$: Observable<Language> = this.languageSubject.asObservable();
