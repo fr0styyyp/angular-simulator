@@ -4,10 +4,10 @@ import { BehaviorSubject, catchError, Observable, of, switchMap, tap, throwError
 import { HttpClient } from '@angular/common/http';
 import { IAuthResponse } from '../interfaces/IAuthResponse';
 import { Router } from '@angular/router';
-import { LocalStorageService } from '../../../local-storage.service';
+import { LocalStorageService } from '../../../core/services/local-storage.service';
 import { IToken } from '../interfaces/IToken';
-import { IAppConfig } from '../../../interfaces/IAppConfig';
-import { APP_CONFIG_TOKEN } from '../../../tokens/app-config.token';
+import { IAppConfig } from '../../../core/interfaces/IAppConfig';
+import { APP_CONFIG_TOKEN } from '../../../shared/tokens/app-config.token';
 
 @Injectable({
   providedIn: 'root',

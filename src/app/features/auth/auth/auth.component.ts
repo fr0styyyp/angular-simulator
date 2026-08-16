@@ -4,8 +4,8 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { catchError, tap, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { MessageService } from '../../../message.service';
 import { TranslatePipe } from '@ngx-translate/core';
+import { MessageService } from '../../../core/services/message.service';
 
 @Component({
   selector: 'app-auth',

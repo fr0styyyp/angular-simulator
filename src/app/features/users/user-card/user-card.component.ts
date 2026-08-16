@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IUser } from '../app/features/users/interfaces/IUser';
 import { UpperCasePipe } from '@angular/common';
-import { BoldOnHoverDirective } from '../app/shared/directives/bold-on-hover.directive';
-import { PhoneMode } from '../app/core/enums/PhoneMode';
 import { TranslatePipe } from '@ngx-translate/core';
-import { PhoneModePipe } from '../app/shared/pipes/phone-mode.pipe';
-import { AnimatedGradientDirective } from '../app/shared/directives/animated-gradient.directive';
+import { PhoneModePipe } from '../../../shared/pipes/phone-mode.pipe';
+import { BoldOnHoverDirective } from '../../../shared/directives/bold-on-hover.directive';
+import { AnimatedGradientDirective } from '../../../shared/directives/animated-gradient.directive';
+import { IUser } from '../interfaces/IUser';
+import { PhoneMode } from '../../../core/enums/PhoneMode';
 
 @Component({
   selector: 'app-user-card',

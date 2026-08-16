@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { postResolver } from './features/posts/resolvers/post.resolver';
 import { authGuard } from './features/auth/guards/auth.guard';
-import { adminGuard } from './guards/admin.guard';
+import { adminGuard } from './features/auth/guards/admin.guard';
 
 export const routes: Routes = [
   {
@@ -40,19 +40,19 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('../home-page/home-page.component').then((m) => m.HomePageComponent),
+      import('./features/home/home-page/home-page.component').then((m) => m.HomePageComponent),
     canActivate: [authGuard],
   },
   {
     path: 'users',
     loadComponent: () =>
-      import('../users-page/users-page.component').then((m) => m.UsersPageComponent),
+      import('./features/users/users-page/users-page.component').then((m) => m.UsersPageComponent),
     canActivate: [authGuard, adminGuard],
   },
   {
     path: '**',
     loadComponent: () =>
-      import('../not-found-page/not-found-page.component').then((m) => m.NotFoundPageComponent),
+      import('./shared/components/not-found-page/not-found-page.component').then((m) => m.NotFoundPageComponent),
     canActivate: [authGuard],
   },
 ];

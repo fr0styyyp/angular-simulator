@@ -12,8 +12,8 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { PostEditDialogComponent } from '../post-edit-dialog/post-edit-dialog.component';
 import { postEditData } from '../types/postEditData';
-import { MessageService } from '../../../message.service';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { MessageService } from '../../../core/services/message.service';
 
 @Component({
   selector: 'app-posts',
