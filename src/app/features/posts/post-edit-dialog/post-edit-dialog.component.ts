@@ -3,10 +3,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { postEditData } from '../types/postEditData';
 import { IPostEditFormValue } from '../interfaces/IPostEditFormValue';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-post-edit-dialog',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TranslatePipe],
   templateUrl: './post-edit-dialog.component.html',
   styleUrl: './post-edit-dialog.component.scss',
 })

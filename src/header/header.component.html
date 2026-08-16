@@ -28,6 +28,21 @@
       [allowEmpty]="false"
     ></p-selectButton>
 
+    <p-select
+      [options]="languages"
+      optionValue="value"
+      [ngModel]="languageService.language$ | async"
+      [placeholder]="'languageSwitcher.placeholder' | translate"
+      (onChange)="languageService.setLanguage($event.value)"
+    >
+      <ng-template #selectedItem let-selected>
+        <span>{{ selected.label | translate }}</span>
+      </ng-template>
+      <ng-template #item let-lang>
+        <span>{{ lang.label | translate }}</span>
+      </ng-template>
+    </p-select>
+
     <nav class="navigation">
       @for (navItem of navItems; track navItem.path) {
         <a
@@ -35,12 +50,14 @@
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="{ exact: navItem.path === '/' }"
         >
-          {{ navItem.label }}
+          {{ navItem.label | translate }}
         </a>
       }
-      <button id="logout-btn" class="logout-btn" (click)="logout()">logout</button>
-      <p>авторизован</p>
-      <button id="consult-btn" class="consult-btn">Консультация</button>
+      <button id="logout-btn" class="logout-btn" (click)="logout()">
+        {{ 'common.logout' | translate }}
+      </button>
+      <p>{{ 'header.authorized' | translate }}</p>
+      <button id="consult-btn" class="consult-btn">{{ 'header.consultButton' | translate }}</button>
     </nav>
 
     <div class="header-actions">
@@ -49,7 +66,8 @@
           {{ currentDate | appDate }}
         </div>
         <div class="last-login">
-          Последний вход: {{ lastLoginDate ? (lastLoginDate | appDate) : 'даты нету' }}
+          {{ 'header.lastLogin' | translate }}
+          {{ lastLoginDate ? (lastLoginDate | appDate) : ('header.noDate' | translate) }}
         </div>
       } @else {
         <div class="clicker">
@@ -68,7 +86,7 @@
         </div>
       }
       <button id="change-action" class="change-action" (click)="onToggleTimerVisibility()">
-        {{ isTimerVisible ? 'Показать кликер' : 'Показать дату' }}
+        {{ isTimerVisible ? ('header.showClicker' | translate) : ('header.showDate' | translate) }}
       </button>
     </div>
   </div>

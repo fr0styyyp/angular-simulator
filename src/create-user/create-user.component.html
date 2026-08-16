@@ -1,75 +1,77 @@
 <div class="form-container">
   <form [formGroup]="userForm">
     <div>
-      <label for="name">Name</label>
+      <label for="name">{{ 'users.createForm.fields.name' | translate }}</label>
       <input appAnimatedGradient type="text" id="name" formControlName="name" />
     </div>
 
     <div>
-      <label for="username">Username</label>
+      <label for="username">{{ 'users.createForm.fields.username' | translate }}</label>
       <input appAnimatedGradient type="text" id="username" formControlName="username" />
     </div>
 
     <div>
-      <label for="email">Email</label>
+      <label for="email">{{ 'users.createForm.fields.email' | translate }}</label>
       <input appAnimatedGradient type="email" id="email" formControlName="email" />
     </div>
 
     <div>
-      <label for="phone">Phone</label>
+      <label for="phone">{{ 'users.createForm.fields.phone' | translate }}</label>
       <input appAnimatedGradient type="tel" id="phone" formControlName="phone" />
     </div>
 
     <div>
-      <label for="website">Website</label>
+      <label for="website">{{ 'users.createForm.fields.website' | translate }}</label>
       <input appAnimatedGradient type="text" id="website" formControlName="website" />
     </div>
 
     <ng-container formGroupName="address">
-      <span>Address:</span>
+      <span>{{ 'users.createForm.address.title' | translate }}</span>
       <div>
-        <label for="address-city">City</label>
+        <label for="address-city">{{ 'users.createForm.address.city' | translate }}</label>
         <input appAnimatedGradient type="text" id="address-city" formControlName="city" />
       </div>
 
       <div for="address-street">
-        <label for="address-street">Street</label>
+        <label for="address-street">{{ 'users.createForm.address.street' | translate }}</label>
         <input appAnimatedGradient type="text" id="address-street" formControlName="street" />
       </div>
 
       <div>
-        <label for="address-suite">Suite</label>
+        <label for="address-suite">{{ 'users.createForm.address.suite' | translate }}</label>
         <input appAnimatedGradient type="text" id="address-suite" formControlName="suite" />
       </div>
 
       <div>
-        <label for="address-zipcode">Zipcode</label>
+        <label for="address-zipcode">{{ 'users.createForm.address.zipcode' | translate }}</label>
         <input appAnimatedGradient type="tel" id="address-zipcode" formControlName="zipcode" />
       </div>
 
       <ng-container formGroupName="geo">
-        <span>Geo:</span>
+        <span>{{ 'users.createForm.geo.title' | translate }}</span>
         <div>
-          <label for="address-geo-lat">lat</label>
+          <label for="address-geo-lat">{{ 'users.createForm.geo.lat' | translate }}</label>
           <input appAnimatedGradient type="tel" id="address-geo-lat" formControlName="lat" />
         </div>
 
         <div>
-          <label for="address-geo-lng">lng</label>
+          <label for="address-geo-lng">{{ 'users.createForm.geo.lng' | translate }}</label>
           <input appAnimatedGradient type="tel" id="address-geo-lng" formControlName="lng" />
         </div>
       </ng-container>
     </ng-container>
 
     <ng-container formGroupName="company">
-      <span>Company:</span>
+      <span>{{ 'users.createForm.company.title' | translate }}</span>
       <div>
-        <label for="company-name">Name</label>
+        <label for="company-name">{{ 'users.createForm.company.name' | translate }}</label>
         <input appAnimatedGradient type="text" id="company-name" formControlName="name" />
       </div>
 
       <div>
-        <label for="company-catchPhrase">Catch phrase</label>
+        <label for="company-catchPhrase">{{
+          'users.createForm.company.catchPhrase' | translate
+        }}</label>
         <input
           appAnimatedGradient
           type="text"
@@ -79,12 +81,12 @@
       </div>
 
       <div>
-        <label for="company-bs">bs</label>
+        <label for="company-bs">{{ 'users.createForm.company.bs' | translate }}</label>
         <input appAnimatedGradient type="text" id="company-bs" formControlName="bs" />
       </div>
     </ng-container>
   </form>
   <button type="button" appBoldOnHover (click)="onSubmit()" [disabled]="userForm.invalid">
-    Создать пользователя
+    {{ 'users.createForm.submitButton' | translate }}
   </button>
 </div>

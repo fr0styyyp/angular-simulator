@@ -1,21 +1,25 @@
 <div class="form-container">
   <form [formGroup]="editForm" (ngSubmit)="onSave()">
-    <button type="button" (click)="onClose()">Закрыть</button>
+    <button type="button" (click)="onClose()">
+      {{ 'posts.postEditDialog.closeButton' | translate }}
+    </button>
     <div>
-      <label for="title">Title</label>
+      <label for="title">{{ 'posts.createPost.titleLabel' | translate }}</label>
       <input type="text" id="title" formControlName="title" />
     </div>
 
     <div>
-      <label for="tags">Tags</label>
+      <label for="tags">{{ 'posts.createPost.tagsLabel' | translate }}</label>
       <input type="text" id="tags" formControlName="tags" />
     </div>
 
     <div>
-      <label for="views">Views</label>
+      <label for="views">{{ 'posts.createPost.viewsLabel' | translate }}</label>
       <input type="number" id="views" formControlName="views" />
     </div>
 
-    <button type="submit" [disabled]="editForm.invalid">Обновить пост</button>
+    <button type="submit" [disabled]="editForm.invalid">
+      {{ 'posts.postEditDialog.updateButton' | translate }}
+    </button>
   </form>
 </div>

@@ -1,6 +1,6 @@
 <div class="posts">
   @if (errorMessage) {
-    <div class="error-message">Ошибка: {{ errorMessage }}</div>
+    <div class="error-message">{{ 'posts.list.error' | translate }} {{ errorMessage }}</div>
   } @else {
     <p-contextmenu #cm [model]="items" (onHide)="selectedPost = null" />
     <p-table
@@ -16,13 +16,12 @@
       (onLazyLoad)="loadPosts($event)"
       [rowsPerPageOptions]="[10, 25, 50]"
       [showCurrentPageReport]="true"
-      currentPageReportTemplate="Showing { first } to { last } of { totalRecords } entries"
     >
       <ng-template #header>
         <tr>
-          <th>Title</th>
-          <th>Tags</th>
-          <th>views</th>
+          <th>{{ 'posts.list.table.columns.title' | translate }}</th>
+          <th>{{ 'posts.list.table.columns.tags' | translate }}</th>
+          <th>{{ 'posts.list.table.columns.views' | translate }}</th>
         </tr>
       </ng-template>
       <ng-template #body let-post>
@@ -40,6 +39,6 @@
       </ng-template>
     </p-table>
 
-    <button routerLink="/posts/create">Создать пост</button>
+    <button routerLink="/posts/create">{{ 'posts.list.createButton' | translate }}</button>
   }
 </div>

@@ -7,10 +7,11 @@ import { MessageService } from '../../../message.service';
 import { IPost } from '../interfaces/IPost';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PostFormValue } from '../types/postFormValue';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-post',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TranslatePipe],
   templateUrl: './create-post.component.html',
   styleUrl: './create-post.component.scss',
 })

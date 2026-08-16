@@ -2,21 +2,21 @@
   <div class="home-page-container">
     <div class="title-container">
       <h1 class="title">
-        Насладись прогулкой в горах
+        {{ 'home.hero.title.line1' | translate }}
         <br />
-        с командой единомышленников
+        {{ 'home.hero.title.line2' | translate }}
       </h1>
     </div>
     <div class="form-data-container container">
       <div class="form-item-container">
         <div class="form-item">
           <select id="select-direction" [(ngModel)]="selectedDirection">
-            <option value="" disabled>Локация для тура</option>
-            <option value="mountains">Горы</option>
-            <option value="forest">Лес</option>
+            <option value="" disabled>{{ 'home.hero.locationPlaceholder' | translate }}</option>
+            <option value="mountains">{{ 'home.hero.mountains' | translate }}</option>
+            <option value="forest">{{ 'home.hero.forest' | translate }}</option>
           </select>
         </div>
-        <span class="subtitle">выберите из списка</span>
+        <span class="subtitle">{{ 'home.hero.chooseFromList' | translate }}</span>
       </div>
       <div class="form-item-container">
         <div class="form-item">
@@ -24,10 +24,10 @@
             id="input-tour-date"
             type="date"
             [(ngModel)]="selectedDate"
-            placeholder="Дата похода"
+            [placeholder]="'home.hero.datePlaceholder' | translate"
           />
         </div>
-        <span class="subtitle">укажите дату</span>
+        <span class="subtitle">{{ 'home.hero.specifyDate' | translate }}</span>
       </div>
       <div class="form-item-container">
         <div class="form-item">
@@ -36,17 +36,21 @@
             [(ngModel)]="participantsCount"
             class="form-select"
           >
-            <option value="" disabled selected>Количество человек</option>
-            <option value="4">4 человека</option>
-            <option value="5">5 человек</option>
-            <option value="6">6 человек</option>
-            <option value="7">7 человек</option>
-            <option value="8+">8+ человек</option>
+            <option value="" disabled selected>
+              {{ 'home.hero.participantsPlaceholder' | translate }}
+            </option>
+            <option value="4">{{ 'home.hero.participants.four' | translate }}</option>
+            <option value="5">{{ 'home.hero.participants.five' | translate }}</option>
+            <option value="6">{{ 'home.hero.participants.six' | translate }}</option>
+            <option value="7">{{ 'home.hero.participants.seven' | translate }}</option>
+            <option value="8+">{{ 'home.hero.participants.eightPlus' | translate }}</option>
           </select>
         </div>
-        <span class="subtitle">выберите из списка</span>
+        <span class="subtitle">{{ 'home.hero.chooseFromList' | translate }}</span>
       </div>
-      <button id="submit-btn" [disabled]="!isFormValid()" class="main-btn">Найти программу</button>
+      <button id="submit-btn" [disabled]="!isFormValid()" class="main-btn">
+        {{ 'home.hero.submitButton' | translate }}
+      </button>
     </div>
 
     <div class="live-input-wrapper container">
@@ -55,7 +59,7 @@
           id="live-text-input"
           type="text"
           [(ngModel)]="liveTextInput"
-          placeholder="Живой текст"
+          [placeholder]="'home.hero.liveTextPlaceholder' | translate"
         />
       </div>
 
@@ -80,20 +84,13 @@
   </div>
 
   <div class="description">
-    <span>о нашем походе</span>
-    <h2>Исследуйте все горные массивы мира вместе с нами</h2>
+    <span>{{ 'home.tourDescription.label' | translate }}</span>
+    <h2>{{ 'home.tourDescription.title' | translate }}</h2>
     <p>
-      Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
-      тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат
-      Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками
-      в классической латинской литературе.
+      {{ 'home.tourDescription.text' | translate }}
     </p>
-    <button
-      (click)="messageService.showWarn('Программа недоступна')"
-      id="tour-description-btn"
-      class="main-btn"
-    >
-      Программа тура
+    <button (click)="onTourDescriptionClick()" id="tour-description-btn" class="main-btn">
+      {{ 'home.tourDescription.button' | translate }}
     </button>
   </div>
 </section>
@@ -101,32 +98,25 @@
 <section class="offers container">
   <div class="offers-left">
     <div class="offers-description">
-      <span>наше предложение</span>
-      <h2>Лучшие программы для тебя</h2>
-      <p>
-        Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
-        тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.
-      </p>
+      <span>{{ 'home.offers.label' | translate }}</span>
+      <h2>{{ 'home.offers.title' | translate }}</h2>
+      <p>{{ 'home.offers.text' | translate }}</p>
     </div>
 
     @for (card of cards; track card.title) {
       <div class="services-card">
         <fa-icon [icon]="card.icon"></fa-icon>
         <div class="card-content">
-          <h3>{{ card.title }}</h3>
-          <p>{{ card.text }}</p>
+          <h3>{{ card.title | translate }}</h3>
+          <p>{{ card.text | translate }}</p>
         </div>
       </div>
     } @empty {
-      <p>Карточек пока нету</p>
+      <p>{{ 'home.offers.emptyCards' | translate }}</p>
     }
 
-    <button
-      (click)="messageService.showInfo('Стоимость отправлена на почту')"
-      id="price-btn"
-      class="main-btn"
-    >
-      Стоимость программ
+    <button (click)="onPriceClick()" id="price-btn" class="main-btn">
+      {{ 'home.offers.priceButton' | translate }}
     </button>
   </div>
 
@@ -140,8 +130,8 @@
 
 <section class="popular-destinations-container container">
   <div class="popular-destinations-title">
-    <span>по версии отдыхающих</span>
-    <h2>Популярные направления</h2>
+    <span>{{ 'home.destinations.label' | translate }}</span>
+    <h2>{{ 'home.destinations.title' | translate }}</h2>
   </div>
 
   <div class="popular-destination-cards">
@@ -157,8 +147,8 @@
 
         <div class="destination-card-description-wrapper">
           <div class="destinate-description">
-            <h3>{{ card.title }}</h3>
-            <p>{{ card.description }}</p>
+            <h3>{{ card.title | translate }}</h3>
+            <p>{{ card.description | translate }}</p>
           </div>
 
           <div class="destinate-price">
@@ -169,19 +159,15 @@
     }
   </div>
 
-  <button
-    (click)="messageService.showSuccess('направление получено')"
-    id="destinations-rating"
-    class="main-btn"
-  >
-    Рейтинг направлений
+  <button (click)="onDestinationsRatingClick()" id="destinations-rating" class="main-btn">
+    {{ 'home.destinations.ratingButton' | translate }}
   </button>
 </section>
 
 <section class="trip-blog container">
   <div class="trip-blog-title">
-    <span>делимся впечатлениями</span>
-    <h2>Блог о путешествиях</h2>
+    <span>{{ 'home.blog.label' | translate }}</span>
+    <h2>{{ 'home.blog.title' | translate }}</h2>
   </div>
 
   <div class="cards-of-blog">
@@ -196,32 +182,28 @@
 
         <div class="description-wrapper">
           <div class="blog-description">
-            <h3>{{ card.title }}</h3>
-            <p>{{ card.description }}</p>
+            <h3>{{ card.title | translate }}</h3>
+            <p>{{ card.description | translate }}</p>
           </div>
 
           <div class="description-footer">
             <span>{{ card.date | appDate }}</span>
-            <a>{{ card.link }}</a>
+            <a>{{ card.link | translate }}</a>
           </div>
         </div>
       </div>
     }
   </div>
 
-  <button
-    (click)="messageService.showError('Материалы недоступы')"
-    id="other-materials"
-    class="main-btn"
-  >
-    Другие материалы
+  <button (click)="onOtherMaterialsClick()" id="other-materials" class="main-btn">
+    {{ 'home.blog.otherMaterialsButton' | translate }}
   </button>
 </section>
 
 <section class="impressions container">
   <div class="impressions-title">
-    <span>фото-отчет</span>
-    <h2>Делимся впечатлениями</h2>
+    <span>{{ 'home.impressions.label' | translate }}</span>
+    <h2>{{ 'home.impressions.title' | translate }}</h2>
   </div>
 
   <div class="impression-images">
@@ -230,30 +212,34 @@
     }
   </div>
 
-  <button id="pinterest" class="main-btn">Наш pinterest</button>
+  <button id="pinterest" class="main-btn">
+    {{ 'home.impressions.pinterestButton' | translate }}
+  </button>
 </section>
 
 <section class="mailings container">
   <div class="mailings-wrapper">
     <div class="mailings-title">
-      <span>актуально</span>
-      <h2>Получайте полезные рассылки о путешествиях</h2>
+      <span>{{ 'home.mailings.label' | translate }}</span>
+      <h2>{{ 'home.mailings.title' | translate }}</h2>
     </div>
 
     <div class="email-input">
       <div class="email-btn-wrapper">
         <div class="email-input-wrapper">
-          <span>Введите e-mail адрес</span>
+          <span>{{ 'home.mailings.emailLabel' | translate }}</span>
           <input type="email" placeholder="name@domain.com" />
         </div>
-        <button id="news-subscription" class="main-btn">Подписаться на новости</button>
+        <button id="news-subscription" class="main-btn">
+          {{ 'home.mailings.subscribeButton' | translate }}
+        </button>
       </div>
       <div class="email-input-p-wrapper">
         <p>
-          подписываясь на новости, вы автоматически соглашаетесь с
-          <a href="#">условиями обработки персональных данных</a>
-          и
-          <a href="">правилами рекламных рассылок</a>
+          {{ 'home.mailings.consentPrefix' | translate }}
+          <a href="#">{{ 'home.mailings.privacyPolicyLink' | translate }}</a>
+          {{ 'home.mailings.consentAnd' | translate }}
+          <a href="">{{ 'home.mailings.rulesLink' | translate }}</a>
         </p>
       </div>
     </div>
