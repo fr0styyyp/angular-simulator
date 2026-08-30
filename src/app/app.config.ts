@@ -20,14 +20,14 @@ import { loggingInterceptor } from './core/interceptors/logging.interceptor';
 import { AuthService } from './features/auth/services/auth.service';
 import { authReqInterceptor } from './features/auth/interceptors/auth-req.interceptor';
 import { Theme } from './core/enums/Theme';
-import { DATE_FORMAT_TOKEN } from './shared/tokens/date-format-token';
-import { APP_CONFIG_TOKEN } from './shared/tokens/app-config.token';
 import { IAppConfig } from './core/interfaces/IAppConfig';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LanguageService } from './features/language/services/language.service';
 import { errorInterceptor } from './core/interceptors/error.interceptor';
 import { IThemeState } from './core/interfaces/IThemeState';
+import { DATE_FORMAT_TOKEN } from './core/tokens/date-format-token';
+import { APP_CONFIG_TOKEN } from './core/tokens/app-config.token';
 
 function getInitialPreset(): Preset<AuraBaseDesignTokens> {
   const savedData: string | null = localStorage.getItem('app-theme-settings');

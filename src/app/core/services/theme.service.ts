@@ -10,9 +10,9 @@ import { SelectButtonChangeEvent } from 'primeng/selectbutton';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Preset } from '@primeuix/themes/types';
 import { IAppConfig } from '../interfaces/IAppConfig';
-import { APP_CONFIG_TOKEN } from '../../shared/tokens/app-config.token';
 import { IThemeState } from '../interfaces/IThemeState';
 import { ISelectOption } from '../interfaces/ISelectOption';
+import { APP_CONFIG_TOKEN } from '../tokens/app-config.token';
 
 @Injectable({
   providedIn: 'root',

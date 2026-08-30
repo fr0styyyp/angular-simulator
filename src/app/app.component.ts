@@ -5,16 +5,16 @@ import { CommonModule } from '@angular/common';
 import { Message } from './core/enums/Message';
 import { LocalStorageService } from './core/services/local-storage.service';
 import { RouterOutlet } from '@angular/router';
-import { MessageComponent } from './shared/components/message/message.component';
+import { MessageComponent } from './core/components/message/message.component';
 import { LoaderService } from './core/services/loader.service';
 import { AuthService } from './features/auth/services/auth.service';
 import { Color } from './core/enums/Color';
 import { ParentComponent } from '../sandbox/homework-28/parent/parent.component';
 import { CdDefaultComponent } from '../sandbox/homework-28/cd-default/cd-default.component';
 import { CdOnPushComponent } from '../sandbox/homework-28/cd-on-push/cd-on-push.component';
-import { HeaderComponent } from './shared/components/header/header.component';
-import { FooterComponent } from './shared/components/footer/footer.component';
-import { LoaderComponent } from './shared/components/loader/loader.component';
+import { HeaderComponent } from './core/components/header/header.component';
+import { FooterComponent } from './core/components/footer/footer.component';
+import { LoaderComponent } from './core/components/loader/loader.component';
 
 @Component({
   selector: 'app-root',

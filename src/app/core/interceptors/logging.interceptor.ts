@@ -9,7 +9,7 @@ import {
 import { finalize, Observable, tap } from 'rxjs';
 import { IAppConfig } from '../interfaces/IAppConfig';
 import { inject } from '@angular/core';
-import { APP_CONFIG_TOKEN } from '../../shared/tokens/app-config.token';
+import { APP_CONFIG_TOKEN } from '../tokens/app-config.token';
 
 export const loggingInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,

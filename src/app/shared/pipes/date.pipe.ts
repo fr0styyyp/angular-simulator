@@ -1,5 +1,5 @@
 import { inject, Pipe, PipeTransform } from '@angular/core';
-import { DATE_FORMAT_TOKEN } from '../tokens/date-format-token';
+import { DATE_FORMAT_TOKEN } from '../../core/tokens/date-format-token';
 
 @Pipe({
   name: 'appDate',

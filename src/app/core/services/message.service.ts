@@ -2,8 +2,8 @@ import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IAppConfig } from '../interfaces/IAppConfig';
 import { Message } from '../enums/Message';
-import { APP_CONFIG_TOKEN } from '../../shared/tokens/app-config.token';
 import { IMessage } from '../interfaces/IMessage';
+import { APP_CONFIG_TOKEN } from '../tokens/app-config.token';
 
 
 

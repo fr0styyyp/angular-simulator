@@ -15,8 +15,9 @@ import { IAppConfig } from '../../../core/interfaces/IAppConfig';
 import { LanguageService } from '../../../features/language/services/language.service';
 import { INavItem } from '../../../core/interfaces/INavItem';
 import { ILanguage } from '../../../features/language/interfaces/ILanguage';
-import { AppDatePipe } from '../../pipes/date.pipe';
+import { AppDatePipe } from '../../../shared/pipes/date.pipe';
 import { APP_CONFIG_TOKEN } from '../../tokens/app-config.token';
+
 
 @Component({
   selector: 'app-header',

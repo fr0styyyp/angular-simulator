@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { LocalStorageService } from '../../../core/services/local-storage.service';
 import { IToken } from '../interfaces/IToken';
 import { IAppConfig } from '../../../core/interfaces/IAppConfig';
-import { APP_CONFIG_TOKEN } from '../../../shared/tokens/app-config.token';
+import { APP_CONFIG_TOKEN } from '../../../core/tokens/app-config.token';
 
 @Injectable({
   providedIn: 'root',
