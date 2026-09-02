@@ -1,4 +1,4 @@
-import { UserRole } from '../../../../enums/UserRole';
+import { UserRole } from '../../../core/enums/UserRole';
 
 export interface IAuthUser {
   id: number;

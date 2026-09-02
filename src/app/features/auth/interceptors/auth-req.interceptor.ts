@@ -8,7 +8,7 @@ import { catchError, switchMap, throwError } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { inject } from '@angular/core';
 import { IAuthResponse } from '../interfaces/IAuthResponse';
-import { LocalStorageService } from '../../../local-storage.service';
+import { LocalStorageService } from '../../../core/services/local-storage.service';
 import { IToken } from '../interfaces/IToken';
 
 export const authReqInterceptor: HttpInterceptorFn = (
